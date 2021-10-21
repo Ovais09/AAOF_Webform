@@ -1,0 +1,56 @@
+body {
+    background-color: rgb(33,33,33);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+div {
+    margin-left:25%;
+}
+
+label {
+    color: white;
+    position: absolute;
+    text-align: right;
+    margin-left: -20.5%;
+    margin-top: 1%;
+}
+
+#placemark_description {
+    margin-left: -10%;
+}
+
+#upload{
+    margin-left:-10%;
+    margin-top:-2%;
+}
+
+#long {
+    margin-left:57.5%;
+    margin-top: -3.4%;
+}
+
+#latitude-text {
+    margin-left:-61%;
+}
+
+#longitude-text {
+    margin-left:-61%;
+}
+
+select{
+    margin-left:25%;
+}
+
+#titlelabels{
+    color: white;
+    margin-left: 15%;
+}
+
+#cancel {
+    margin-left: 54.5%;
+}
