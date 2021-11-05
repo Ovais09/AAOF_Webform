@@ -43,7 +43,7 @@ img {
     border: none;
     color: rgb(1,67,110);
     padding: 40px;
-    text-align:left;
+    text-align:center;
     text-decoration: none;
     border-radius: 12px;
     font-size: 16px;
@@ -79,7 +79,8 @@ img {
     border: 2px solid white;
     width:150px;
     height:30px;
-    margin-left:625px;
+    margin-left:675px;
+    
 }
 
 #special {
@@ -91,7 +92,7 @@ img {
     border: none;
     color: rgb(1,67,110);
     padding: 40px;
-    text-align:left;
+    text-align:center;
     text-decoration: none;
     border-radius: 12px;
     font-size: 16px;

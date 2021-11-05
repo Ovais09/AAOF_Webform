@@ -23,7 +23,7 @@
 
 <br>
 
-<img src="images/chrome_Qj4I3vwotA.png" width="400" height="250" id="a">
+<img src="images/chrome_Qj4I3vwotA.png" width="300" height="200" id="a">
 
 <br>
 <br>
@@ -37,12 +37,12 @@
 <br>
 
 
-<form action="author.php" method="post">
+<form action="author.php" method="post" id="myForm">
 
 
     <label>Code itinéraire</label>
     <div class="input-group mb-3" style = "width:750px" >
-        <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" id="change" readonly name="id">
     </div>
 
     <label>Nom itinéraire</label>
@@ -73,15 +73,11 @@
 
     <br>
 
-    <h1 class="divider" style="margin-left:200px; width:1200px;"></h1>
+    <h1 class="divider" style="margin-left:200px; width:1050px;"></h1>
 
     <br>
 
-
-    
-    <br>
-
-    <label>Auteur &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    <label style="margin-left:500px;">Auteur &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Lieu proposé &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Photo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Video &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -92,7 +88,7 @@
     <br>
     <br>
 
-    <div class="input-group mb-3" style="margin-left:200px;">
+    <div class="input-group mb-3" style="margin-left:500px;">
 
         <div class="input-group mb-3" style="margin-left:0px; width:100px">
             <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -118,7 +114,7 @@
 
     </div>
 
-    <div class="input-group mb-3" style="margin-left:200px;">
+    <div class="input-group mb-3"  style="margin-left:500px;">
 
         <div class="input-group mb-3" style="margin-left:0px; width:100px">
             <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -144,7 +140,7 @@
 
     </div>
 
-    <div class="input-group mb-3" style="margin-left:200px;">
+    <div class="input-group mb-3"  style="margin-left:500px;">
 
         <div class="input-group mb-3" style="margin-left:0px; width:100px">
             <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -170,7 +166,7 @@
 
     </div>
 
-    <div class="input-group mb-3" style="margin-left:200px;">
+    <div class="input-group mb-3"  style="margin-left:500px;">
 
         <div class="input-group mb-3" style="margin-left:0px; width:100px">
             <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -196,7 +192,7 @@
 
     </div>
 
-    <div class="input-group mb-3" style="margin-left:200px;">
+    <div class="input-group mb-3"  style="margin-left:500px;">
 
         <div class="input-group mb-3" style="margin-left:0px; width:100px">
             <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -222,7 +218,7 @@
 
     </div>
 
-    <div class="input-group mb-3" style="margin-left:200px;">
+    <div class="input-group mb-3"  style="margin-left:500px;">
 
         <div class="input-group mb-3" style="margin-left:0px; width:100px">
             <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -248,7 +244,7 @@
 
     </div>
 
-    <div class="input-group mb-3" style="margin-left:200px;">
+    <div class="input-group mb-3"  style="margin-left:500px;">
 
         <div class="input-group mb-3" style="margin-left:0px; width:100px">
             <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -286,7 +282,7 @@
 
     <button type ="button" class="d" style = "width:150px" onclick = "b()">Retour</button>
     <button type ="submit" class="d" style = "width:150px" id = "save">Enregistrer</button>
-    <button type ="button" class="d" style = "width:150px" id="cancel" onclick="a()">Reprendre</button>
+    <button type ="button" class="d" style = "width:150px" id="cancel" onclick="reset()">Reprendre</button>
 
    
 
@@ -296,8 +292,18 @@
 
 <script>
 
+    function reset () {
+        document.getElementById("myForm").reset();
+    }
+
     function b() {
         window.location.href="home.php";
+    }
+
+    window.onload = function putValue() {
+        var x = document.getElementById("change");
+        x.value = "ITI-1";
+    
     }
 
 </script>

@@ -22,7 +22,7 @@
 
     <h2 id="gestion"> <b>Menu principal</b></h2>
 
-    <img src="images/chrome_Qj4I3vwotA.png" width="400" height="200" id="a">
+    <img src="images/chrome_Qj4I3vwotA.png" width="250" height="200" id="a">
 
     <br>
     <br>

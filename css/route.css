@@ -48,13 +48,14 @@ button {
 }
 
 #save {
+
     margin-left: 435px;
 }
 
 #cancel {
     position: absolute;
 
-    margin-left: -375px;
+    margin-left: -430px;
 }
 
 #border {
@@ -65,8 +66,6 @@ button {
 
 h1.divider {
     border-bottom: 4px solid black;
-    margin-left: 200px;
-    width:1200px;
 }
 
 .d {
@@ -82,7 +81,7 @@ h1.divider {
 .divider2 {
     position:absolute;
     border-bottom: 4px solid black;
-    width:1200px;
+    width:1050px;
     margin-left:200px;
 }
 

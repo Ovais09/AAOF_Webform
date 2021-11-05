@@ -1,6 +1,17 @@
 <?php
+error_reporting(0);
 
+try {
   $nameofroute = $_REQUEST['nameofroute'];
+  $id = $_REQUEST['id'];
+}
+
+catch (ErrorException $e) {
+  // echo "Error: " . $e->getMessage();
+}
+
+
+
 
 
 ?>
@@ -31,7 +42,7 @@
 
 <div id="border"></div>
 
-<img src="images/chrome_Qj4I3vwotA.png" width="200" height="100" id="a">
+<img src="images/chrome_Qj4I3vwotA.png" width="250" height="200" id="a">
 
 <h3 id="c"> <b> Lieux proposés</b> </h3>
 
@@ -164,13 +175,14 @@
   }
 
   var abc = '<?php echo $nameofroute; ?>';
+  var id = '<?php echo $id; ?>';
 
   window.onload = function exampleFunction() {
 
-    if (!(abc.length ==0)) {
+    if (!(abc.length == 0 && id.length == 0)) {
       var x = document.getElementById("dropdownmenu");
       var option = document.createElement("option");
-      option.text = abc;
+      option.text = id + "," + abc;
       x.add(option);
      }
   }
