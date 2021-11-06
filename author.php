@@ -37,7 +37,8 @@ catch (ErrorException $e) {
 <body>
 
 
-<form id="myForm">
+<form id="myForm" action = "home.php" method = "POST">
+
 <h3 id="b"> <b> GESTION DES AUTEURS </b> </h3>
 
 <div id="border"></div>
@@ -90,7 +91,7 @@ catch (ErrorException $e) {
 
 <label for="exampleFormControlTextarea1" id = "placemark_description">Description du lieu</label>
 <div class="form-group" style = "width:750px">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "description"></textarea>
 </div>
 
 <br>
@@ -147,7 +148,7 @@ catch (ErrorException $e) {
   <br>
 
   <button type ="button"  style = "width:150px" onclick = "b()" class="d">Retour</button>
-  <button type ="button"  style = "width:150px" id ="save" class="d">Sauvegarder</button>
+  <button type ="submit"  style = "width:150px" id ="save" class="d">Sauvegarder</button>
   <button type ="button"  style = "width:150px" id="cancel" onclick = "jojo()" class="d">Reprendre</button>
 
 
@@ -176,16 +177,40 @@ catch (ErrorException $e) {
 
   var abc = '<?php echo $nameofroute; ?>';
   var id = '<?php echo $id; ?>';
+  var x = document.getElementById("dropdownmenu");
+
 
   window.onload = function exampleFunction() {
 
-    if (!(abc.length == 0 && id.length == 0)) {
-      var x = document.getElementById("dropdownmenu");
+     if (!(abc.length == 0 || abc == undefined)) {
+
       var option = document.createElement("option");
-      option.text = id + "," + abc;
-      x.add(option);
-     }
+        option.text = id + "," + abc;
+        x.add(option);
+        localStorage.setItem(id, option.text);
+
+      for (var i = 0; i < localStorage.length-1; i++) {
+        var a  = localStorage.getItem(localStorage.key(i));
+
+        //get rid of duplicates in dropdown menu
+        if (a != option.text) {
+          var option = document.createElement("option");
+          option.text = a;
+          x.add(option);
+
+
+        //  var option = document.createElement("option");
+        //  option.text = a;
+        //  x.add(option);
+       }
+
+    }
+
+     
   }
+
+  }
+
 
 </script>
 

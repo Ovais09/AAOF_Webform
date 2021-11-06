@@ -1,3 +1,14 @@
+
+
+<?php 
+// $fname =  $_REQUEST['description'];
+// echo $fname;
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +53,7 @@
 
     <label>Code itinéraire</label>
     <div class="input-group mb-3" style = "width:750px" >
-        <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" id="change" readonly name="id">
+        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="change" readonly name="id">
     </div>
 
     <label>Nom itinéraire</label>
@@ -300,11 +311,14 @@
         window.location.href="home.php";
     }
 
-    window.onload = function putValue() {
-        var x = document.getElementById("change");
-        x.value = "ITI-1";
+    localStorage['change'] =
+      document.getElementById('change').value =
+        parseInt(localStorage['change'] || '0', 10) + 1;
+
+    document.getElementById('change').value = "ITI-" + localStorage['change'];
+
     
-    }
+
 
 </script>
 
