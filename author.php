@@ -55,12 +55,12 @@ catch (ErrorException $e) {
 <label>Code Auteur</label>
 
 <div class="input-group mb-3" style = "width:750px" >
-  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" id = "code" readonly >
 </div>
 
 
   <label id="titlelabels">Genre</label>
-  <select class="form-control" style = "width:750px" >
+  <select class="form-control" style = "width:750px">
     <option  disabled selected>Cliquez et sélectionnez</option>
     <option value="Mr">Femme</option>
     <option value="Ms">Homme</option>
@@ -140,7 +140,7 @@ catch (ErrorException $e) {
 </div>
 
   <label id="titlelabels">Nom de la route associée</label>
-  <select class="form-control" style = "width:750px" id="dropdownmenu" >
+  <select class="form-control" style = "width:750px" id="dropdownmenu">
     <option  disabled selected>(Identifiant numérique, Nom de la route)</option>>
   </select>
 
@@ -162,6 +162,12 @@ catch (ErrorException $e) {
 
 
 <script>
+
+sessionStorage['code'] =
+      document.getElementById('code').value =
+        parseInt(sessionStorage['code'] || '0', 10) + 1;
+
+    document.getElementById('code').value = "AUT-" + sessionStorage['code'];
 
   function jojo() {
     document.getElementById("myForm").reset();
@@ -186,6 +192,7 @@ catch (ErrorException $e) {
 
       var option = document.createElement("option");
         option.text = id + "," + abc;
+        option.setAttribute("disabled", true)
         x.add(option);
         localStorage.setItem(id, option.text);
 
@@ -193,7 +200,7 @@ catch (ErrorException $e) {
         var a  = localStorage.getItem(localStorage.key(i));
 
         //get rid of duplicates in dropdown menu
-        if (a != option.text) {
+        if (a != option.text ) {
           var option = document.createElement("option");
           option.text = a;
           x.add(option);

@@ -4,13 +4,13 @@ $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
 
 
 
-$fname =  $_REQUEST['fname'];
-$lname = $_REQUEST['lname'];
-$address = $_REQUEST['address'];
-$email = $_REQUEST['email'];
+// $fname =  $_REQUEST['fname'];
+// $lname = $_REQUEST['lname'];
+// $address = $_REQUEST['address'];
+// $email = $_REQUEST['email'];
 
-$lat = floatval($_REQUEST['lat']);
-$lng = floatval($_REQUEST['lng']);
+// $lat = floatval($_REQUEST['lat']);
+// $lng = floatval($_REQUEST['lng']);
 
 
 // $data = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
@@ -35,12 +35,12 @@ $create_table = "CREATE TABLE testss (
 mysqli_query($conn, $create_table);
    
 
-$sql = "INSERT INTO testss (firstname,lastname,address,email,lat,lng,image_name,image)
-VALUES ('$fname', 
-'$lname', '$address', '$email', '$lat', '$lng', '$name', '$data' )";
+// $sql = "INSERT INTO testss (firstname,lastname,address,email,lat,lng,image_name,image)
+// VALUES ('$fname', 
+// '$lname', '$address', '$email', '$lat', '$lng', '$name', '$data' )";
 
 
-mysqli_query($conn,$sql );
+// mysqli_query($conn,$sql );
 
 // if(mysqli_query($conn, $sql)){
 //     echo "<h3>data stored in a database successfully." 
@@ -53,8 +53,8 @@ mysqli_query($conn,$sql );
 //         . mysqli_error($conn);
 // }
 
-$query = 'SELECT * FROM testss';
-$result = mysqli_query($conn, $query);
+// $query = 'SELECT * FROM testss';
+// $result = mysqli_query($conn, $query);
 
 $kml = array('<?xml version="1.0" encoding="UTF-8"?>');
 $kml[] = '<kml xmlns="http://earth.google.com/kml/2.1">';
@@ -75,25 +75,25 @@ $kml[] = ' </IconStyle>';
 $kml[] = ' </Style>';
 
 
-while ($row = @mysqli_fetch_assoc($result)) 
-{
-  $kml[] = ' <Placemark id="placemark' . $row['id'] . '">';
-  $kml[] = ' <name>' . htmlentities($row['firstname']) . '</name>';
-  $kml[] = ' <description>' . htmlentities($row['address']) . '</description>';
-  $kml[] = ' <styleUrl>#' . ($row['email']) .'Style</styleUrl>';
-  $kml[] = ' <Point>';
-  $kml[] = ' <coordinates>' . $row['lng'] . ','  . $row['lat'] . '</coordinates>';
-  $kml[] = ' </Point>';
-  $kml[] = ' </Placemark>';
+// while ($row = @mysqli_fetch_assoc($result)) 
+// {
+//   $kml[] = ' <Placemark id="placemark' . $row['id'] . '">';
+//   $kml[] = ' <name>' . htmlentities($row['firstname']) . '</name>';
+//   $kml[] = ' <description>' . htmlentities($row['address']) . '</description>';
+//   $kml[] = ' <styleUrl>#' . ($row['email']) .'Style</styleUrl>';
+//   $kml[] = ' <Point>';
+//   $kml[] = ' <coordinates>' . $row['lng'] . ','  . $row['lat'] . '</coordinates>';
+//   $kml[] = ' </Point>';
+//   $kml[] = ' </Placemark>';
  
-} 
+// } 
 
 
-$kml[] = ' </Document>';
-$kml[] = '</kml>';
-$kmlOutput = join("\n", $kml);
-header('Content-type: application/vnd.google-earth.kml+xml');
-echo $kmlOutput;
+// $kml[] = ' </Document>';
+// $kml[] = '</kml>';
+// $kmlOutput = join("\n", $kml);
+// header('Content-type: application/vnd.google-earth.kml+xml');
+// echo $kmlOutput;
 
 
 
