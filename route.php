@@ -48,7 +48,7 @@
 <br>
 
 
-<form action="author.php" method="post" id="myForm">
+<form action="home.php" method="post" id="myForm" enctype="multipart/form-data">
 
 
     <label>Code itinéraire</label>
@@ -63,14 +63,14 @@
 
     <label for="exampleFormControlTextarea1" id = "placemark_description">Description itinéraire <br> (route)</label>
     <div class="form-group" style = "width:750px">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "routedescription"></textarea>
     </div>
 
     <br>
 
     <label id = "upload">Photo itinéraire</label>
     <div class="custom-file" style = "width:750px">
-        <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff">
+        <input type="file" name="myfile" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" >
     </div>
 
     <br>
@@ -78,7 +78,7 @@
 
     <label>Statut Disponibilité</label>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name = "check">
         Checkbox
     </div>
 
@@ -292,7 +292,7 @@
     <br>
 
     <button type ="button" class="d" style = "width:150px" onclick = "b()">Retour</button>
-    <button type ="submit" class="d" style = "width:150px" id = "save">Enregistrer</button>
+    <button type ="submit" class="d" style = "width:150px" id = "save" name = "routeform">Enregistrer</button>
     <button type ="button" class="d" style = "width:150px" id="cancel" onclick="reset()">Reprendre</button>
 
    

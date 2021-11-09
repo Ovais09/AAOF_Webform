@@ -1,6 +1,69 @@
 <?php
 
-$conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
+//check to see which php file sent the form data
+if (isset($_POST['routeform'])) {
+
+    //checking to see if the checkbox of name= check was clicked or not
+    if(isset($_POST['check'])){
+        //if it was clicked, then the value of the checkbox is stored in the variable $check
+        $flexCheckDefault = "checked";
+    }
+    else{
+        //if it was not clicked, then the value of the checkbox is stored in the variable $check
+        $flexCheckDefault = "not checked";
+    }
+
+    
+
+    $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
+
+
+    $Code_itinéraire = $_POST['id'];
+    $Nom_itinéraire = $_POST['nameofroute'];
+    $Description_itinéraire = $_POST['routedescription'];
+    $filename = $_FILES['myfile']['name'];
+    $tname = $_FILES['myfile']['tmp_name'];
+    $uploads_dir = 'RouteFormUploads/';
+
+    move_uploaded_file($tname, $uploads_dir .'/' . $filename);
+
+    $create_table = "CREATE TABLE RouteForm (
+    Code_itineraire VARCHAR(30) NOT NULL,
+    Nom_itineraire VARCHAR(30) NOT NULL,
+    Description_itineraire VARCHAR(80) NOT NULL,
+    image_name VARCHAR(100),
+    checkbox_default VARCHAR(80)
+     )";
+
+    // check to see if the table exists
+    if(mysqli_query($conn, $create_table)){
+        echo "Table created successfully";
+    }else{
+        echo "Error creating table: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO RouteForm (Code_itineraire, Nom_itineraire, Description_itineraire,image_name,checkbox_default)
+    VALUES ('$Code_itinéraire', 
+    '$Nom_itinéraire', '$Description_itinéraire', '$filename', ' $flexCheckDefault')";
+
+    if(mysqli_query($conn, $sql)){
+        echo "<h3>data stored in a database successfully." 
+        . " Please browse your localhost php my admin" 
+        . " to view the updated data</h3>"; 
+
+    }
+    else{
+    echo "ERROR: Hush! Sorr" 
+        . mysqli_error($conn);
+    }
+    
+
+
+
+
+
+
+
 
 
 
@@ -19,20 +82,20 @@ $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
 
 
 
-$create_table = "CREATE TABLE testss (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    firstname VARCHAR(30) NOT NULL,
-    lastname VARCHAR(30) NOT NULL,
-    address VARCHAR(80) NOT NULL,
-    email VARCHAR(50),
-    lat FLOAT(10,6) NOT NULL,
-    lng FLOAT(10,6) NOT NULL,
-    image_name VARCHAR(100),
-    image LONGBLOB
-     )";
+// $create_table = "CREATE TABLE testss (
+//     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+//     firstname VARCHAR(30) NOT NULL,
+//     lastname VARCHAR(30) NOT NULL,
+//     address VARCHAR(80) NOT NULL,
+//     email VARCHAR(50),
+//     lat FLOAT(10,6) NOT NULL,
+//     lng FLOAT(10,6) NOT NULL,
+//     image_name VARCHAR(100),
+//     image LONGBLOB
+//      )";
 
 
-mysqli_query($conn, $create_table);
+// mysqli_query($conn, $create_table);
    
 
 // $sql = "INSERT INTO testss (firstname,lastname,address,email,lat,lng,image_name,image)
@@ -96,6 +159,78 @@ $kml[] = ' </Style>';
 // echo $kmlOutput;
 
 
+
+}
+
+else {
+    $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
+
+    $authorcode = $_POST['authorcode'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $gender = $_POST['gender'];
+    $lat = $_POST['lat'];
+    $long = $_POST['long'];
+
+    $uploads_dir = 'AuthorFormUploads/';
+
+    $filenamephoto = $_FILES['photo']['name'];
+    $tnamephoto = $_FILES['photo']['tmp_name'];
+
+    $filenamevideo = $_FILES['video']['name'];
+    $tnamevideo = $_FILES['video']['tmp_name'];
+
+    $filenamepodcast = $_FILES['podcast']['name'];
+    $tnamepodcast= $_FILES['podcast']['tmp_name'];
+
+    $filenameicone = $_FILES['icone']['name'];
+    $tnameicone = $_FILES['icone']['tmp_name'];
+
+    move_uploaded_file($tnamephoto, $uploads_dir .'/' . $filenamephoto);
+    move_uploaded_file($tnamevideo, $uploads_dir .'/' . $filenamevideo);
+    move_uploaded_file($tnamepodcast, $uploads_dir .'/' . $filenamepodcast);
+    move_uploaded_file($tnameicone, $uploads_dir .'/' . $filenameicone);
+
+    
+    $create_table = "CREATE TABLE AuthorForm (
+        AuthorCode VARCHAR(30) NOT NULL,
+        FirstName VARCHAR(30) NOT NULL,
+        LastName VARCHAR(80) NOT NULL,
+        Gender VARCHAR(80) NOT NULL,
+        Lat DECIMAL(8,6) NOT NULL, 
+        Longitude DECIMAL(8,6) NOT NULL, 
+        image_name_photo VARCHAR(100),
+        image_name_video VARCHAR(100),
+        image_name_podcast VARCHAR(100),
+        image_name_icon VARCHAR(100)
+         )";
+    
+        // check to see if the table exists
+        if(mysqli_query($conn, $create_table)){
+            echo "Table created successfully";
+        }else{
+            echo "Error creating table: " . mysqli_error($conn);
+        }
+
+
+        $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon)
+        VALUES ('$authorcode', 
+        '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone')";
+    
+        if(mysqli_query($conn, $sql)){
+            echo "<h3>data stored in a database successfully." 
+            . " Please browse your localhost php my admin" 
+            . " to view the updated data</h3>"; 
+    
+        }
+        else{
+        echo "ERROR: Hush! Sorr" 
+            . mysqli_error($conn);
+        }
+
+}
+
+    
 
 
 ?>

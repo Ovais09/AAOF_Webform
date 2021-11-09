@@ -37,7 +37,7 @@ catch (ErrorException $e) {
 <body>
 
 
-<form id="myForm" action = "home.php" method = "POST">
+<form id="myForm" action = "home.php" method = "POST" enctype="multipart/form-data">
 
 <h3 id="b"> <b> GESTION DES AUTEURS </b> </h3>
 
@@ -55,29 +55,29 @@ catch (ErrorException $e) {
 <label>Code Auteur</label>
 
 <div class="input-group mb-3" style = "width:750px" >
-  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" id = "code" readonly >
+  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" id = "code" name = "authorcode" readonly >
 </div>
 
 
   <label id="titlelabels">Genre</label>
-  <select class="form-control" style = "width:750px">
+  <select class="form-control" style = "width:750px" name = "gender">
     <option  disabled selected>Cliquez et sélectionnez</option>
-    <option value="Mr">Femme</option>
-    <option value="Ms">Homme</option>
-    <option value="Mrs">Je préfère ne pas répondre</option>
-    <option value="Miss">Autre</option>
+    <option value="Femme">Femme</option>
+    <option value="Homme">Homme</option>
+    <option value="Je préfère ne pas répondre">Je préfère ne pas répondre</option>
+    <option value="Autre">Autre</option>
   </select>
 
   <br>
 
 <label>Nom (auteur.e)</label>
 <div class="input-group mb-3" style = "width:750px" >
-  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50">
+  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50" name = "fname">
 </div>
 
 <label>Prénom (auteur.e)</label>
 <div class="input-group mb-3" style = "width:750px" >
-  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50">
+  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50" name = "lname">
 </div>
 
 <h1 class="divider"></h1>
@@ -98,7 +98,7 @@ catch (ErrorException $e) {
 
 <label id = "upload">Photo du lieu proposé</label>
 <div class="custom-file" style = "width:750px">
-    <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff">
+    <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" name = "photo">
 </div>
 
 <br>
@@ -106,21 +106,21 @@ catch (ErrorException $e) {
 
 <label id = "upload">Vidéo du lieu proposé</label>
 <div class="custom-file" style = "width:750px">
-    <input type="file" class="form-control" id="inputGroupFile04" accept=".mp4, .wav, .wmv, .avi">
+    <input type="file" class="form-control" id="inputGroupFile04" accept=".mp4, .wav, .wmv, .avi" name = "video">
 </div>
 
 <br>
 
 <label id = "upload">Podcast du lieu proposé</label>
 <div class="custom-file" style = "width:750px">
-    <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff">
+    <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" name = "podcast">
 </div>
 
 <br>
 
 <label id = "upload">Icône liée au lieu proposé</label>
 <div class="custom-file" style = "width:750px">
-    <input type="file" class="form-control" id="inputGroupFile04" accept="image/*">
+    <input type="file" class="form-control" id="inputGroupFile04" accept="image/*" name = "icone">
 </div>
 
 <br>
@@ -131,12 +131,12 @@ catch (ErrorException $e) {
 
 <label id="latitude-text">Latitude</label>
 <div class="input-group mb-3" style = "width:250px" >
-  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" name = "lat">
 </div>
 
 <label id = "longitude-text">Longitude</label>
 <div class="input-group mb-3" style = "width:250px" id = "long" >
-  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2" name = "long">
 </div>
 
   <label id="titlelabels">Nom de la route associée</label>
@@ -148,7 +148,7 @@ catch (ErrorException $e) {
   <br>
 
   <button type ="button"  style = "width:150px" onclick = "b()" class="d">Retour</button>
-  <button type ="submit"  style = "width:150px" id ="save" class="d">Sauvegarder</button>
+  <button type ="submit"  style = "width:150px" id ="save" class="d" name = "authorform">Sauvegarder</button>
   <button type ="button"  style = "width:150px" id="cancel" onclick = "jojo()" class="d">Reprendre</button>
 
 
