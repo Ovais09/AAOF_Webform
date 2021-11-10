@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+error_reporting(0);
+
 //check to see which php file sent the form data
 if (isset($_POST['routeform'])) {
 
@@ -19,7 +23,11 @@ if (isset($_POST['routeform'])) {
 
 
     $Code_itinéraire = $_POST['id'];
+    $_SESSION['Code_itinéraire'] = $Code_itinéraire;
+
     $Nom_itinéraire = $_POST['nameofroute'];
+    $_SESSION['Nom_itinéraire'] = $Nom_itinéraire;
+
     $Description_itinéraire = $_POST['routedescription'];
     $filename = $_FILES['myfile']['name'];
     $tname = $_FILES['myfile']['tmp_name'];
@@ -191,6 +199,8 @@ else {
     move_uploaded_file($tnamepodcast, $uploads_dir .'/' . $filenamepodcast);
     move_uploaded_file($tnameicone, $uploads_dir .'/' . $filenameicone);
 
+    $routeassociation = $_POST['routeassociation'];
+
     
     $create_table = "CREATE TABLE AuthorForm (
         AuthorCode VARCHAR(30) NOT NULL,
@@ -202,7 +212,8 @@ else {
         image_name_photo VARCHAR(100),
         image_name_video VARCHAR(100),
         image_name_podcast VARCHAR(100),
-        image_name_icon VARCHAR(100)
+        image_name_icon VARCHAR(100),
+        LinkToRoute VARCHAR(100)
          )";
     
         // check to see if the table exists
@@ -213,9 +224,9 @@ else {
         }
 
 
-        $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon)
+        $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon, LinkToRoute)
         VALUES ('$authorcode', 
-        '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone')";
+        '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone', '$routeassociation')";
     
         if(mysqli_query($conn, $sql)){
             echo "<h3>data stored in a database successfully." 

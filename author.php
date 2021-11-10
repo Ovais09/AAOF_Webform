@@ -1,9 +1,14 @@
 <?php
+
+session_start();
+
+$id =  $_SESSION['Code_itinéraire'];
+$nameofroute = $_SESSION['Nom_itinéraire'];
 error_reporting(0);
 
 try {
-  $nameofroute = $_REQUEST['nameofroute'];
-  $id = $_REQUEST['id'];
+  // $nameofroute = $_REQUEST['nameofroute'];
+  // $id = $_REQUEST['id'];
 }
 
 catch (ErrorException $e) {
@@ -140,7 +145,7 @@ catch (ErrorException $e) {
 </div>
 
   <label id="titlelabels">Nom de la route associée</label>
-  <select class="form-control" style = "width:750px" id="dropdownmenu">
+  <select class="form-control" style = "width:750px" id="dropdownmenu" name = "routeassociation">
     <option  disabled selected>(Identifiant numérique, Nom de la route)</option>>
   </select>
 
@@ -183,6 +188,7 @@ sessionStorage['code'] =
 
   var abc = '<?php echo $nameofroute; ?>';
   var id = '<?php echo $id; ?>';
+
   var x = document.getElementById("dropdownmenu");
 
 
@@ -192,7 +198,7 @@ sessionStorage['code'] =
 
       var option = document.createElement("option");
         option.text = id + "," + abc;
-        option.setAttribute("disabled", true)
+        // option.setAttribute("disabled", true)
         x.add(option);
         localStorage.setItem(id, option.text);
 
