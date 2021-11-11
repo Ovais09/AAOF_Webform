@@ -20,6 +20,9 @@ if (isset($_POST['routeform'])) {
     
 
     $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
 
     $Code_itinéraire = $_POST['id'];
@@ -172,6 +175,10 @@ $kml[] = ' </Style>';
 
 else {
     $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
     $authorcode = $_POST['authorcode'];
     $fname = $_POST['fname'];
