@@ -83,7 +83,7 @@
 <script>
 
     function login() {
-        window.location.href="home.php";
+        window.location.href="instructions.php";
     }
 
 

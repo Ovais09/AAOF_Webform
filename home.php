@@ -327,7 +327,7 @@ else {
     <br>
     <br>
 
-    <button type="button" class="custombutton" onclick="logout()">Quitter</button>
+    <button type="button" class="custombutton" onclick="logout()">Retour</button>
 
     <br>
     <br>
@@ -346,7 +346,7 @@ else {
     }
 
     function logout () {
-        window.location.href="index.php";
+        window.location.href="instructions.php";
     }
 
 </script>
