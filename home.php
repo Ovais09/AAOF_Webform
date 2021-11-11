@@ -19,7 +19,7 @@ if (isset($_POST['routeform'])) {
 
     
 
-    $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
+    $conn  = mysqli_connect('sql304.epizy.com','epiz_30180170','PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
@@ -174,7 +174,7 @@ $kml[] = ' </Style>';
 }
 
 else {
-    $conn  = mysqli_connect('localhost','ovais','test', 'onepiece');
+    $conn  = mysqli_connect('sql304.epizy.com','epiz_30180170','PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
     // Check connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
