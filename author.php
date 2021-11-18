@@ -149,6 +149,8 @@ catch (ErrorException $e) {
     <option  disabled selected>(Identifiant numérique, Nom de la route)</option>>
   </select>
 
+  <input type = "text" style = "display:none" name = "varauthor" id = "varauthor"> 
+
   <br>
   <br>
 
@@ -190,6 +192,11 @@ sessionStorage['code'] =
   var id = '<?php echo $id; ?>';
 
   var x = document.getElementById("dropdownmenu");
+
+  sessionStorage['authordate'] = new Date();
+
+    document.getElementById("varauthor").value = sessionStorage.getItem('authordate');
+
 
 
   window.onload = function exampleFunction() {

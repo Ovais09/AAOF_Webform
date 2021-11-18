@@ -24,6 +24,8 @@ if (isset($_POST['routeform'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
+    $dateTimeCreated = $_POST['var'];
+
 
     $Code_itinéraire = $_POST['id'];
     $_SESSION['Code_itinéraire'] = $Code_itinéraire;
@@ -43,7 +45,8 @@ if (isset($_POST['routeform'])) {
     Nom_itineraire VARCHAR(30) NOT NULL,
     Description_itineraire VARCHAR(80) NOT NULL,
     image_name VARCHAR(100),
-    checkbox_default VARCHAR(80)
+    checkbox_default VARCHAR(80),
+    DateTimeCreated VARCHAR(200)
      )";
 
     // check to see if the table exists
@@ -53,9 +56,9 @@ if (isset($_POST['routeform'])) {
         echo "Error creating table: " . mysqli_error($conn);
     }
 
-    $sql = "INSERT INTO RouteForm (Code_itineraire, Nom_itineraire, Description_itineraire,image_name,checkbox_default)
+    $sql = "INSERT INTO RouteForm (Code_itineraire, Nom_itineraire, Description_itineraire,image_name,checkbox_default, DateTimeCreated )
     VALUES ('$Code_itinéraire', 
-    '$Nom_itinéraire', '$Description_itinéraire', '$filename', ' $flexCheckDefault')";
+'$Nom_itinéraire', '$Description_itinéraire', '$filename', ' $flexCheckDefault', '$dateTimeCreated'); ";
 
     if(mysqli_query($conn, $sql)){
         echo "<h3>data stored in a database successfully." 
@@ -180,6 +183,8 @@ else {
         die("Connection failed: " . mysqli_connect_error());
     }
 
+    $dateTimeCreatedAuthor = $_POST['varauthor'];
+
     $authorcode = $_POST['authorcode'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -220,7 +225,8 @@ else {
         image_name_video VARCHAR(100),
         image_name_podcast VARCHAR(100),
         image_name_icon VARCHAR(100),
-        LinkToRoute VARCHAR(100)
+        LinkToRoute VARCHAR(100),
+        DateTimeCreated VARCHAR(200)
          )";
     
         // check to see if the table exists
@@ -231,9 +237,9 @@ else {
         }
 
 
-        $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon, LinkToRoute)
+        $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon, LinkToRoute, DateTimeCreated)
         VALUES ('$authorcode', 
-        '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone', '$routeassociation')";
+        '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone', '$routeassociation', '$dateTimeCreatedAuthor')";
     
         if(mysqli_query($conn, $sql)){
             echo "<h3>data stored in a database successfully." 

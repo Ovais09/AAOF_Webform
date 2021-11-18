@@ -24,24 +24,24 @@
     <br>
     <br>
 
-<h3><b>GESTION DES ITINERAIRES</b></h3>
+    <h3><b>GESTION DES ITINERAIRES</b></h3>
 
-<div id="border"></div>
+    <div id="border"></div>
 
-<br>
+    <br>
 
-<img src="images/chrome_Qj4I3vwotA.png" width="300" height="200" id="a">
+    <img src="images/chrome_Qj4I3vwotA.png" width="300" height="200" id="a">
 
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
 
-<h2 class="divider2"></h2>
+    <h2 class="divider2"></h2>
 
-<br>
-<br>
+    <br>
+    <br>
 
-<br>
+    <br>
 
 
 <form action="home.php" method="post" id="myForm" enctype="multipart/form-data">
@@ -283,6 +283,8 @@
     <label>à</label>
     <input type="date" id="to" name="birthday" class="s2"> -->
 
+    <input type = "text" style = "display:none" name = "var" id = "var"> 
+
     
     <br>
     <br>
@@ -312,6 +314,12 @@
         parseInt(localStorage['change'] || '0', 10) + 1;
 
     document.getElementById('change').value = "ITI-" + localStorage['change'];
+
+    sessionStorage['date'] = new Date();
+
+    document.getElementById("var").value = sessionStorage.getItem('date');
+
+
 
     
 
