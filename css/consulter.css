@@ -1,0 +1,48 @@
+body {
+  background-color: rgb(0, 66, 103);
+  font-family: "Open Sans", sans-serif;
+}
+
+h2 {
+  color: white;
+  /* position: absolute; */
+  text-align: center;
+  margin-top: 10px;
+}
+
+#border {
+  border-bottom: 1px solid black;
+  width: 1500px;
+}
+
+.divider2 {
+  position: absolute;
+  border-bottom: 4px solid black;
+  width: 1050px;
+  margin-left: 200px;
+}
+
+label {
+  color: white;
+  text-align: justify;
+  margin-left: 200px;
+  position: absolute;
+}
+
+#titlelabels {
+  color: white;
+}
+
+.d {
+  color: white;
+  background-color: rgb(0, 66, 103);
+  border-radius: 18px;
+  border: 2px solid white;
+  width: 150px;
+  height: 30px;
+}
+
+div {
+    margin-left:500px;
+    color: white;
+}

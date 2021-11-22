@@ -170,6 +170,7 @@ catch (ErrorException $e) {
 
 <script>
 
+
 sessionStorage['code'] =
       document.getElementById('code').value =
         parseInt(sessionStorage['code'] || '0', 10) + 1;
