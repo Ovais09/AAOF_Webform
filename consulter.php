@@ -294,7 +294,7 @@
 <script>
 
     function homepage() {
-        windows.location.href = "home.php";
+        window.location.href = "home.php";
     }
 
     function reset () {
