@@ -82,7 +82,7 @@
 
     <h1 class="divider" style="margin-left:200px; width:1050px;"></h1>
 
-    <br>
+    <!-- <br>
 
     <label style="margin-left:500px;">Auteur &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Lieu proposé &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -275,7 +275,7 @@
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
 
 
-    </div>
+    </div> -->
 
     <!-- <label id="ava">Disponible depuis</label>
     <input type="date" id="birthday" name="birthday">
