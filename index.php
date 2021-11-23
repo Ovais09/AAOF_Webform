@@ -72,7 +72,7 @@
 
     <br>
 
-    <button type="button" class="custombutton" onclick="login()">CONNEXION</button>
+    <button type="button" class="custombutton" onclick="homepage()">CONNEXION</button>
 
 </form>
 
@@ -85,8 +85,8 @@
 
 <script>
 
-    function login() {
-        window.location.href="instructions.php";
+    function homepage() {
+        window.location.href="home.php";
     }
 
 
