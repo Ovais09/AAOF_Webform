@@ -8,20 +8,30 @@ error_reporting(0);
 if (isset($_POST['routeform'])) {
 
     //checking to see if the checkbox of name= check was clicked or not
-    if(isset($_POST['check'])){
+    if (isset($_POST['check'])) {
         //if it was clicked, then the value of the checkbox is stored in the variable $check
         $flexCheckDefault = "checked";
-    }
-    else{
+    } else {
         //if it was not clicked, then the value of the checkbox is stored in the variable $check
         $flexCheckDefault = "not checked";
     }
 
-    
 
-    $conn  = mysqli_connect('sql304.epizy.com','epiz_30180170','PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+
+    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $rowcount = $_POST['rows'];
+
+    //insert the values into the Code_itineraireRoute column from the CodeTableRoute table
+    $sql = "INSERT INTO CodeTableRoute (Code_itineraireRoute) VALUES ('$rowcount')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Records inserted successfully.";
+    } else {
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
     }
 
     $dateTimeCreated = $_POST['var'];
@@ -38,7 +48,7 @@ if (isset($_POST['routeform'])) {
     $tname = $_FILES['myfile']['tmp_name'];
     $uploads_dir = 'RouteFormUploads/';
 
-    move_uploaded_file($tname, $uploads_dir .'/' . $filename);
+    move_uploaded_file($tname, $uploads_dir . '/' . $filename);
 
     $create_table = "CREATE TABLE RouteForm (
     Code_itineraire VARCHAR(30) NOT NULL,
@@ -51,9 +61,9 @@ if (isset($_POST['routeform'])) {
      )";
 
     // check to see if the table exists
-    if(mysqli_query($conn, $create_table)){
+    if (mysqli_query($conn, $create_table)) {
         echo "Table created successfully";
-    }else{
+    } else {
         echo "Error creating table: " . mysqli_error($conn);
     }
 
@@ -61,17 +71,14 @@ if (isset($_POST['routeform'])) {
     VALUES ('$Code_itinéraire', 
 '$Nom_itinéraire', '$Description_itinéraire', '$filename', ' $flexCheckDefault', '$dateTimeCreated', '$dateTimeCreated'); ";
 
-    if(mysqli_query($conn, $sql)){
-        echo "<h3>data stored in a database successfully." 
-        . " Please browse your localhost php my admin" 
-        . " to view the updated data</h3>"; 
-
+    if (mysqli_query($conn, $sql)) {
+        echo "<h3>data stored in a database successfully."
+            . " Please browse your localhost php my admin"
+            . " to view the updated data</h3>";
+    } else {
+        echo "ERROR: Hush! Sorr"
+            . mysqli_error($conn);
     }
-    else{
-    echo "ERROR: Hush! Sorr" 
-        . mysqli_error($conn);
-    }
-    
 
 
 
@@ -82,103 +89,102 @@ if (isset($_POST['routeform'])) {
 
 
 
-// $fname =  $_REQUEST['fname'];
-// $lname = $_REQUEST['lname'];
-// $address = $_REQUEST['address'];
-// $email = $_REQUEST['email'];
 
-// $lat = floatval($_REQUEST['lat']);
-// $lng = floatval($_REQUEST['lng']);
+    // $fname =  $_REQUEST['fname'];
+    // $lname = $_REQUEST['lname'];
+    // $address = $_REQUEST['address'];
+    // $email = $_REQUEST['email'];
 
-
-// $data = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
-// $name = $_FILES["image"]["name"];
+    // $lat = floatval($_REQUEST['lat']);
+    // $lng = floatval($_REQUEST['lng']);
 
 
-
-
-// $create_table = "CREATE TABLE testss (
-//     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//     firstname VARCHAR(30) NOT NULL,
-//     lastname VARCHAR(30) NOT NULL,
-//     address VARCHAR(80) NOT NULL,
-//     email VARCHAR(50),
-//     lat FLOAT(10,6) NOT NULL,
-//     lng FLOAT(10,6) NOT NULL,
-//     image_name VARCHAR(100),
-//     image LONGBLOB
-//      )";
-
-
-// mysqli_query($conn, $create_table);
-   
-
-// $sql = "INSERT INTO testss (firstname,lastname,address,email,lat,lng,image_name,image)
-// VALUES ('$fname', 
-// '$lname', '$address', '$email', '$lat', '$lng', '$name', '$data' )";
-
-
-// mysqli_query($conn,$sql );
-
-// if(mysqli_query($conn, $sql)){
-//     echo "<h3>data stored in a database successfully." 
-//         . " Please browse your localhost php my admin" 
-//         . " to view the updated data</h3>"; 
-
-// }
-//  else{
-//     echo "ERROR: Hush! Sorr" 
-//         . mysqli_error($conn);
-// }
-
-// $query = 'SELECT * FROM testss';
-// $result = mysqli_query($conn, $query);
-
-$kml = array('<?xml version="1.0" encoding="UTF-8"?>');
-$kml[] = '<kml xmlns="http://earth.google.com/kml/2.1">';
-$kml[] = ' <Document>';
-$kml[] = ' <Style id="restaurantStyle">';
-$kml[] = ' <IconStyle id="restuarantIcon">';
-$kml[] = ' <Icon>';
-$kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon63.png</href>';
-$kml[] = ' </Icon>';
-$kml[] = ' </IconStyle>';
-$kml[] = ' </Style>';
-$kml[] = ' <Style id="barStyle">';
-$kml[] = ' <IconStyle id="barIcon">';
-$kml[] = ' <Icon>';
-$kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon27.png</href>';
-$kml[] = ' </Icon>';
-$kml[] = ' </IconStyle>';
-$kml[] = ' </Style>';
-
-
-// while ($row = @mysqli_fetch_assoc($result)) 
-// {
-//   $kml[] = ' <Placemark id="placemark' . $row['id'] . '">';
-//   $kml[] = ' <name>' . htmlentities($row['firstname']) . '</name>';
-//   $kml[] = ' <description>' . htmlentities($row['address']) . '</description>';
-//   $kml[] = ' <styleUrl>#' . ($row['email']) .'Style</styleUrl>';
-//   $kml[] = ' <Point>';
-//   $kml[] = ' <coordinates>' . $row['lng'] . ','  . $row['lat'] . '</coordinates>';
-//   $kml[] = ' </Point>';
-//   $kml[] = ' </Placemark>';
- 
-// } 
-
-
-// $kml[] = ' </Document>';
-// $kml[] = '</kml>';
-// $kmlOutput = join("\n", $kml);
-// header('Content-type: application/vnd.google-earth.kml+xml');
-// echo $kmlOutput;
+    // $data = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+    // $name = $_FILES["image"]["name"];
 
 
 
-}
 
-else {
-    $conn  = mysqli_connect('sql304.epizy.com','epiz_30180170','PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+    // $create_table = "CREATE TABLE testss (
+    //     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    //     firstname VARCHAR(30) NOT NULL,
+    //     lastname VARCHAR(30) NOT NULL,
+    //     address VARCHAR(80) NOT NULL,
+    //     email VARCHAR(50),
+    //     lat FLOAT(10,6) NOT NULL,
+    //     lng FLOAT(10,6) NOT NULL,
+    //     image_name VARCHAR(100),
+    //     image LONGBLOB
+    //      )";
+
+
+    // mysqli_query($conn, $create_table);
+
+
+    // $sql = "INSERT INTO testss (firstname,lastname,address,email,lat,lng,image_name,image)
+    // VALUES ('$fname', 
+    // '$lname', '$address', '$email', '$lat', '$lng', '$name', '$data' )";
+
+
+    // mysqli_query($conn,$sql );
+
+    // if(mysqli_query($conn, $sql)){
+    //     echo "<h3>data stored in a database successfully." 
+    //         . " Please browse your localhost php my admin" 
+    //         . " to view the updated data</h3>"; 
+
+    // }
+    //  else{
+    //     echo "ERROR: Hush! Sorr" 
+    //         . mysqli_error($conn);
+    // }
+
+    // $query = 'SELECT * FROM testss';
+    // $result = mysqli_query($conn, $query);
+
+    $kml = array('<?xml version="1.0" encoding="UTF-8"?>');
+    $kml[] = '<kml xmlns="http://earth.google.com/kml/2.1">';
+    $kml[] = ' <Document>';
+    $kml[] = ' <Style id="restaurantStyle">';
+    $kml[] = ' <IconStyle id="restuarantIcon">';
+    $kml[] = ' <Icon>';
+    $kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon63.png</href>';
+    $kml[] = ' </Icon>';
+    $kml[] = ' </IconStyle>';
+    $kml[] = ' </Style>';
+    $kml[] = ' <Style id="barStyle">';
+    $kml[] = ' <IconStyle id="barIcon">';
+    $kml[] = ' <Icon>';
+    $kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon27.png</href>';
+    $kml[] = ' </Icon>';
+    $kml[] = ' </IconStyle>';
+    $kml[] = ' </Style>';
+
+
+    // while ($row = @mysqli_fetch_assoc($result)) 
+    // {
+    //   $kml[] = ' <Placemark id="placemark' . $row['id'] . '">';
+    //   $kml[] = ' <name>' . htmlentities($row['firstname']) . '</name>';
+    //   $kml[] = ' <description>' . htmlentities($row['address']) . '</description>';
+    //   $kml[] = ' <styleUrl>#' . ($row['email']) .'Style</styleUrl>';
+    //   $kml[] = ' <Point>';
+    //   $kml[] = ' <coordinates>' . $row['lng'] . ','  . $row['lat'] . '</coordinates>';
+    //   $kml[] = ' </Point>';
+    //   $kml[] = ' </Placemark>';
+
+    // } 
+
+
+    // $kml[] = ' </Document>';
+    // $kml[] = '</kml>';
+    // $kmlOutput = join("\n", $kml);
+    // header('Content-type: application/vnd.google-earth.kml+xml');
+    // echo $kmlOutput;
+
+
+
+} else {
+    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
     // Check connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
@@ -202,19 +208,19 @@ else {
     $tnamevideo = $_FILES['video']['tmp_name'];
 
     $filenamepodcast = $_FILES['podcast']['name'];
-    $tnamepodcast= $_FILES['podcast']['tmp_name'];
+    $tnamepodcast = $_FILES['podcast']['tmp_name'];
 
     $filenameicone = $_FILES['icone']['name'];
     $tnameicone = $_FILES['icone']['tmp_name'];
 
-    move_uploaded_file($tnamephoto, $uploads_dir .'/' . $filenamephoto);
-    move_uploaded_file($tnamevideo, $uploads_dir .'/' . $filenamevideo);
-    move_uploaded_file($tnamepodcast, $uploads_dir .'/' . $filenamepodcast);
-    move_uploaded_file($tnameicone, $uploads_dir .'/' . $filenameicone);
+    move_uploaded_file($tnamephoto, $uploads_dir . '/' . $filenamephoto);
+    move_uploaded_file($tnamevideo, $uploads_dir . '/' . $filenamevideo);
+    move_uploaded_file($tnamepodcast, $uploads_dir . '/' . $filenamepodcast);
+    move_uploaded_file($tnameicone, $uploads_dir . '/' . $filenameicone);
 
     $routeassociation = $_POST['routeassociation'];
 
-    
+
     $create_table = "CREATE TABLE AuthorForm (
         AuthorCode VARCHAR(30) NOT NULL,
         FirstName VARCHAR(30) NOT NULL,
@@ -230,33 +236,30 @@ else {
         DateTimeCreated VARCHAR(200),
         LastModificationDate VARCHAR(200)
          )";
-    
-        // check to see if the table exists
-        if(mysqli_query($conn, $create_table)){
-            echo "Table created successfully";
-        }else{
-            echo "Error creating table: " . mysqli_error($conn);
-        }
+
+    // check to see if the table exists
+    if (mysqli_query($conn, $create_table)) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . mysqli_error($conn);
+    }
 
 
-        $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon, LinkToRoute, DateTimeCreated, LastModificationDate)
+    $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon, LinkToRoute, DateTimeCreated, LastModificationDate)
         VALUES ('$authorcode', 
         '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone', '$routeassociation', '$dateTimeCreatedAuthor', '$dateTimeCreatedAuthor')";
-    
-        if(mysqli_query($conn, $sql)){
-            echo "<h3>data stored in a database successfully." 
-            . " Please browse your localhost php my admin" 
-            . " to view the updated data</h3>"; 
-    
-        }
-        else{
-        echo "ERROR: Hush! Sorr" 
-            . mysqli_error($conn);
-        }
 
+    if (mysqli_query($conn, $sql)) {
+        echo "<h3>data stored in a database successfully."
+            . " Please browse your localhost php my admin"
+            . " to view the updated data</h3>";
+    } else {
+        echo "ERROR: Hush! Sorr"
+            . mysqli_error($conn);
+    }
 }
 
-    
+
 
 
 ?>
@@ -278,7 +281,7 @@ else {
 
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -312,23 +315,23 @@ else {
     <br>
     <br>
     <br>
-  
+
 
 
 
 
     <div class="both">
 
-    <button id="b1" onclick = "routechange()"   class="and" type="button">Créer un itinéraire</button>
-    <button id="b2" onclick = "authorchange()" class="and"  type="button">Créer un lieu d'inspiration</button>
-    <button id="b3" class="and"  type="button">Générer <br> Fichier KML</button>
+        <button id="b1" onclick="routechange()" class="and" type="button">Créer un itinéraire</button>
+        <button id="b2" onclick="authorchange()" class="and" type="button">Créer un lieu d'inspiration</button>
+        <button id="b3" class="and" type="button">Générer <br> Fichier KML</button>
 
 
-    
-    <button id="special"  class="and2" type="button" onclick = "consulter()">Consulter un Itinéraire </button>
-    <button id="b2"   class="and2" type="button">Consulter lieu d'inspiration</button>
-    <button id="b3" class="and2" type="button">Consulter Fichier KML</button>
-   
+
+        <button id="special" class="and2" type="button" onclick="consulter()">Consulter un Itinéraire </button>
+        <button id="b2" class="and2" type="button">Consulter lieu d'inspiration</button>
+        <button id="b3" class="and2" type="button">Consulter Fichier KML</button>
+
 
     </div>
 
@@ -339,28 +342,26 @@ else {
 
     <br>
     <br>
-    
+
 </body>
 
 <script>
+    function authorchange() {
+        window.location.href = "author.php";
 
-    function authorchange () {
-        window.location.href="author.php";
-        
     }
 
-    function  routechange () {
-        window.location.href="route.php";
+    function routechange() {
+        window.location.href = "route.php";
     }
 
-    function logout () {
-        window.location.href="instructions.php";
+    function logout() {
+        window.location.href = "instructions.php";
     }
 
-    function consulter () {
-        window.location.href="consulter.php";
+    function consulter() {
+        window.location.href = "consulter.php";
     }
-
 </script>
 
 
