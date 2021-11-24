@@ -1,3 +1,65 @@
+<?php
+
+
+$conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+//getting all the data from colunm Code_itneraire from table RouteForm
+$sql = "SELECT Code_itineraire FROM RouteForm";
+$nom = "SELECT Nom_itineraire FROM RouteForm";
+if($result = mysqli_query($conn, $sql)) {
+    echo "works";
+}
+
+else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+
+//getting all the data from colunm Code_itneraire from table RouteForm and storing them in an array
+$array = array();
+while($row = mysqli_fetch_array($result)) {
+    $array[] = $row['Code_itineraire'];
+}
+
+if($nomresult = mysqli_query($conn, $nom)) {
+    echo "yay";
+}
+
+else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+$nomarray = array();
+while($rownom = mysqli_fetch_array($nomresult)) {
+    $nomarray[] = $rownom['Nom_itineraire'];
+}
+
+
+
+
+//store the data from the colunm Code_itneraire in an array
+// $array = array();
+// foreach ($rows as $row) {
+//     array_push($array, $row);
+// }
+
+// echo $array[0];
+// echo $array[1];
+
+
+
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +82,7 @@
 
     <br>
 
-    <form id = "myForm" method = "post">
+    <form id="myForm" method="post">
 
 
         <label id="titlelabels">Nom de la route associée</label>
@@ -297,9 +359,27 @@
         window.location.href = "home.php";
     }
 
-    function reset () {
+    function reset() {
         document.getElementById("myForm").reset();
     }
+
+    var array = "<?php echo implode(",", $array); ?>".split(",");
+    var namearray =  "<?php echo implode(",", $nomarray); ?>".split(",");
+    
+    var newarray = [];
+    for (var i =0; i <array.length; i++) {
+        newarray.push(array[i] + "," + namearray[i]);
+    }
+
+
+    var x = document.getElementById("dropdownmenu");
+
+    for (var i = 0; i < array.length; i++) {
+        var option = document.createElement("option");
+        option.text = newarray[i];
+        x.add(option);
+    }
+
 
 </script>
 

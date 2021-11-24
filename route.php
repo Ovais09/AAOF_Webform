@@ -8,6 +8,13 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+$create_table = "CREATE TABLE CodeTableRoute (
+    Code_itineraireRoute VARCHAR(30) NOT NULL
+     )";
+
+mysqli_query($conn, $create_table);
+
+
 //grab the values from the Code_itineraireRoute column from the CodeTableRoute table
 $sql = "SELECT Code_itineraireRoute FROM CodeTableRoute";
 
