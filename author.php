@@ -105,15 +105,20 @@ try {
 
     <br>
 
-    <label>Nom (auteur.e)</label>
-    <div class="input-group mb-3" style="width:750px">
-      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50" name="fname">
-    </div>
 
     <label>Prénom (auteur.e)</label>
     <div class="input-group mb-3" style="width:750px">
       <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50" name="lname">
     </div>
+    
+    <br>
+    
+    <label>Nom (auteur.e)</label>
+    <div class="input-group mb-3" style="width:750px">
+      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50" name="fname">
+    </div>
+
+
 
     <h1 class="divider"></h1>
 

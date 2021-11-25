@@ -198,6 +198,7 @@ if (isset($_POST['routeform'])) {
     $gender = $_POST['gender'];
     $lat = $_POST['lat'];
     $long = $_POST['long'];
+    $description = $_POST['description'];
 
     $uploads_dir = 'AuthorFormUploads/';
 
@@ -234,7 +235,8 @@ if (isset($_POST['routeform'])) {
         image_name_icon VARCHAR(100),
         LinkToRoute VARCHAR(100),
         DateTimeCreated VARCHAR(200),
-        LastModificationDate VARCHAR(200)
+        LastModificationDate VARCHAR(200),
+        LieuDescription VARCHAR(500)
          )";
 
     // check to see if the table exists
@@ -245,9 +247,9 @@ if (isset($_POST['routeform'])) {
     }
 
 
-    $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon, LinkToRoute, DateTimeCreated, LastModificationDate)
+    $sql = "INSERT INTO AuthorForm (AuthorCode, FirstName, LastName, Gender, Lat, Longitude, image_name_photo, image_name_video, image_name_podcast, image_name_icon, LinkToRoute, DateTimeCreated, LastModificationDate, LieuDescription)
         VALUES ('$authorcode', 
-        '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone', '$routeassociation', '$dateTimeCreatedAuthor', '$dateTimeCreatedAuthor')";
+        '$fname', '$lname ', '$gender', '$lat', '$long', '$filenamephoto', '$filenamevideo', '$filenamepodcast', '$filenameicone', '$routeassociation', '$dateTimeCreatedAuthor', '$dateTimeCreatedAuthor', '$description')";
 
     if (mysqli_query($conn, $sql)) {
         echo "<h3>data stored in a database successfully."

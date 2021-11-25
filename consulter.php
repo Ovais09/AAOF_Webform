@@ -95,7 +95,7 @@ while($rownom = mysqli_fetch_array($nomresult)) {
         <br>
 
         <div>
-            <button type="button" style="width:150px" onclick="b()" class="d">Chercher</button>
+            <button type="button" style="width:150px" onclick="displaySubform()" class="d">Chercher</button>
         </div>
 
         <h2 class="divider2"></h2>
@@ -378,6 +378,12 @@ while($rownom = mysqli_fetch_array($nomresult)) {
         var option = document.createElement("option");
         option.text = newarray[i];
         x.add(option);
+    }
+
+    function displaySubform () {
+        var x = document.getElementById("dropdownmenu");
+        var y = x.options[x.selectedIndex].text;
+        
     }
 
 
