@@ -10,31 +10,27 @@ if (!$conn) {
 //getting all the data from colunm Code_itneraire from table RouteForm
 $sql = "SELECT Code_itineraire FROM RouteForm";
 $nom = "SELECT Nom_itineraire FROM RouteForm";
-if($result = mysqli_query($conn, $sql)) {
+if ($result = mysqli_query($conn, $sql)) {
     echo "works";
-}
-
-else {
+} else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
 
 //getting all the data from colunm Code_itneraire from table RouteForm and storing them in an array
 $array = array();
-while($row = mysqli_fetch_array($result)) {
+while ($row = mysqli_fetch_array($result)) {
     $array[] = $row['Code_itineraire'];
 }
 
-if($nomresult = mysqli_query($conn, $nom)) {
+if ($nomresult = mysqli_query($conn, $nom)) {
     echo "yay";
-}
-
-else {
+} else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
 $nomarray = array();
-while($rownom = mysqli_fetch_array($nomresult)) {
+while ($rownom = mysqli_fetch_array($nomresult)) {
     $nomarray[] = $rownom['Nom_itineraire'];
 }
 
@@ -49,6 +45,41 @@ while($rownom = mysqli_fetch_array($nomresult)) {
 
 // echo $array[0];
 // echo $array[1];
+
+if (isset($_POST['subform'])) {
+
+    $idroute = $_REQUEST['idroute'];
+
+    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    //get the record that has $idroute as one its value from table AuthorForm
+    $select = "SELECT * FROM AuthorForm WHERE LinkToRoute = '$idroute'";
+    if ($resultselect = mysqli_query($conn, $select)) {
+        echo "hopefully works";
+    } else {
+        echo "Error: " . $select . "<br>" . mysqli_error($conn);
+    }
+
+    if (mysqli_num_rows($resultselect) > 0) {
+        // output data of each row
+        $row = mysqli_fetch_assoc($resultselect);
+        //echoing the data from that record
+        $authorname = $row['FirstName'] . " " . $row['LastName'];
+        $authordescription  = $row['LieuDescription'];
+        $photo = $row['image_name_photo'];
+        $video = $row['image_name_video'];
+        $podcast = $row['image_name_podcast'];
+        $icon = $row['image_name_icon'];
+    }
+}
+
+
+
+
+
 
 
 
@@ -69,6 +100,7 @@ while($rownom = mysqli_fetch_array($nomresult)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/consulter.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 
@@ -87,16 +119,19 @@ while($rownom = mysqli_fetch_array($nomresult)) {
 
         <label id="titlelabels">Nom de la route associée</label>
         <div>
-            <select class="form-control" style="width:750px" id="dropdownmenu" name="routeassociation">
-                <option disabled selected>(Identifiant numérique, Nom de la route)</option>>
+            <select class="form-control" style="width:750px" id="dropdownmenu" name="routeassociation" onchange="findelement()">
+                <option disabled selected>(Identifiant numérique, Nom de la route) </option>
             </select>
         </div>
 
         <br>
 
-        <div>
-            <button type="button" style="width:150px" onclick="displaySubform()" class="d">Chercher</button>
-        </div>
+        <form action="consulter.php" method="post">
+            <div>
+                <input type="text" style="display:none" name="idroute" id="idroute">
+                <button type="submit" style="width:150px" class="d" name="subform" id="chercher">Chercher</button>
+            </div>
+        </form>
 
         <h2 class="divider2"></h2>
 
@@ -157,25 +192,25 @@ while($rownom = mysqli_fetch_array($nomresult)) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="one" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="two" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input id="three" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="four" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input id="five" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input id="six" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -354,7 +389,6 @@ while($rownom = mysqli_fetch_array($nomresult)) {
 </body>
 
 <script>
-
     function homepage() {
         window.location.href = "home.php";
     }
@@ -364,10 +398,10 @@ while($rownom = mysqli_fetch_array($nomresult)) {
     }
 
     var array = "<?php echo implode(",", $array); ?>".split(",");
-    var namearray =  "<?php echo implode(",", $nomarray); ?>".split(",");
-    
+    var namearray = "<?php echo implode(",", $nomarray); ?>".split(",");
+
     var newarray = [];
-    for (var i =0; i <array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
         newarray.push(array[i] + "," + namearray[i]);
     }
 
@@ -380,13 +414,43 @@ while($rownom = mysqli_fetch_array($nomresult)) {
         x.add(option);
     }
 
-    function displaySubform () {
+
+
+    function findelement() {
         var x = document.getElementById("dropdownmenu");
         var y = x.options[x.selectedIndex].text;
-        
+        document.getElementById("idroute").value = y;
     }
 
+    var authorname = '<?php echo $authorname; ?>';
+    var authordescription = '<?php echo $authordescription; ?>';
+    var photo = '<?php echo $photo; ?>';
+    var video = '<?php echo $video ?>';
+    var podcast = '<?php echo $podcast ?>';
+    var icon = '<?php echo $icon ?>';
 
+    document.getElementById("one").value = authorname;
+    document.getElementById("two").value = authordescription;
+
+    if (photo.length != 0) {
+
+        document.getElementById("three").checked = true;
+    }
+
+    if (video.length != 0) {
+
+        document.getElementById("four").checked = true;
+    }
+
+    if (podcast.length != 0) {
+
+        document.getElementById("five").checked = true;
+    }
+
+    if (icon.length != 0) {
+
+        document.getElementById("six").checked = true;
+    }
 </script>
 
 </html>
