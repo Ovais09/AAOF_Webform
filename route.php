@@ -15,7 +15,6 @@ $create_table = "CREATE TABLE CodeTableRoute (
 mysqli_query($conn, $create_table);
 
 
-//grab the values from the Code_itineraireRoute column from the CodeTableRoute table
 $sql = "SELECT Code_itineraireRoute FROM CodeTableRoute";
 
 if ($result = mysqli_query($conn, $sql)) {

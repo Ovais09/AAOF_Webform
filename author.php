@@ -7,6 +7,21 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
+$create_table = "CREATE TABLE AuthorTableRoute (
+  AuthorCodeRoute VARCHAR(30) NOT NULL
+   )";
+
+mysqli_query($conn, $create_table);
+
+//grab the values from the Code_itineraireRoute column from the CodeTableRoute table
+$get = "SELECT AuthorCodeRoute FROM AuthorTableRoute";
+
+if ($result = mysqli_query($conn, $get)) {
+  $rowcount = mysqli_num_rows($result);
+} else {
+  echo "Error: " . $get . "<br>" . mysqli_error($conn);
+}
+
 
 //getting all the data from colunm Code_itneraire from table RouteForm
 $sql = "SELECT Code_itineraire FROM RouteForm";
@@ -110,9 +125,9 @@ try {
     <div class="input-group mb-3" style="width:750px">
       <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50" name="lname">
     </div>
-    
+
     <br>
-    
+
     <label>Nom (auteur.e)</label>
     <div class="input-group mb-3" style="width:750px">
       <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="50" name="fname">
@@ -185,6 +200,7 @@ try {
     </select>
 
     <input type="text" style="display:none" name="varauthor" id="varauthor">
+    <input type="text" style="display:none" name="rowes" id="rowes">
 
     <br>
     <br>
@@ -204,11 +220,18 @@ try {
 
 
 <script>
-  sessionStorage['code'] =
-    document.getElementById('code').value =
-    parseInt(sessionStorage['code'] || '0', 10) + 1;
+  // sessionStorage['code'] =
+  //   document.getElementById('code').value =
+  //   parseInt(sessionStorage['code'] || '0', 10) + 1;
 
-  document.getElementById('code').value = "AUT-" + sessionStorage['code'];
+  // document.getElementById('code').value = "AUT-" + sessionStorage['code'];
+
+  var row = '<?php echo $rowcount; ?>';
+  var rowint = parseInt(row) + 1;
+  console.log(rowint);
+
+  document.getElementById('rowes').value = rowint;
+  document.getElementById('code').value = "AUT-" + rowint.toString();
 
   function jojo() {
     document.getElementById("myForm").reset();
@@ -241,9 +264,9 @@ try {
   window.onload = function exampleFunction() {
 
     for (var i = 0; i < array.length; i++) {
-        var option = document.createElement("option");
-        option.text = newarray[i];
-        x.add(option);
+      var option = document.createElement("option");
+      option.text = newarray[i];
+      x.add(option);
     }
 
 
@@ -256,19 +279,19 @@ try {
     // for (var i = 0; i < localStorage.length - 1; i++) {
     //   var a = localStorage.getItem(localStorage.key(i));
 
-      //get rid of duplicates in dropdown menu
-      // ;if (a != option.text) 
-      //   var option = document.createElement("option");
-      //   option.text = a;
-      //   x.add(option)
+    //get rid of duplicates in dropdown menu
+    // ;if (a != option.text) 
+    //   var option = document.createElement("option");
+    //   option.text = a;
+    //   x.add(option)
 
 
-        //  var option = document.createElement("option");
-        //  option.text = a;
-        //  x.add(option);
-      
+    //  var option = document.createElement("option");
+    //  option.text = a;
+    //  x.add(option);
 
-    
+
+
 
 
 

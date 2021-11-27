@@ -222,6 +222,22 @@ if (isset($_POST['routeform'])) {
     $routeassociation = $_POST['routeassociation'];
 
 
+    if (isset($_POST['authorform'])) {
+        $rowcount = $_POST['rowes'];
+
+        //insert the values into the Code_itineraireRoute column from the CodeTableRoute table
+        $sqle = "INSERT INTO AuthorTableRoute (AuthorCodeRoute) VALUES ('$rowcount')";
+
+        if (mysqli_query($conn, $sqle)) {
+            echo "inserted row number";
+        } else {
+            echo "ERROR: Hush! Sorr"
+                . mysqli_error($conn);
+        }
+    }
+
+
+
     $create_table = "CREATE TABLE AuthorForm (
         AuthorCode VARCHAR(30) NOT NULL,
         FirstName VARCHAR(30) NOT NULL,
