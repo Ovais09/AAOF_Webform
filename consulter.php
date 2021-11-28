@@ -317,7 +317,7 @@ if (isset($_POST['subform'])) {
 
             <input class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input video"" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input video"" type=" checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <input class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
@@ -405,7 +405,7 @@ if (isset($_POST['subform'])) {
         </div>
 
         <button type="button" style="width:150px; margin-left:500px" onclick="homepage()" class="d">Retour</button>
-        <button type="button" style="width:150px; margin-left:150px" onclick="reset()" class="d">Reprendre</button>
+        <button type="reset" style="width:150px; margin-left:150px" onclick="resete()" class="d">Reprendre</button>
         <button type="button" style="width:150px; margin-left:125px" onclick="b()" class="d">Enregistrer</button>
 
     </form>
@@ -426,8 +426,29 @@ if (isset($_POST['subform'])) {
         window.location.href = "home.php";
     }
 
-    function reset() {
-        document.getElementById("myForm").reset();
+    function resete() {
+
+        var inputlength = document.getElementsByTagName("input").length;
+        console.log(inputlength);
+
+        for (var i = 0; i < inputlength; i++) {
+            document.getElementsByTagName("input")[i].value = "";
+        }
+
+        //uncheck all checkboxes
+        var checkboxes = document.getElementsByTagName('input');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = false;
+            }
+        }
+
+        // clearing the textarea
+        document.getElementsByTagName("textarea")[0].value = "";
+
+
+        // window.location.reload();
+
     }
 
     var array = "<?php echo implode(",", $array); ?>".split(",");
@@ -458,33 +479,33 @@ if (isset($_POST['subform'])) {
     var databasearray = <?php echo json_encode($arrayfix); ?>;
 
     var authorname = [];
-    for (var i = 0; i < databasearray.length/6; i++) {
-        authorname[i] = databasearray[i*6];
+    for (var i = 0; i < databasearray.length / 6; i++) {
+        authorname[i] = databasearray[i * 6];
     }
 
     var authordescription = [];
-    for (var i = 0; i < databasearray.length/6; i++) {
-        authordescription[i] = databasearray[i*6+1];
+    for (var i = 0; i < databasearray.length / 6; i++) {
+        authordescription[i] = databasearray[i * 6 + 1];
     }
 
     var photo = [];
-    for (var i = 0; i < databasearray.length/6; i++) {
-        photo[i] = databasearray[i*6+2];
+    for (var i = 0; i < databasearray.length / 6; i++) {
+        photo[i] = databasearray[i * 6 + 2];
     }
 
     var video = [];
-    for (var i = 0; i < databasearray.length/6; i++) {
-        video[i] = databasearray[i*6+3];
+    for (var i = 0; i < databasearray.length / 6; i++) {
+        video[i] = databasearray[i * 6 + 3];
     }
 
     var podcast = [];
-    for (var i = 0; i < databasearray.length/6; i++) {
-        podcast[i] = databasearray[i*6+4];
+    for (var i = 0; i < databasearray.length / 6; i++) {
+        podcast[i] = databasearray[i * 6 + 4];
     }
 
     var icon = [];
-    for (var i = 0; i < databasearray.length/6; i++) {
-        icon[i] = databasearray[i*6+5];
+    for (var i = 0; i < databasearray.length / 6; i++) {
+        icon[i] = databasearray[i * 6 + 5];
     }
 
     for (var i = 0; i < authorname.length; i++) {
