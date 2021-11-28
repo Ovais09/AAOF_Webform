@@ -55,7 +55,10 @@ if (isset($_POST['subform'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    //get the record that has $idroute as one its value from table AuthorForm
+
+
+
+
     $select = "SELECT * FROM AuthorForm WHERE LinkToRoute = '$idroute'";
     if ($resultselect = mysqli_query($conn, $select)) {
         echo "hopefully works";
@@ -63,18 +66,48 @@ if (isset($_POST['subform'])) {
         echo "Error: " . $select . "<br>" . mysqli_error($conn);
     }
 
-    if (mysqli_num_rows($resultselect) > 0) {
-        // output data of each row
-        $row = mysqli_fetch_assoc($resultselect);
-        //echoing the data from that record
-        $authorname = $row['FirstName'] . " " . $row['LastName'];
-        $authordescription  = $row['LieuDescription'];
-        $photo = $row['image_name_photo'];
-        $video = $row['image_name_video'];
-        $podcast = $row['image_name_podcast'];
-        $icon = $row['image_name_icon'];
+    $rows = mysqli_fetch_all($resultselect, MYSQLI_ASSOC);
+
+    $arrayfix = array();
+    $j = 0;
+
+
+    for ($i = 0; $i < count($rows); $i++) {
+        $arrayfix[$j] = $rows[$i]['FirstName'] . " " . $rows[$i]['LastName'];
+        $j++;
+        $arrayfix[$j] = $rows[$i]['LieuDescription'];
+        $j++;
+        $arrayfix[$j] = $rows[$i]['image_name_photo'];
+        $j++;
+        $arrayfix[$j] = $rows[$i]['image_name_video'];
+        $j++;
+        $arrayfix[$j] = $rows[$i]['image_name_podcast'];
+        $j++;
+        $arrayfix[$j] = $rows[$i]['image_name_icon'];
+        $j++;
     }
 }
+
+
+
+
+
+
+// $row = mysqli_fetch_assoc($resultselect);
+// echo $row;
+// echo $row[0];
+// echo $row[1];
+// echo $row[2];
+// //echoing the data from that record
+// $authorname = $row['FirstName'] . " " . $row['LastName'];
+// echo $authorname;
+// $authordescription  = $row['LieuDescription'];
+// $photo = $row['image_name_photo'];
+// $video = $row['image_name_video'];
+// $podcast = $row['image_name_podcast'];
+// $icon = $row['image_name_icon'];
+
+
 
 
 
@@ -192,25 +225,25 @@ if (isset($_POST['subform'])) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="one" readonly>
+                <input type="text" class="form-control author" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="two" readonly>
+                <input type="text" class="form-control lieu" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input id="three" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input id="three" class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input id="four" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="four" class="form-check-input video" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input id="five" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input id="five" class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input id="six" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
+            <input id="six" class="form-check-input icon" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -218,25 +251,25 @@ if (isset($_POST['subform'])) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control author" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control lieu" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input video" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input icon" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -244,25 +277,25 @@ if (isset($_POST['subform'])) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control author" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control lieu" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input video" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input icon" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -270,25 +303,25 @@ if (isset($_POST['subform'])) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control author" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control lieu" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input video"" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input icon" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -296,25 +329,25 @@ if (isset($_POST['subform'])) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control author" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control lieu" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input video" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input icon" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -322,25 +355,25 @@ if (isset($_POST['subform'])) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control author" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control lieu" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input video" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input icon" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -348,25 +381,25 @@ if (isset($_POST['subform'])) {
         <div class="input-group mb-3" style="margin-left:500px;">
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control author" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
 
             <div class="input-group mb-3" style="margin-left:0px; width:100px">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control lieu" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
             </div>
 
             &nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;
 
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
+            <input class="form-check-input photo" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="form-check-input video" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
+            <input class="form-check-input podcast" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp;
 
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input icon" type="checkbox" value="" id="flexCheckDefault" disabled="disabled">
 
 
         </div>
@@ -422,35 +455,98 @@ if (isset($_POST['subform'])) {
         document.getElementById("idroute").value = y;
     }
 
-    var authorname = '<?php echo $authorname; ?>';
-    var authordescription = '<?php echo $authordescription; ?>';
-    var photo = '<?php echo $photo; ?>';
-    var video = '<?php echo $video ?>';
-    var podcast = '<?php echo $podcast ?>';
-    var icon = '<?php echo $icon ?>';
+    var databasearray = <?php echo json_encode($arrayfix); ?>;
 
-    document.getElementById("one").value = authorname;
-    document.getElementById("two").value = authordescription;
-
-    if (photo.length != 0) {
-
-        document.getElementById("three").checked = true;
+    var authorname = [];
+    for (var i = 0; i < databasearray.length/6; i++) {
+        authorname[i] = databasearray[i*6];
     }
 
-    if (video.length != 0) {
-
-        document.getElementById("four").checked = true;
+    var authordescription = [];
+    for (var i = 0; i < databasearray.length/6; i++) {
+        authordescription[i] = databasearray[i*6+1];
     }
 
-    if (podcast.length != 0) {
-
-        document.getElementById("five").checked = true;
+    var photo = [];
+    for (var i = 0; i < databasearray.length/6; i++) {
+        photo[i] = databasearray[i*6+2];
     }
 
-    if (icon.length != 0) {
-
-        document.getElementById("six").checked = true;
+    var video = [];
+    for (var i = 0; i < databasearray.length/6; i++) {
+        video[i] = databasearray[i*6+3];
     }
+
+    var podcast = [];
+    for (var i = 0; i < databasearray.length/6; i++) {
+        podcast[i] = databasearray[i*6+4];
+    }
+
+    var icon = [];
+    for (var i = 0; i < databasearray.length/6; i++) {
+        icon[i] = databasearray[i*6+5];
+    }
+
+    for (var i = 0; i < authorname.length; i++) {
+
+        document.getElementsByClassName("author")[i].value = authorname[i];
+    }
+
+    for (var i = 0; i < authordescription.length; i++) {
+
+        document.getElementsByClassName("lieu")[i].value = authordescription[i];
+    }
+
+    for (var i = 0; i < photo.length; i++) {
+
+        if (photo[i].length != 0) {
+            document.getElementsByClassName("photo")[i].checked = true;
+        }
+    }
+
+    for (var i = 0; i < video.length; i++) {
+
+        if (video[i].length != 0) {
+            document.getElementsByClassName("video")[i].checked = true;
+        }
+    }
+
+    for (var i = 0; i < podcast.length; i++) {
+
+        if (podcast[i].length != 0) {
+            document.getElementsByClassName("podcast")[i].checked = true;
+        }
+    }
+
+    for (var i = 0; i < icon.length; i++) {
+
+        if (icon[i].length != 0) {
+            document.getElementsByClassName("icon")[i].checked = true;
+        }
+    }
+
+    // document.getElementById("one").value = authorname;
+    // document.getElementById("two").value = authordescription;
+
+    // if (photo.length != 0) {
+
+    //     document.getElementById("three").checked = true;
+    // }
+
+    // if (video.length != 0) {
+
+    //     document.getElementById("four").checked = true;
+    // }
+
+    // if (podcast.length != 0) {
+
+    //     document.getElementById("five").checked = true;
+    // }
+
+    // if (icon.length != 0) {
+
+    //     document.getElementById("six").checked = true;
+    // }
 </script>
 
 </html>
