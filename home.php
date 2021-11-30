@@ -183,7 +183,70 @@ if (isset($_POST['routeform'])) {
 
 
 
-} else {
+} 
+
+if (isset($_POST['enregistrer'])) {
+
+    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $routeid = $_POST['id'];
+    $nameofroute = $_POST['nameofroute'];
+    $routeidname = $routeid . "," . $nameofroute;
+    $routedescription = $_POST['routedescription'];
+
+    if (isset($_POST['check'])) {
+        //if it was clicked, then the value of the checkbox is stored in the variable $check
+        $flexCheckDefault = "checked";
+    } else {
+        //if it was not clicked, then the value of the checkbox is stored in the variable $check
+        $flexCheckDefault = "not checked";
+    }
+
+    $dateTimeCreated = date("Y-m-d H:i:s");
+    echo $dateTimeCreated;
+
+    $filename = $_FILES['myfile']['name'];
+    $tname = $_FILES['myfile']['tmp_name'];
+    $uploads_dir = 'RouteFormUploads/';
+
+    move_uploaded_file($tname, $uploads_dir . '/' . $filename);
+
+    $sql = "UPDATE RouteForm SET Nom_itineraire= '$nameofroute', Description_itineraire = '$routedescription', image_name = '$filename', checkbox_default = '$flexCheckDefault', LastModificationDate = '$dateTimeCreated' WHERE Code_itineraire= '$routeid'";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error updating record: " . mysqli_error($conn);
+    }
+
+
+    $sqle = "UPDATE AuthorForm SET LinkToRoute = '$routeidname' WHERE LinkToRoute LIKE '%$routeid%'";
+
+    if (mysqli_query($conn, $sqle)) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error updating record: " . mysqli_error($conn);
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+else {
     $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
     // Check connection
     if (!$conn) {

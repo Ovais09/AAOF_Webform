@@ -151,35 +151,36 @@ if (isset($_POST['subform'])) {
 
     <br>
 
-    <form id="myForm" method="post">
 
 
-        <label id="titlelabels">Nom de la route associée</label>
+    <label id="titlelabels">Nom de la route associée</label>
+    <div>
+        <select class="form-control" style="width:750px" id="dropdownmenu" name="routeassociation" onchange="findelement()">
+            <option disabled selected>(Identifiant numérique, Nom de la route) </option>
+        </select>
+    </div>
+
+    <br>
+
+    <form action="consulter.php" method="post">
         <div>
-            <select class="form-control" style="width:750px" id="dropdownmenu" name="routeassociation" onchange="findelement()">
-                <option disabled selected>(Identifiant numérique, Nom de la route) </option>
-            </select>
+            <input type="text" style="display:none" name="idroute" id="idroute">
+            <input type="text" style="display:none" name="justidroute" id="justidroute">
+            <button type="submit" style="width:150px" class="d" name="subform" id="chercher">Chercher</button>
         </div>
+    </form>
 
-        <br>
+    <h2 class="divider2"></h2>
 
-        <form action="consulter.php" method="post">
-            <div>
-                <input type="text" style="display:none" name="idroute" id="idroute">
-                <input type="text" style="display:none" name="justidroute" id="justidroute">
-                <button type="submit" style="width:150px" class="d" name="subform" id="chercher">Chercher</button>
-            </div>
-        </form>
+    <br>
+    <br>
 
-        <h2 class="divider2"></h2>
 
-        <br>
-        <br>
-
+    <form id="myForm" method="POST" enctype="multipart/form-data" action = "home.php">
 
         <label>Code itinéraire</label>
         <div class="input-group mb-3" style="width:750px">
-            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="change" readonly name="id" value="<?php echo $justidroute; ?>" >
+            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="change" readonly name="id" value="<?php echo $justidroute; ?>">
         </div>
 
         <label>Nom itinéraire</label>
@@ -411,7 +412,7 @@ if (isset($_POST['subform'])) {
 
         <button type="button" style="width:150px; margin-left:500px" onclick="homepage()" class="d">Retour</button>
         <button type="reset" style="width:150px; margin-left:150px" onclick="resete()" class="d">Reprendre</button>
-        <button type="button" style="width:150px; margin-left:125px" onclick="b()" class="d">Enregistrer</button>
+        <button type="submit" style="width:150px; margin-left:125px" class="d" name = "enregistrer">Enregistrer</button>
 
     </form>
 
