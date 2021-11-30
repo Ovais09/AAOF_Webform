@@ -6,6 +6,10 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+$justidroute = $_REQUEST['justidroute'];
+echo $justidroute;
+
+
 
 //getting all the data from colunm Code_itneraire from table RouteForm
 $sql = "SELECT Code_itineraire FROM RouteForm";
@@ -162,6 +166,7 @@ if (isset($_POST['subform'])) {
         <form action="consulter.php" method="post">
             <div>
                 <input type="text" style="display:none" name="idroute" id="idroute">
+                <input type="text" style="display:none" name="justidroute" id="justidroute">
                 <button type="submit" style="width:150px" class="d" name="subform" id="chercher">Chercher</button>
             </div>
         </form>
@@ -174,7 +179,7 @@ if (isset($_POST['subform'])) {
 
         <label>Code itinéraire</label>
         <div class="input-group mb-3" style="width:750px">
-            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="change" readonly name="id">
+            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" id="change" readonly name="id" value="<?php echo $justidroute; ?>" >
         </div>
 
         <label>Nom itinéraire</label>
@@ -474,6 +479,10 @@ if (isset($_POST['subform'])) {
         var x = document.getElementById("dropdownmenu");
         var y = x.options[x.selectedIndex].text;
         document.getElementById("idroute").value = y;
+        var z = y.split(",");
+        var routejustid = z[0];
+        document.getElementById("change").value = routejustid;
+        document.getElementById("justidroute").value = routejustid;
     }
 
     var databasearray = <?php echo json_encode($arrayfix); ?>;
@@ -545,6 +554,8 @@ if (isset($_POST['subform'])) {
             document.getElementsByClassName("icon")[i].checked = true;
         }
     }
+
+
 
     // document.getElementById("one").value = authorname;
     // document.getElementById("two").value = authordescription;
