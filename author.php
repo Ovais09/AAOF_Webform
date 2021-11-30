@@ -186,12 +186,14 @@ try {
 
     <label id="latitude-text">Latitude</label>
     <div class="input-group mb-3" style="width:250px">
-      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" name="lat">
+      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" name="lat" id="txtLat" onkeyup="ValidateLatitude()">
+      <span id="lblLat" style="color: Red;display:none;"></span>
     </div>
 
     <label id="longitude-text">Longitude</label>
     <div class="input-group mb-3" style="width:250px" id="long">
-      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" name="long">
+      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" name="long" id="txtLong" onkeyup="ValidateLongitude()">
+      <span id="lblLong" style="color: Red;display:none;"></span>
     </div>
 
     <label id="titlelabels">Nom de la route associée</label>
@@ -219,12 +221,34 @@ try {
 </body>
 
 
-<script>
+<script type="text/javascript">
   // sessionStorage['code'] =
   //   document.getElementById('code').value =
   //   parseInt(sessionStorage['code'] || '0', 10) + 1;
 
   // document.getElementById('code').value = "AUT-" + sessionStorage['code'];
+
+
+  function ValidateLatitude() {
+    document.getElementById("save").disabled = false;
+    $("#lblLat").hide();
+    var regexLat = new RegExp('^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$');
+    if (!regexLat.test($("#txtLat").val())) {
+      $("#lblLat").html("Invalid Latitude").show();
+      document.getElementById("save").disabled = true;
+    }
+  }
+
+  function ValidateLongitude() {
+    document.getElementById("save").disabled = false;
+    $("#lblLong").hide();
+    var regexLong = new RegExp('^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$');
+    if (!regexLong.test($("#txtLong").val())) {
+      $("#lblLong").html("Invalid Longitude").show();
+      document.getElementById("save").disabled = true;
+    }
+  }
+
 
   var row = '<?php echo $rowcount; ?>';
   var rowint = parseInt(row) + 1;
@@ -289,11 +313,6 @@ try {
     //  var option = document.createElement("option");
     //  option.text = a;
     //  x.add(option);
-
-
-
-
-
 
 
   }
