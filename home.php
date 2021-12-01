@@ -424,7 +424,7 @@ else {
     }
 
     function logout() {
-        window.location.href = "instructions.php";
+        window.location.href = "index.php";
     }
 
     function consulter() {
