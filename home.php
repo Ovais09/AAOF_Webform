@@ -183,7 +183,7 @@ if (isset($_POST['routeform'])) {
 
 
 
-} 
+}
 
 if (isset($_POST['enregistrer'])) {
 
@@ -230,20 +230,7 @@ if (isset($_POST['enregistrer'])) {
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
+} 
 
 
 else {
@@ -265,16 +252,16 @@ else {
 
     $uploads_dir = 'AuthorFormUploads/';
 
-    $filenamephoto = $_FILES['photo']['name'];
+    $filenamephoto = $authorcode . "_" . $_FILES['photo']['name'];
     $tnamephoto = $_FILES['photo']['tmp_name'];
 
-    $filenamevideo = $_FILES['video']['name'];
+    $filenamevideo = $authorcode . "_" . $_FILES['video']['name'];
     $tnamevideo = $_FILES['video']['tmp_name'];
 
-    $filenamepodcast = $_FILES['podcast']['name'];
+    $filenamepodcast = $authorcode . "_" . $_FILES['podcast']['name'];
     $tnamepodcast = $_FILES['podcast']['tmp_name'];
 
-    $filenameicone = $_FILES['icone']['name'];
+    $filenameicone = $authorcode . "_" . $_FILES['icone']['name'];
     $tnameicone = $_FILES['icone']['tmp_name'];
 
     move_uploaded_file($tnamephoto, $uploads_dir . '/' . $filenamephoto);

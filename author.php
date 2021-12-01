@@ -87,7 +87,7 @@ try {
 <body>
 
 
-  <form id="myForm" action="home.php" method="POST" enctype="multipart/form-data">
+  <form id="myForm" action="home.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
 
     <h3 id="b"> <b> GESTION DES AUTEURS </b> </h3>
 
@@ -227,6 +227,22 @@ try {
   //   parseInt(sessionStorage['code'] || '0', 10) + 1;
 
   // document.getElementById('code').value = "AUT-" + sessionStorage['code'];
+
+  function validateForm() {
+    
+    var e = document.forms["myForm"]["lat"].value.length;
+    var f = document.forms["myForm"]["long"].value.length;
+
+   if(e == 0 || f == 0){
+     alert("Veuillez remplir tous les champs");
+     return false;
+   }
+   else{
+     return true;
+   }
+
+
+  }
 
 
   function ValidateLatitude() {
