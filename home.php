@@ -44,7 +44,7 @@ if (isset($_POST['routeform'])) {
     $_SESSION['Nom_itinéraire'] = $Nom_itinéraire;
 
     $Description_itinéraire = $_POST['routedescription'];
-    $filename = $_FILES['myfile']['name'];
+    $filename = $Code_itinéraire . "_" . $_FILES['myfile']['name'];
     $tname = $_FILES['myfile']['tmp_name'];
     $uploads_dir = 'RouteFormUploads/';
 
@@ -208,7 +208,7 @@ if (isset($_POST['enregistrer'])) {
     $dateTimeCreated = date("Y-m-d H:i:s");
     echo $dateTimeCreated;
 
-    $filename = $_FILES['myfile']['name'];
+    $filename = $routeid . "_" . $_FILES['myfile']['name'];
     $tname = $_FILES['myfile']['tmp_name'];
     $uploads_dir = 'RouteFormUploads/';
 
