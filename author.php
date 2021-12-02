@@ -250,7 +250,7 @@ try {
     $("#lblLat").hide();
     var regexLat = new RegExp('^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$');
     if (!regexLat.test($("#txtLat").val())) {
-      $("#lblLat").html("Invalid Latitude").show();
+      $("#lblLat").html("Données de latitude invalides").show();
       document.getElementById("save").disabled = true;
     }
   }
@@ -260,7 +260,7 @@ try {
     $("#lblLong").hide();
     var regexLong = new RegExp('^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$');
     if (!regexLong.test($("#txtLong").val())) {
-      $("#lblLong").html("Invalid Longitude").show();
+      $("#lblLong").html("Données de longitude invalides").show();
       document.getElementById("save").disabled = true;
     }
   }
