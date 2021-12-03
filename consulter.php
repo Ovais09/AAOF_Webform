@@ -530,28 +530,28 @@ if (isset($_POST['subform'])) {
 
     for (var i = 0; i < photo.length; i++) {
 
-        if (photo[i].length >6) {
+        if (photo[i].length >12) {
             document.getElementsByClassName("photo")[i].checked = true;
         }
     }
 
     for (var i = 0; i < video.length; i++) {
 
-        if (video[i].length >6) {
+        if (video[i].length >12) {
             document.getElementsByClassName("video")[i].checked = true;
         }
     }
 
     for (var i = 0; i < podcast.length; i++) {
 
-        if (podcast[i].length >6) {
+        if (podcast[i].length >14) {
             document.getElementsByClassName("podcast")[i].checked = true;
         }
     }
 
     for (var i = 0; i < icon.length; i++) {
 
-        if (icon[i].length >6) {
+        if (icon[i].length >12) {
             document.getElementsByClassName("icon")[i].checked = true;
         }
     }
