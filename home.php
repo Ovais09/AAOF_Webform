@@ -252,16 +252,16 @@ else {
 
     $uploads_dir = 'AuthorFormUploads/';
 
-    $filenamephoto = $authorcode . "_" . $_FILES['photo']['name'];
+    $filenamephoto = $authorcode . "_" . "Photo" . "." . end(explode(".", $_FILES['photo']['name']));
     $tnamephoto = $_FILES['photo']['tmp_name'];
 
-    $filenamevideo = $authorcode . "_" . $_FILES['video']['name'];
+    $filenamevideo = $authorcode . "_" . "Video" . "."  . end(explode(".", $_FILES['video']['name']));
     $tnamevideo = $_FILES['video']['tmp_name'];
 
-    $filenamepodcast = $authorcode . "_" . $_FILES['podcast']['name'];
+    $filenamepodcast = $authorcode . "_" . "Podcast" . "." . end(explode(".", $_FILES['podcast']['name']));
     $tnamepodcast = $_FILES['podcast']['tmp_name'];
 
-    $filenameicone = $authorcode . "_" . $_FILES['icone']['name'];
+    $filenameicone = $authorcode . "_" . "Icone" . "." . end(explode(".", $_FILES['icone']['name']));
     $tnameicone = $_FILES['icone']['tmp_name'];
 
     move_uploaded_file($tnamephoto, $uploads_dir . '/' . $filenamephoto);
