@@ -52,8 +52,8 @@ if (isset($_POST['routeform'])) {
 
     $create_table = "CREATE TABLE RouteForm (
     Code_itineraire VARCHAR(30) NOT NULL,
-    Nom_itineraire VARCHAR(30) NOT NULL,
-    Description_itineraire VARCHAR(80) NOT NULL,
+    Nom_itineraire VARCHAR(90) NOT NULL,
+    Description_itineraire VARCHAR(50000) NOT NULL,
     image_name VARCHAR(100),
     checkbox_default VARCHAR(80),
     DateTimeCreated VARCHAR(200),
@@ -290,8 +290,8 @@ else {
 
     $create_table = "CREATE TABLE AuthorForm (
         AuthorCode VARCHAR(30) NOT NULL,
-        FirstName VARCHAR(30) NOT NULL,
-        LastName VARCHAR(80) NOT NULL,
+        FirstName VARCHAR(50) NOT NULL,
+        LastName VARCHAR(50) NOT NULL,
         Gender VARCHAR(80) NOT NULL,
         Lat DECIMAL(8,6) NOT NULL, 
         Longitude DECIMAL(8,6) NOT NULL, 
@@ -302,7 +302,7 @@ else {
         LinkToRoute VARCHAR(100),
         DateTimeCreated VARCHAR(200),
         LastModificationDate VARCHAR(200),
-        LieuDescription VARCHAR(500)
+        LieuDescription VARCHAR(50000)
          )";
 
     // check to see if the table exists

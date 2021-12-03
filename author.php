@@ -146,7 +146,7 @@ try {
 
     <label for="exampleFormControlTextarea1" id="placemark_description">Description du lieu</label>
     <div class="form-group" style="width:750px">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" maxlength = "50000"></textarea>
     </div>
 
     <br>

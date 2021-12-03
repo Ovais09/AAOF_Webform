@@ -87,7 +87,7 @@ if ($result = mysqli_query($conn, $sql)) {
 
         <label for="exampleFormControlTextarea1" id="placemark_description">Description itinéraire <br> (route)</label>
         <div class="form-group" style="width:750px">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="routedescription"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="routedescription" maxlength = "50000"></textarea>
         </div>
 
         <br>
