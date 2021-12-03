@@ -187,14 +187,14 @@ try {
     <label id="latitude-text">Latitude</label>
     <div class="input-group mb-3" style="width:250px">
       <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" name="lat" id="txtLat" onkeyup="ValidateLatitude()">
-      <span id="lblLat" style="color: Red;display:none;"></span>
     </div>
+    <div id="lblLat" style="color: Red;display:none; margin-left: 1000px; margin-top : -50px; position:absolute;"></div>
 
     <label id="longitude-text">Longitude</label>
     <div class="input-group mb-3" style="width:250px" id="long">
       <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" name="long" id="txtLong" onkeyup="ValidateLongitude()">
-      <span id="lblLong" style="color: Red;display:none;"></span>
     </div>
+    <div id="lblLong" style="color: Red;display:none; margin-left: 1000px;  margin-top : -50px; position:absolute;"></div>
 
     <label id="titlelabels">Nom de la route associée</label>
     <select class="form-control" style="width:750px" id="dropdownmenu" name="routeassociation">
