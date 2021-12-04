@@ -18,7 +18,8 @@ if (isset($_POST['routeform'])) {
 
 
 
-    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+    $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
+
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
@@ -187,7 +188,8 @@ if (isset($_POST['routeform'])) {
 
 if (isset($_POST['enregistrer'])) {
 
-    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+    $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
+
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
@@ -234,7 +236,7 @@ if (isset($_POST['enregistrer'])) {
 
 
 else {
-    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+    $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
     // Check connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());

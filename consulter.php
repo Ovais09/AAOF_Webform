@@ -1,13 +1,14 @@
 <?php
 
 
-$conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+$conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
+
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
 $justidroute = $_REQUEST['justidroute'];
-echo $justidroute;
+
 
 
 
@@ -54,7 +55,8 @@ if (isset($_POST['subform'])) {
 
     $idroute = $_REQUEST['idroute'];
 
-    $conn  = mysqli_connect('sql304.epizy.com', 'epiz_30180170', 'PqcofX2eqJDb', 'epiz_30180170_AAOFdata');
+    $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
+
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
@@ -90,6 +92,28 @@ if (isset($_POST['subform'])) {
         $arrayfix[$j] = $rows[$i]['image_name_icon'];
         $j++;
     }
+
+
+    //splitting the variable %idroute from the comma
+    $idroute = explode(",", $idroute);
+    $idroute = $idroute[0];
+
+
+
+    $sqlsss = "SELECT * FROM RouteForm WHERE Code_itineraire = '$idroute'";
+    if ($resultsss = mysqli_query($conn, $sqlsss)) {
+        echo "dioe";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    $rows = mysqli_fetch_all($resultsss, MYSQLI_ASSOC);
+
+    $arrayfix2 = array();
+
+    $arrayfix2[0] = $rows[0]['Nom_itineraire'];
+    $arrayfix2[1] = $rows[0]['Description_itineraire'];
+    $arrayfix2[2] = $rows[0]['checkbox_default'];
 }
 
 
@@ -176,7 +200,7 @@ if (isset($_POST['subform'])) {
     <br>
 
 
-    <form id="myForm" method="POST" enctype="multipart/form-data" action = "home.php">
+    <form id="myForm" method="POST" enctype="multipart/form-data" action="home.php">
 
         <label>Code itinéraire</label>
         <div class="input-group mb-3" style="width:750px">
@@ -185,7 +209,7 @@ if (isset($_POST['subform'])) {
 
         <label>Nom itinéraire</label>
         <div class="input-group mb-3" style="width:750px">
-            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="90" name="nameofroute">
+            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" maxlength="90" name="nameofroute" id="nameofroute">
         </div>
 
         <label for="exampleFormControlTextarea1" id="placemark_description">Description itinéraire <br> (route)</label>
@@ -412,7 +436,7 @@ if (isset($_POST['subform'])) {
 
         <button type="button" style="width:150px; margin-left:500px" onclick="homepage()" class="d">Retour</button>
         <button type="reset" style="width:150px; margin-left:150px" onclick="resete()" class="d">Reprendre</button>
-        <button type="submit" style="width:150px; margin-left:125px" class="d" name = "enregistrer">Enregistrer</button>
+        <button type="submit" style="width:150px; margin-left:125px" class="d" name="enregistrer">Enregistrer</button>
 
     </form>
 
@@ -530,56 +554,46 @@ if (isset($_POST['subform'])) {
 
     for (var i = 0; i < photo.length; i++) {
 
-        if (photo[i].length >12) {
+        if (photo[i].length > 12) {
             document.getElementsByClassName("photo")[i].checked = true;
         }
     }
 
     for (var i = 0; i < video.length; i++) {
 
-        if (video[i].length >12) {
+        if (video[i].length > 12) {
             document.getElementsByClassName("video")[i].checked = true;
         }
     }
 
     for (var i = 0; i < podcast.length; i++) {
 
-        if (podcast[i].length >14) {
+        if (podcast[i].length > 14) {
             document.getElementsByClassName("podcast")[i].checked = true;
         }
     }
 
+
     for (var i = 0; i < icon.length; i++) {
 
-        if (icon[i].length >12) {
+        if (icon[i].length > 12) {
             document.getElementsByClassName("icon")[i].checked = true;
         }
     }
 
+    var databasetwo = <?php echo json_encode($arrayfix2); ?>;
+    document.getElementById("nameofroute").value = databasetwo[0];
 
+    document.getElementById("exampleFormControlTextarea1").value = databasetwo[1];
 
-    // document.getElementById("one").value = authorname;
-    // document.getElementById("two").value = authordescription;
+    var checkboxdefault = databasetwo[2];
+    if (checkboxdefault.trim() == "checked") {
+        console.log("wryyyyyyyyy");
+        document.getElementById("flexCheckDefault").checked = true;
+    }
 
-    // if (photo.length != 0) {
-
-    //     document.getElementById("three").checked = true;
-    // }
-
-    // if (video.length != 0) {
-
-    //     document.getElementById("four").checked = true;
-    // }
-
-    // if (podcast.length != 0) {
-
-    //     document.getElementById("five").checked = true;
-    // }
-
-    // if (icon.length != 0) {
-
-    //     document.getElementById("six").checked = true;
-    // }
+    var abovearray = <?php echo json_encode($finalarray); ?>;
+    console.log(abovearray);
 </script>
 
 </html>
