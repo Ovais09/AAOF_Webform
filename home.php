@@ -394,7 +394,7 @@ else {
 
         <button id="b1" onclick="routechange()" class="and" type="button">Créer un itinéraire</button>
         <button id="b2" onclick="authorchange()" class="and" type="button">Créer un lieu d'inspiration</button>
-        <button id="b3" class="and" type="button">Générer <br> Fichier KML</button>
+        <button id="b3" class="and" type="button" onclick = "createkmlfile()">Générer <br> Fichier KML</button>
 
 
 
@@ -416,6 +416,12 @@ else {
 </body>
 
 <script>
+
+    function createkmlfile() {
+        console.log("iksrgjwrigiujgnhwueijghnewiujhjneth");
+        window.location.href = "kmlcreate.php";
+    }
+
     function authorchange() {
         window.location.href = "author.php";
 

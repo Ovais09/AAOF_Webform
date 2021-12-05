@@ -114,6 +114,10 @@ if (isset($_POST['subform'])) {
     $arrayfix2[0] = $rows[0]['Nom_itineraire'];
     $arrayfix2[1] = $rows[0]['Description_itineraire'];
     $arrayfix2[2] = $rows[0]['checkbox_default'];
+
+    $imagename = explode("_", $rows[0]['image_name']);
+    $arrayfix2[3] = $imagename[1];
+
 }
 
 
@@ -592,8 +596,11 @@ if (isset($_POST['subform'])) {
         document.getElementById("flexCheckDefault").checked = true;
     }
 
-    var abovearray = <?php echo json_encode($finalarray); ?>;
-    console.log(abovearray);
+    console.log(databasetwo[3]);
+    document.getElementById("inputGroupFile04").name= databasetwo[3];
+    document.getElementById("inputGroupFile04").value= databasetwo[3];
+
+   
 </script>
 
 </html>
