@@ -234,7 +234,9 @@ try {
     var e = document.forms["myForm"]["lat"].value.length;
     var f = document.forms["myForm"]["long"].value.length;
 
-   if(e == 0 || f == 0){
+    //dropdownmenu value
+
+   if(e == 0 || f == 0 | document.getElementById('dropdownmenu').value == "(Identifiant numérique, Nom de la route)"){
      alert("Veuillez remplir tous les champs");
      return false;
    }
