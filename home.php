@@ -232,10 +232,20 @@ if (isset($_POST['enregistrer'])) {
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
-} 
+}
 
 
-else {
+
+
+
+
+
+
+
+
+
+
+if (isset($_POST['authorform'])) {
     $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
     // Check connection
     if (!$conn) {
@@ -332,6 +342,10 @@ else {
 
 
 
+
+
+
+
 ?>
 
 
@@ -394,7 +408,7 @@ else {
 
         <button id="b1" onclick="routechange()" class="and" type="button">Créer un itinéraire</button>
         <button id="b2" onclick="authorchange()" class="and" type="button">Créer un lieu d'inspiration</button>
-        <button id="b3" class="and" type="button" onclick = "createkmlfile()">Générer <br> Fichier KML</button>
+        <button id="b3" class="and" type="button" onclick="createkmlfile()">Générer <br> Fichier KML</button>
 
 
 
@@ -416,7 +430,6 @@ else {
 </body>
 
 <script>
-
     function createkmlfile() {
         console.log("iksrgjwrigiujgnhwueijghnewiujhjneth");
         window.location.href = "kmlcreate.php";

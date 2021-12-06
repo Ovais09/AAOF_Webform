@@ -39,8 +39,120 @@ while ($rownom = mysqli_fetch_array($nomresult)) {
     $nomarray[] = $rownom['Nom_itineraire'];
 }
 
+if (isset($_REQUEST['kml'])) {
+    $idroute = $_REQUEST['idroute'];
+
+    $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $select = "SELECT * FROM AuthorForm WHERE LinkToRoute = '$idroute'";
+    if ($resultselect = mysqli_query($conn, $select)) {
+        echo "hopefully works";
+    } else {
+        echo "Error: " . $select . "<br>" . mysqli_error($conn);
+    }
+
+    $rows = mysqli_fetch_all($resultselect, MYSQLI_ASSOC);
+
+    $fname = array();
+    for ($i = 0; $i < count($rows); $i++) {
+        $fname[] = $rows[$i]['FirstName'];
+    }
+
+    $lname = array();
+    for ($i = 0; $i < count($rows); $i++) {
+        $lname[] = $rows[$i]['LastName'];
+    }
+
+    $lat = array();
+    for ($i = 0; $i < count($rows); $i++) {
+        $lat[] = $rows[$i]['Lat'];
+    }
+
+    $long = array();
+    for ($i = 0; $i < count($rows); $i++) {
+        $long[] = $rows[$i]['Longitude'];
+    }
+
+    $routename = explode(",", $idroute);
+    $routename = $routename[1];
+
+    $authordescription = array();
+    for ($i = 0; $i < count($rows); $i++) {
+        $authordescription[] = $rows[$i]['LieuDescription'];
+    }
+
+    $kml = array('<?xml version="1.0" encoding="UTF-8"?>');
+    $kml[] = '<kml xmlns="http://earth.google.com/kml/2.1">';
+    $kml[] = ' <Document>';
+    $kml[] = ' <name>' . $routename . '</name>';
+    $kml[] = ' <Style id="restaurantStyle">';
+    $kml[] = ' <IconStyle id="restuarantIcon">';
+    $kml[] = ' <Icon>';
+    $kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon63.png</href>';
+    $kml[] = ' </Icon>';
+    $kml[] = ' </IconStyle>';
+    $kml[] = ' </Style>';
+    $kml[] = ' <Style id="barStyle">';
+    $kml[] = ' <IconStyle id="barIcon">';
+    $kml[] = ' <Icon>';
+    $kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon27.png</href>';
+    $kml[] = ' </Icon>';
+    $kml[] = ' </IconStyle>';
+    $kml[] = ' </Style>';
+
+    for($i = 0; $i < count($rows); $i++) {
+        $kml[] = ' <Placemark>';
+        $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
+        $kml[] = ' <description>' . $authordescription[$i] . '</description>';
+        $kml[] = ' <styleUrl>#barStyle</styleUrl>';
+        $kml[] = ' <Point>';
+        $kml[] = ' <coordinates>' . $long[$i]. ',' . $lat[$i] . ',0</coordinates>';
+        $kml[] = ' </Point>';
+        $kml[] = ' </Placemark>';
+    }
 
 
+    // while ($row = @mysqli_fetch_assoc($resultselect)) {
+    //     $kml[] = ' <Placemark id="placemark' . $row['id'] . '">';
+    //     $kml[] = ' <name>' . htmlentities($row['firstname']) . '</name>';
+    //     $kml[] = ' <description>' . htmlentities($row['address']) . '</description>';
+    //     $kml[] = ' <styleUrl>#' . ($row['email']) . 'Style</styleUrl>';
+    //     $kml[] = ' <Point>';
+    //     $kml[] = ' <coordinates>' . $row['lng'] . ','  . $row['lat'] . '</coordinates>';
+    //     $kml[] = ' </Point>';
+    //     $kml[] = ' </Placemark>';
+    // }
+
+
+    $kml[] = ' </Document>';
+    $kml[] = '</kml>';
+
+
+    $kmlOutput = join("\n", $kml);
+
+    // header('Content-type: application/vnd.google-earth.kml+xml');
+
+    $myfile = fopen($routename . ".kml", "w") or die("Unable to open file!");
+    fwrite($myfile, $kmlOutput);
+
+    $uploads_dir = 'KMLFiles/';
+    //copy the file to the server
+    if (copy($routename . ".kml", $uploads_dir . $routename . ".kml")) {
+        echo "File is valid, and was successfully uploaded.\n";
+    } else {
+        echo "Possible file upload attack!\n";
+    }
+
+    unlink($routename . ".kml");
+    
+
+
+
+}
 
 ?>
 
@@ -56,8 +168,8 @@ while ($rownom = mysqli_fetch_array($nomresult)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/kmlcreate.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
 
