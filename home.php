@@ -1,8 +1,8 @@
 <?php
 
-session_start();
+// session_start();
 
-error_reporting(0);
+// error_reporting(0);
 
 //check to see which php file sent the form data
 if (isset($_POST['routeform'])) {
@@ -24,16 +24,17 @@ if (isset($_POST['routeform'])) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $rowcount = $_POST['rows'];
+    // $rowcount = $_POST['rows'];
+    // echo $rowcount; //for testing purposes
 
-    //insert the values into the Code_itineraireRoute column from the CodeTableRoute table
-    $sql = "INSERT INTO CodeTableRoute (Code_itineraireRoute) VALUES ('$rowcount')";
+    // //insert the values into the Code_itineraireRoute column from the CodeTableRoute table
+    // $sql = "INSERT INTO CodeTableRoute (Code_itineraireRoute) VALUES ('$rowcount')";
 
-    if (mysqli_query($conn, $sql)) {
-        echo "Records inserted successfully.";
-    } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-    }
+    // if (mysqli_query($conn, $sql)) {
+    //     echo "Records inserted successfully.";
+    // } else {
+    //     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+    // }
 
     $dateTimeCreated = $_POST['var'];
 
@@ -50,6 +51,21 @@ if (isset($_POST['routeform'])) {
     $uploads_dir = 'RouteFormUploads/';
 
     move_uploaded_file($tname, $uploads_dir . '/' . $filename);
+
+
+    if (isset($_POST['routeform'])) {
+        $rowcount = $_POST['rows'];
+
+        //insert the values into the Code_itineraireRoute column from the CodeTableRoute table
+        $sqle = "INSERT INTO CodeTableRoute (Code_itineraireRoute) VALUES ('$rowcount')";
+
+        if (mysqli_query($conn, $sqle)) {
+            echo "inserted row number";
+        } else {
+            echo "ERROR: Hush! Sorr"
+                . mysqli_error($conn);
+        }
+    }
 
     $create_table = "CREATE TABLE RouteForm (
     Code_itineraire VARCHAR(30) NOT NULL,

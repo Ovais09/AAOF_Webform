@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
 
 
@@ -12,15 +13,16 @@ $create_table = "CREATE TABLE CodeTableRoute (
     Code_itineraireRoute VARCHAR(30) NOT NULL
      )";
 
+
 mysqli_query($conn, $create_table);
 
+//grab the values from the Code_itineraireRoute column from the CodeTableRoute table
+$get = "SELECT Code_itineraireRoute FROM CodeTableRoute";
 
-$sql = "SELECT Code_itineraireRoute FROM CodeTableRoute";
-
-if ($result = mysqli_query($conn, $sql)) {
+if ($result = mysqli_query($conn, $get)) {
     $rowcount = mysqli_num_rows($result);
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error: " . $get . "<br>" . mysqli_error($conn);
 }
 
 
@@ -87,7 +89,7 @@ if ($result = mysqli_query($conn, $sql)) {
 
         <label for="exampleFormControlTextarea1" id="placemark_description">Description itinéraire <br> (route)</label>
         <div class="form-group" style="width:750px">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="routedescription" maxlength = "50000"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="routedescription" maxlength="50000"></textarea>
         </div>
 
         <br>
@@ -344,6 +346,7 @@ if ($result = mysqli_query($conn, $sql)) {
     // document.getElementById('change').value = "ITI-" + localStorage['change'];
 
     var row = '<?php echo $rowcount; ?>';
+    console.log(row);
     var rowint = parseInt(row) + 1;
 
     document.getElementById('rows').value = rowint;
