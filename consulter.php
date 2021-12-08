@@ -117,7 +117,6 @@ if (isset($_POST['subform'])) {
 
     $imagename = explode("_", $rows[0]['image_name']);
     $arrayfix2[3] = $imagename[1];
-
 }
 
 
@@ -225,7 +224,7 @@ if (isset($_POST['subform'])) {
 
         <label id="upload">Photo itinéraire</label>
         <div class="custom-file" style="width:750px">
-            <input type="file" name="myfile" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff">
+            <input type="file" name="newfile" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" onchange="ab()">
         </div>
 
         <br>
@@ -438,6 +437,10 @@ if (isset($_POST['subform'])) {
 
         </div>
 
+        <input type="text" style="display:none" id="routeupload" name="routeupload">
+
+        <input type="text" style="display:none" name="datejavascript" id="datejavascript">
+
         <button type="button" style="width:150px; margin-left:500px" onclick="homepage()" class="d">Retour</button>
         <button type="reset" style="width:150px; margin-left:150px" onclick="resete()" class="d">Reprendre</button>
         <button type="submit" style="width:150px; margin-left:125px" class="d" name="enregistrer">Enregistrer</button>
@@ -597,10 +600,20 @@ if (isset($_POST['subform'])) {
     }
 
     console.log(databasetwo[3]);
-    document.getElementById("inputGroupFile04").name= databasetwo[3];
-    document.getElementById("inputGroupFile04").value= databasetwo[3];
+    document.getElementById("inputGroupFile04").name = databasetwo[3];
+    document.getElementById("inputGroupFile04").value = databasetwo[3];
 
-   
+    function ab() {
+        var x = document.getElementById("inputGroupFile04").value;
+        var y = x.split("\\").pop();
+        console.log(x);
+        console.log(y);
+        document.getElementById("routeupload").value = y;
+    }
+
+    sessionStorage['datejavascript'] = new Date();
+
+    document.getElementById("datejavascript").value = sessionStorage.getItem('datejavascript');
 </script>
 
 </html>

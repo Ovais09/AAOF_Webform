@@ -214,6 +214,7 @@ if (isset($_POST['enregistrer'])) {
     $nameofroute = $_POST['nameofroute'];
     $routeidname = $routeid . "," . $nameofroute;
     $routedescription = $_POST['routedescription'];
+    $routeupload = $_POST['routeupload'];
 
     if (isset($_POST['check'])) {
         //if it was clicked, then the value of the checkbox is stored in the variable $check
@@ -223,11 +224,11 @@ if (isset($_POST['enregistrer'])) {
         $flexCheckDefault = "not checked";
     }
 
-    $dateTimeCreated = date("Y-m-d H:i:s");
+    $dateTimeCreated = $_POST['datejavascript'];
     echo $dateTimeCreated;
 
-    $filename = $routeid . "_" . $_FILES['myfile']['name'];
-    $tname = $_FILES['myfile']['tmp_name'];
+    $filename = $routeid . "_" . $routeupload;
+    $tname = $_FILES['newfile']['tmp_name'];
     $uploads_dir = 'RouteFormUploads/';
 
     move_uploaded_file($tname, $uploads_dir . '/' . $filename);
@@ -235,7 +236,7 @@ if (isset($_POST['enregistrer'])) {
     $sql = "UPDATE RouteForm SET Nom_itineraire= '$nameofroute', Description_itineraire = '$routedescription', image_name = '$filename', checkbox_default = '$flexCheckDefault', LastModificationDate = '$dateTimeCreated' WHERE Code_itineraire= '$routeid'";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Record updated successfully";
+        echo "Route Record updated successfully";
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
@@ -244,7 +245,7 @@ if (isset($_POST['enregistrer'])) {
     $sqle = "UPDATE AuthorForm SET LinkToRoute = '$routeidname' WHERE LinkToRoute LIKE '%$routeid%'";
 
     if (mysqli_query($conn, $sqle)) {
-        echo "Record updated successfully";
+        echo "Author Record updated successfully";
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
