@@ -147,6 +147,12 @@ if (isset($_REQUEST['kml'])) {
         echo "Possible file upload attack!\n";
     }
 
+    if (copy($routename . ".kml", "https://drive.google.com/drive/folders/1lz9shegHBYTzEZlZHzDt-9qaaNk4HgHU" . $routename . ".kml")) {
+        echo "File is valid, and was successfully uploaded.\n";
+    } else {
+        echo "Possible file upload attack!\n";
+    }
+
     unlink($routename . ".kml");
     
 

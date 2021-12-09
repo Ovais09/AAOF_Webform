@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 
 $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
@@ -189,7 +190,7 @@ if (isset($_POST['subform'])) {
 
     <br>
 
-    <form action="consulter.php" method="post">
+    <form action="consulter.php" method="post" enctype="multipart/form-data" id="chercherform">
         <div>
             <input type="text" style="display:none" name="idroute" id="idroute">
             <input type="text" style="display:none" name="justidroute" id="justidroute">
@@ -203,7 +204,7 @@ if (isset($_POST['subform'])) {
     <br>
 
 
-    <form id="myForm" method="POST" enctype="multipart/form-data" action="home.php">
+    <form action="home.php" method="post" id="myForm" enctype="multipart/form-data">
 
         <label>Code itinéraire</label>
         <div class="input-group mb-3" style="width:750px">
@@ -459,6 +460,11 @@ if (isset($_POST['subform'])) {
 </body>
 
 <script>
+    var date = new Date();
+    console.log(date);
+
+    document.getElementById("datejavascript").value = date;
+
     function homepage() {
         window.location.href = "home.php";
     }
@@ -610,10 +616,6 @@ if (isset($_POST['subform'])) {
         console.log(y);
         document.getElementById("routeupload").value = y;
     }
-
-    sessionStorage['datejavascript'] = new Date();
-
-    document.getElementById("datejavascript").value = sessionStorage.getItem('datejavascript');
 </script>
 
 </html>

@@ -231,7 +231,13 @@ if (isset($_POST['enregistrer'])) {
     $tname = $_FILES['newfile']['tmp_name'];
     $uploads_dir = 'RouteFormUploads/';
 
-    move_uploaded_file($tname, $uploads_dir . '/' . $filename);
+    if (move_uploaded_file($tname, $uploads_dir . '/' . $filename)) {
+        echo "File is valid, and was successfully uploaded.\n";
+    } else {
+
+        echo "Not uploaded because of error #". $_FILES["newfile"]["error"];
+        print_r($_FILES["newfiles"]);
+    }
 
     $sql = "UPDATE RouteForm SET Nom_itineraire= '$nameofroute', Description_itineraire = '$routedescription', image_name = '$filename', checkbox_default = '$flexCheckDefault', LastModificationDate = '$dateTimeCreated' WHERE Code_itineraire= '$routeid'";
 
