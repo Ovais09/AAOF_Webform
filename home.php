@@ -229,6 +229,7 @@ if (isset($_POST['enregistrer'])) {
 
     $filename = $routeid . "_" . $routeupload;
     $tname = $_FILES['newfile']['tmp_name'];
+    print_r($_FILES['newfile']['error']);
     $uploads_dir = 'RouteFormUploads/';
 
     if (move_uploaded_file($tname, $uploads_dir . '/' . $filename)) {

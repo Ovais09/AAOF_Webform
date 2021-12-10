@@ -94,6 +94,8 @@ if (isset($_POST['subform'])) {
         $j++;
     }
 
+    print_r($arrayfix);
+
 
     //splitting the variable %idroute from the comma
     $idroute = explode(",", $idroute);
@@ -223,11 +225,12 @@ if (isset($_POST['subform'])) {
 
         <br>
 
-        <label id="upload">Photo itinéraire</label>
-        <div class="custom-file" style="width:750px">
+        <label id="upload" style="display:none">Photo itinéraire</label>
+        <div class="custom-file" style="width:750px; display:none" id = "divupload">
             <input type="file" name="newfile" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" onchange="ab()">
         </div>
 
+        <br>
         <br>
 
 
@@ -603,6 +606,34 @@ if (isset($_POST['subform'])) {
     if (checkboxdefault.trim() == "checked") {
         console.log("wryyyyyyyyy");
         document.getElementById("flexCheckDefault").checked = true;
+
+        var label = document.createElement("label");
+        label.innerHTML = "Photo itinéraire";
+        label.style.marginLeft = "-1030px";
+        label.style.marginTop = "-685px";
+        document.getElementById("myForm").appendChild(label);
+
+
+
+        //add an input element of type = file
+        var input = document.createElement("input");
+        input.type = "file";
+        input.name = "newfile";
+        input.id = "inputGroupFile04";
+        input.className = "form-control";
+        input.style.width = "750px";
+        input.style.position = "absolute";
+        input.style.marginLeft = "500px";
+        input.style.marginTop = "-720px";
+        input.onchange = function() {
+            var x  = this.value;
+            var y = x.split("\\").pop();
+            console.log(y);
+
+            document.getElementById("routeupload").value = y;
+        };
+        document.getElementById("myForm").appendChild(input);
+
     }
 
     console.log(databasetwo[3]);
@@ -610,7 +641,7 @@ if (isset($_POST['subform'])) {
     document.getElementById("inputGroupFile04").value = databasetwo[3];
 
     function ab() {
-        var x = document.getElementById("inputGroupFile04").value;
+        var x = document.getElementById("file").value;
         var y = x.split("\\").pop();
         console.log(x);
         console.log(y);
