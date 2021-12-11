@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 $conn  = mysqli_connect('localhost:3306', 'aaoftech_ovais09', 'PqcofX2eqJDb', 'aaoftech_form');
 
@@ -16,7 +16,6 @@ $justidroute = $_REQUEST['justidroute'];
 $sql = "SELECT Code_itineraire FROM RouteForm";
 $nom = "SELECT Nom_itineraire FROM RouteForm";
 if ($result = mysqli_query($conn, $sql)) {
-    echo "works";
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
@@ -29,7 +28,6 @@ while ($row = mysqli_fetch_array($result)) {
 }
 
 if ($nomresult = mysqli_query($conn, $nom)) {
-    echo "yay";
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
@@ -50,7 +48,6 @@ if (isset($_REQUEST['kml'])) {
 
     $select = "SELECT * FROM AuthorForm WHERE LinkToRoute = '$idroute'";
     if ($resultselect = mysqli_query($conn, $select)) {
-        echo "hopefully works";
     } else {
         echo "Error: " . $select . "<br>" . mysqli_error($conn);
     }
@@ -79,6 +76,7 @@ if (isset($_REQUEST['kml'])) {
 
     $routename = explode(",", $idroute);
     $routename = $routename[1];
+    $_SESSION['routename'] = $routename;
 
     $authordescription = array();
     for ($i = 0; $i < count($rows); $i++) {
@@ -104,13 +102,13 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = ' </IconStyle>';
     $kml[] = ' </Style>';
 
-    for($i = 0; $i < count($rows); $i++) {
+    for ($i = 0; $i < count($rows); $i++) {
         $kml[] = ' <Placemark>';
         $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
         $kml[] = ' <description>' . $authordescription[$i] . '</description>';
         $kml[] = ' <styleUrl>#barStyle</styleUrl>';
         $kml[] = ' <Point>';
-        $kml[] = ' <coordinates>' . $long[$i]. ',' . $lat[$i] . ',0</coordinates>';
+        $kml[] = ' <coordinates>' . $long[$i] . ',' . $lat[$i] . ',0</coordinates>';
         $kml[] = ' </Point>';
         $kml[] = ' </Placemark>';
     }
@@ -138,23 +136,45 @@ if (isset($_REQUEST['kml'])) {
 
     $myfile = fopen($routename . ".kml", "w") or die("Unable to open file!");
     fwrite($myfile, $kmlOutput);
+    fclose($myfile);
 
     $uploads_dir = 'KMLFiles/';
-    //copy the file to the server
+
     if (copy($routename . ".kml", $uploads_dir . $routename . ".kml")) {
-        echo "File is valid, and was successfully uploaded.\n";
     } else {
         echo "Possible file upload attack!\n";
     }
 
-    if (copy($routename . ".kml", "https://drive.google.com/drive/folders/1lz9shegHBYTzEZlZHzDt-9qaaNk4HgHU" . $routename . ".kml")) {
-        echo "File is valid, and was successfully uploaded.\n";
-    } else {
-        echo "Possible file upload attack!\n";
-    }
+    // if (copy($routename . ".kml", "https://drive.google.com/drive/folders/1lz9shegHBYTzEZlZHzDt-9qaaNk4HgHU/" . $routename . ".kml")) {
+    //     echo "File is valid, and was successfully uploaded.\n";
+    // } else {
+    //     echo "Possible file upload attack!\n";
+    // }
 
-    unlink($routename . ".kml");
+    // unlink($routename . ".kml");
+
+
+    header("Location: download.php" );
+
     
+
+
+
+    // //sending the file to the user's download folder
+    // header('Content-disposition: attachment; filename=' . $routename . '.kml');
+
+    // // //delete the php content from the kml file
+
+    
+
+
+    // // // header('Content-type: application/vnd.google-earth.kml+xml');
+
+    // // // header('Content-Length: ' . filesize($routename . ".kml"));
+
+    // readfile("KMLFiles/" . $routename . ".kml");
+
+
 
 
 
