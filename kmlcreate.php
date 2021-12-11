@@ -52,7 +52,20 @@ if (isset($_REQUEST['kml'])) {
         echo "Error: " . $select . "<br>" . mysqli_error($conn);
     }
 
+    //getting the file from the server and storing it in a variable;
+
+
     $rows = mysqli_fetch_all($resultselect, MYSQLI_ASSOC);
+
+    $photos = array();
+    for ($i = 0; $i < count($rows); $i++) {
+        $photos[] = $rows[$i]['image_name_photo'];
+    }
+
+    $photo = file_get_contents('AuthorFormUploads/' . $photos[0]);
+    $photo  = base64_encode($photo);
+
+
 
     $fname = array();
     for ($i = 0; $i < count($rows); $i++) {
@@ -84,29 +97,66 @@ if (isset($_REQUEST['kml'])) {
     }
 
     $kml = array('<?xml version="1.0" encoding="UTF-8"?>');
-    $kml[] = '<kml xmlns="http://earth.google.com/kml/2.1">';
+    $kml[] = '<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">';
     $kml[] = ' <Document>';
     $kml[] = ' <name>' . $routename . '</name>';
-    $kml[] = ' <Style id="restaurantStyle">';
-    $kml[] = ' <IconStyle id="restuarantIcon">';
-    $kml[] = ' <Icon>';
-    $kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon63.png</href>';
-    $kml[] = ' </Icon>';
-    $kml[] = ' </IconStyle>';
-    $kml[] = ' </Style>';
-    $kml[] = ' <Style id="barStyle">';
-    $kml[] = ' <IconStyle id="barIcon">';
-    $kml[] = ' <Icon>';
-    $kml[] = ' <href>http://maps.google.com/mapfiles/kml/pal2/icon27.png</href>';
-    $kml[] = ' </Icon>';
-    $kml[] = ' </IconStyle>';
-    $kml[] = ' </Style>';
+    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_27D1858DB81EE0EA22B2">';
+    $kml[] = '<Style>';
+    $kml[] = '<IconStyle>';
+    $kml[] = '<Scale>1.2</Scale>';
+    $kml[] = '<Icon>';
+    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+    $kml[] = '</Icon>';
+    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+    $kml[] = '</IconStyle>';
+    $kml[] = '<LabelStyle>';
+    $kml[] = '</LabelStyle>';
+    $kml[] = "<LineStyle>";
+    $kml[] = '<width>1.5</width>';
+    $kml[] = '</LineStyle>';
+    $kml[] = '<PolyStyle>';
+    $kml[] = '</PolyStyle>';
+    $kml[] = '<BalloonStyle>';
+    $kml[] = '</BalloonStyle>';
+    $kml[] = '</Style>';
+    $kml[] = '</gx:CascadingStyle>';
+    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_1665DC58581EE0EA22B2">';
+    $kml[] = '<Style>';
+    $kml[] = '<IconStyle>';
+    $kml[] = '<Scale>1.2</Scale>';
+    $kml[] = '<Icon>';
+    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+    $kml[] = '</Icon>';
+    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+    $kml[] = '</IconStyle>';
+    $kml[] = '<LabelStyle>';
+    $kml[] = '</LabelStyle>';
+    $kml[] = "<LineStyle>";
+    $kml[] = '<width>1.5</width>';
+    $kml[] = '</LineStyle>';
+    $kml[] = '<PolyStyle>';
+    $kml[] = '</PolyStyle>';
+    $kml[] = '<BalloonStyle>';
+    $kml[] = '</BalloonStyle>';
+    $kml[] = '</Style>';
+    $kml[] = '</gx:CascadingStyle>';
+    $kml[] = '<StyleMap id="__managed_style_0AE25EC26A1EE0EA22B2">';
+    $kml[] = '<Pair>';
+    $kml[] = '<key>normal</key>';
+    $kml[] = '<styleUrl>#__managed_style_1665DC58581EE0EA22B2</styleUrl>';
+    $kml[] = '</Pair>';
+    $kml[] = '<Pair>';
+    $kml[] = '<key>highlight</key>';
+    $kml[] = '<styleUrl>#__managed_style_27D1858DB81EE0EA22B2</styleUrl>';
+    $kml[] = '</Pair>';
+    $kml[] = '</StyleMap>';
 
     for ($i = 0; $i < count($rows); $i++) {
         $kml[] = ' <Placemark>';
         $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
         $kml[] = ' <description>' . $authordescription[$i] . '</description>';
-        $kml[] = ' <styleUrl>#barStyle</styleUrl>';
+        $kml[] = ' <styleUrl>#__managed_style_0AE25EC26A1EE0EA22B2</styleUrl>';
+       
         $kml[] = ' <Point>';
         $kml[] = ' <coordinates>' . $long[$i] . ',' . $lat[$i] . ',0</coordinates>';
         $kml[] = ' </Point>';
@@ -154,9 +204,9 @@ if (isset($_REQUEST['kml'])) {
     // unlink($routename . ".kml");
 
 
-    header("Location: download.php" );
+    header("Location: download.php");
 
-    
+
 
 
 
@@ -165,7 +215,7 @@ if (isset($_REQUEST['kml'])) {
 
     // // //delete the php content from the kml file
 
-    
+
 
 
     // // // header('Content-type: application/vnd.google-earth.kml+xml');
