@@ -100,10 +100,10 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">';
     $kml[] = ' <Document>';
     $kml[] = ' <name>' . $routename . '</name>';
-    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_27D1858DB81EE0EA22B2">';
+    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_1A0BB232B11EE1F96DBA">';
+    $kml[] = '<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.kml#main</styleUrl>';
     $kml[] = '<Style>';
     $kml[] = '<IconStyle>';
-    $kml[] = '<Scale>1.2</Scale>';
     $kml[] = '<Icon>';
     $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
     $kml[] = '</Icon>';
@@ -112,18 +112,20 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<LabelStyle>';
     $kml[] = '</LabelStyle>';
     $kml[] = "<LineStyle>";
-    $kml[] = '<width>1.5</width>';
+    $kml[] = '<width>5.062</width>';
     $kml[] = '</LineStyle>';
-    $kml[] = '<PolyStyle>';
-    $kml[] = '</PolyStyle>';
-    $kml[] = '<BalloonStyle>';
-    $kml[] = '</BalloonStyle>';
+    $kml[] = '<polyStyle>';
+    $kml[] = '</polyStyle>';
+    $kml[] = '<balloonStyle>';
+    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+    $kml[] = '</balloonStyle>';
     $kml[] = '</Style>';
     $kml[] = '</gx:CascadingStyle>';
-    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_1665DC58581EE0EA22B2">';
+    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_258406A9BD1EE1F96DBA">';
+    $kml[] = '<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.kml#main</styleUrl>';
     $kml[] = '<Style>';
     $kml[] = '<IconStyle>';
-    $kml[] = '<Scale>1.2</Scale>';
+    $kml[] = '<scale>1.2</scale>';
     $kml[] = '<Icon>';
     $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
     $kml[] = '</Icon>';
@@ -132,31 +134,35 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<LabelStyle>';
     $kml[] = '</LabelStyle>';
     $kml[] = "<LineStyle>";
-    $kml[] = '<width>1.5</width>';
+    $kml[] = '<width>7.593</width>';
     $kml[] = '</LineStyle>';
-    $kml[] = '<PolyStyle>';
-    $kml[] = '</PolyStyle>';
-    $kml[] = '<BalloonStyle>';
-    $kml[] = '</BalloonStyle>';
+    $kml[] = '<polyStyle>';
+    $kml[] = '</polyStyle>';
+    $kml[] = '<balloonStyle>';
+    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+    $kml[] = '</balloonStyle>';
+
     $kml[] = '</Style>';
     $kml[] = '</gx:CascadingStyle>';
-    $kml[] = '<StyleMap id="__managed_style_0AE25EC26A1EE0EA22B2">';
+    $kml[] = '<StyleMap id="__managed_style_01053936C21EE1F96DBA">';
     $kml[] = '<Pair>';
     $kml[] = '<key>normal</key>';
-    $kml[] = '<styleUrl>#__managed_style_1665DC58581EE0EA22B2</styleUrl>';
+    $kml[] = '<styleUrl>#__managed_style_1A0BB232B11EE1F96DBA</styleUrl>';
     $kml[] = '</Pair>';
     $kml[] = '<Pair>';
     $kml[] = '<key>highlight</key>';
-    $kml[] = '<styleUrl>#__managed_style_27D1858DB81EE0EA22B2</styleUrl>';
+    $kml[] = '<styleUrl>#__managed_style_258406A9BD1EE1F96DBA</styleUrl>';
     $kml[] = '</Pair>';
     $kml[] = '</StyleMap>';
+
+
 
     for ($i = 0; $i < count($rows); $i++) {
         $kml[] = ' <Placemark>';
         $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
         $kml[] = ' <description>' . $authordescription[$i] . '</description>';
-        $kml[] = ' <styleUrl>#__managed_style_0AE25EC26A1EE0EA22B2</styleUrl>';
-       
+        $kml[] = ' <styleUrl>#__managed_style_01053936C21EE1F96DBA</styleUrl>';
+
         $kml[] = ' <Point>';
         $kml[] = ' <coordinates>' . $long[$i] . ',' . $lat[$i] . ',0</coordinates>';
         $kml[] = ' </Point>';
