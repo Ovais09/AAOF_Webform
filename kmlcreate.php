@@ -114,11 +114,11 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = "<LineStyle>";
     $kml[] = '<width>5.062</width>';
     $kml[] = '</LineStyle>';
-    $kml[] = '<polyStyle>';
-    $kml[] = '</polyStyle>';
-    $kml[] = '<balloonStyle>';
+    $kml[] = '<PolyStyle>';
+    $kml[] = '</PolyStyle>';
+    $kml[] = '<BalloonStyle>';
     $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-    $kml[] = '</balloonStyle>';
+    $kml[] = '</BalloonStyle>';
     $kml[] = '</Style>';
     $kml[] = '</gx:CascadingStyle>';
     $kml[] = '<gx:CascadingStyle kml:id="__managed_style_258406A9BD1EE1F96DBA">';
@@ -136,11 +136,11 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = "<LineStyle>";
     $kml[] = '<width>7.593</width>';
     $kml[] = '</LineStyle>';
-    $kml[] = '<polyStyle>';
-    $kml[] = '</polyStyle>';
-    $kml[] = '<balloonStyle>';
+    $kml[] = '<PolyStyle>';
+    $kml[] = '</PolyStyle>';
+    $kml[] = '<BalloonStyle>';
     $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-    $kml[] = '</balloonStyle>';
+    $kml[] = '</BalloonStyle>';
 
     $kml[] = '</Style>';
     $kml[] = '</gx:CascadingStyle>';
