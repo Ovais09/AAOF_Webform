@@ -338,7 +338,7 @@ if (isset($_REQUEST['kml'])) {
     //     echo "Possible file upload attack!\n";
     // }
 
-    // unlink($routename . ".kml");
+    unlink($routename . ".kml");
 
 
     header("Location: download.php");
