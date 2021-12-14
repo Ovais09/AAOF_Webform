@@ -101,46 +101,46 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = ' <Document>';
     $kml[] = ' <name>' . $routename . '</name>';
 
-    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_1A0BB232B11EE1F96DBA">';
-    $kml[] = '<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.kml#main</styleUrl>';
-    $kml[] = '<Style>';
-    $kml[] = '<IconStyle>';
-    $kml[] = '<Icon>';
-    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
-    $kml[] = '</Icon>';
-    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
-    $kml[] = '</IconStyle>';
-    $kml[] = '<LabelStyle>';
-    $kml[] = '</LabelStyle>';
-    $kml[] = "<LineStyle>";
-    $kml[] = '<width>5.062</width>';
-    $kml[] = '</LineStyle>';
-    $kml[] = '<PolyStyle>';
-    $kml[] = '</PolyStyle>';
-    $kml[] = '<BalloonStyle>';
-    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-    $kml[] = '</BalloonStyle>';
-    $kml[] = '</Style>';
-    $kml[] = '</gx:CascadingStyle>';
+    // $kml[] = '<gx:CascadingStyle kml:id="__managed_style_1A0BB232B11EE1F96DBA">';
+    // $kml[] = '<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.kml#main</styleUrl>';
+    // $kml[] = '<Style>';
+    // $kml[] = '<IconStyle>';
+    // $kml[] = '<Icon>';
+    // $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+    // $kml[] = '</Icon>';
+    // $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+    // $kml[] = '</IconStyle>';
+    // $kml[] = '<LabelStyle>';
+    // $kml[] = '</LabelStyle>';
+    // $kml[] = "<LineStyle>";
+    // $kml[] = '<width>5.062</width>';
+    // $kml[] = '</LineStyle>';
+    // $kml[] = '<PolyStyle>';
+    // $kml[] = '</PolyStyle>';
+    // $kml[] = '<BalloonStyle>';
+    // $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+    // $kml[] = '</BalloonStyle>';
+    // $kml[] = '</Style>';
+    // $kml[] = '</gx:CascadingStyle>';
 
-    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_258406A9BD1EE1F96DBA">';
-    $kml[] = '<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.kml#main</styleUrl>';
-    $kml[] = '<Style>';
-    $kml[] = '<IconStyle>';
-    $kml[] = '<scale>1.2</scale>';
-    $kml[] = '<Icon>';
-    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
-    $kml[] = '</Icon>';
-    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
-    $kml[] = '</IconStyle>';
-    $kml[] = '<LabelStyle>';
-    $kml[] = '</LabelStyle>';
-    $kml[] = "<LineStyle>";
-    $kml[] = '<width>7.593</width>';
-    $kml[] = '</LineStyle>';
-    $kml[] = '<PolyStyle>';
-    $kml[] = '</PolyStyle>';
-    $kml[] = '<BalloonStyle>';
+    // $kml[] = '<gx:CascadingStyle kml:id="__managed_style_258406A9BD1EE1F96DBA">';
+    // $kml[] = '<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.kml#main</styleUrl>';
+    // $kml[] = '<Style>';
+    // $kml[] = '<IconStyle>';
+    // $kml[] = '<scale>1.2</scale>';
+    // $kml[] = '<Icon>';
+    // $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+    // $kml[] = '</Icon>';
+    // $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+    // $kml[] = '</IconStyle>';
+    // $kml[] = '<LabelStyle>';
+    // $kml[] = '</LabelStyle>';
+    // $kml[] = "<LineStyle>";
+    // $kml[] = '<width>7.593</width>';
+    // $kml[] = '</LineStyle>';
+    // $kml[] = '<PolyStyle>';
+    // $kml[] = '</PolyStyle>';
+    // $kml[] = '<BalloonStyle>';
     // $kml[] = '<text><![CDATA[<html lang="en">
     // <head>
     // <meta charset="UTF-8">
@@ -166,68 +166,68 @@ if (isset($_REQUEST['kml'])) {
     // </body>
     // </html>]]></text>';
 
-    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-    $kml[] = '</BalloonStyle>';
+    // $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+    // $kml[] = '</BalloonStyle>';
 
-    $kml[] = '</Style>';
-    $kml[] = '</gx:CascadingStyle>';
+    // $kml[] = '</Style>';
+    // $kml[] = '</gx:CascadingStyle>';
 
-    $kml[] = '<StyleMap id="__managed_style_01053936C21EE1F96DBA">';
-    $kml[] = '<Pair>';
-    $kml[] = '<key>normal</key>';
-    $kml[] = '<styleUrl>#__managed_style_1A0BB232B11EE1F96DBA</styleUrl>';
-    $kml[] = '</Pair>';
-    $kml[] = '<Pair>';
-    $kml[] = '<key>highlight</key>';
-    $kml[] = '<styleUrl>#__managed_style_258406A9BD1EE1F96DBA</styleUrl>';
-    $kml[] = '</Pair>';
-    $kml[] = '</StyleMap>';
+    // $kml[] = '<StyleMap id="__managed_style_01053936C21EE1F96DBA">';
+    // $kml[] = '<Pair>';
+    // $kml[] = '<key>normal</key>';
+    // $kml[] = '<styleUrl>#__managed_style_1A0BB232B11EE1F96DBA</styleUrl>';
+    // $kml[] = '</Pair>';
+    // $kml[] = '<Pair>';
+    // $kml[] = '<key>highlight</key>';
+    // $kml[] = '<styleUrl>#__managed_style_258406A9BD1EE1F96DBA</styleUrl>';
+    // $kml[] = '</Pair>';
+    // $kml[] = '</StyleMap>';
 
-    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_10F30830181EE575F6C1">';
-    $kml[] = '<Style>';
-    $kml[] = '<IconStyle>';
-    $kml[] = '<scale>1.2</scale>';
-    $kml[] = '<Icon>';
-    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
-    $kml[] = '</Icon>';
-    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
-    $kml[] = '</IconStyle>';
-    $kml[] = '<LabelStyle>';
-    $kml[] = '</LabelStyle>';
-    $kml[] = "<LineStyle>";
-    $kml[] = '<width>7.592</width>';
-    $kml[] = '</LineStyle>';
-    $kml[] = '<PolyStyle>';
-    $kml[] = '</PolyStyle>';
-    $kml[] = '<BalloonStyle>';
-    $kml[] = '<text><![CDATA[<html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-    <style>html,body{margin:0;padding:0;width:100%;height:100%}html::-webkit-scrollbar{width:16px}html::-webkit-scrollbar-track{box-sizing:border-box;background-color:var(--gm2-grey-900);border:1px solid transparent;transition:all .15s var(--gm2-easing-standard)}::-webkit-scrollbar-track:hover{border:1px solid var(--gm2-grey-800)}::-webkit-scrollbar-track:active{border:1px solid var(--gm2-grey-800)}html::-webkit-scrollbar-thumb{background-color:rgba(255,255,255,.24);background-clip:padding-box;border:4px solid transparent;border-radius:16px;transition:all .15s var(--gm2-easing-standard)}::-webkit-scrollbar-thumb:vertical{min-height:32px}::-webkit-scrollbar-thumb:horizontal{min-width:32px}::-webkit-scrollbar-thumb:hover{background-color:rgba(255,255,255,.36)}::-webkit-scrollbar-thumb:active{background-color:rgba(255,255,255,.48)}::-webkit-scrollbar-corner{background:transparent}div[unresolved].hidden{display:none}div[unresolved]{padding:20px}div[unresolved] h1{font-family:"Google Sans","Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:18px;font-weight:normal;letter-spacing:0;line-height:24px;margin:0;margin-bottom:4px}div[unresolved] h2{font-family:"Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;font-weight:600;line-height:20px;letter-spacing:.25px;color:#5f6368;margin-bottom:20px}div[unresolved] div{font-family:"Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;font-weight:normal;line-height:20px;letter-spacing:.2px}</style>
+    // $kml[] = '<gx:CascadingStyle kml:id="__managed_style_10F30830181EE575F6C1">';
+    // $kml[] = '<Style>';
+    // $kml[] = '<IconStyle>';
+    // $kml[] = '<scale>1.2</scale>';
+    // $kml[] = '<Icon>';
+    // $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+    // $kml[] = '</Icon>';
+    // $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+    // $kml[] = '</IconStyle>';
+    // $kml[] = '<LabelStyle>';
+    // $kml[] = '</LabelStyle>';
+    // $kml[] = "<LineStyle>";
+    // $kml[] = '<width>7.592</width>';
+    // $kml[] = '</LineStyle>';
+    // $kml[] = '<PolyStyle>';
+    // $kml[] = '</PolyStyle>';
+    // $kml[] = '<BalloonStyle>';
+    // $kml[] = '<text><![CDATA[<html lang="en">
+    // <head>
+    // <meta charset="UTF-8">
+    // <title>Test</title>
+    // <style>html,body{margin:0;padding:0;width:100%;height:100%}html::-webkit-scrollbar{width:16px}html::-webkit-scrollbar-track{box-sizing:border-box;background-color:var(--gm2-grey-900);border:1px solid transparent;transition:all .15s var(--gm2-easing-standard)}::-webkit-scrollbar-track:hover{border:1px solid var(--gm2-grey-800)}::-webkit-scrollbar-track:active{border:1px solid var(--gm2-grey-800)}html::-webkit-scrollbar-thumb{background-color:rgba(255,255,255,.24);background-clip:padding-box;border:4px solid transparent;border-radius:16px;transition:all .15s var(--gm2-easing-standard)}::-webkit-scrollbar-thumb:vertical{min-height:32px}::-webkit-scrollbar-thumb:horizontal{min-width:32px}::-webkit-scrollbar-thumb:hover{background-color:rgba(255,255,255,.36)}::-webkit-scrollbar-thumb:active{background-color:rgba(255,255,255,.48)}::-webkit-scrollbar-corner{background:transparent}div[unresolved].hidden{display:none}div[unresolved]{padding:20px}div[unresolved] h1{font-family:"Google Sans","Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:18px;font-weight:normal;letter-spacing:0;line-height:24px;margin:0;margin-bottom:4px}div[unresolved] h2{font-family:"Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;font-weight:600;line-height:20px;letter-spacing:.25px;color:#5f6368;margin-bottom:20px}div[unresolved] div{font-family:"Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;font-weight:normal;line-height:20px;letter-spacing:.2px}</style>
 
-    <script src="https://earth.google.com/balloon_components/base/1.0.23.0/polyfills/webcomponents-loader.js"></script>
+    // <script src="https://earth.google.com/balloon_components/base/1.0.23.0/polyfills/webcomponents-loader.js"></script>
 
-    </head>
+    // </head>
 
-    <body>
-    <div>
-    <img src  = "https://aaof.tech/new/AuthorFormUploads/AUT-1_Photo.jpg" width = "464px" height = "400px">
-    </div>
-    <simple-template title="$[name|escapeHtml]" snippet="$[snippet|escapeHtml]" description="$[description|escapeHtml]" carousel="$[carousel|escapeHtml]">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
+    // <body>
+    // <div>
+    // <img src  = "https://aaof.tech/new/AuthorFormUploads/AUT-1_Photo.jpg" width = "464px" height = "400px">
+    // </div>
+    // <simple-template title="$[name|escapeHtml]" snippet="$[snippet|escapeHtml]" description="$[description|escapeHtml]" carousel="$[carousel|escapeHtml]">
+    // <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
+    // <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
 
-    <script src="https://earth.google.com/balloon_components/base/1.0.23.0/failsafe_bin.js"></script>
-    </simple-template>
-    <script src="https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.js"></script>
+    // <script src="https://earth.google.com/balloon_components/base/1.0.23.0/failsafe_bin.js"></script>
+    // </simple-template>
+    // <script src="https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.js"></script>
 
-    </body>
-    </html>]]></text>';
-    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-    $kml[] = '</BalloonStyle>';
-    $kml[] = '</Style>';
-    $kml[] = '</gx:CascadingStyle>';
+    // </body>
+    // </html>]]></text>';
+    // $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+    // $kml[] = '</BalloonStyle>';
+    // $kml[] = '</Style>';
+    // $kml[] = '</gx:CascadingStyle>';
 
     $kml[] = '<gx:CascadingStyle kml:id="__managed_style_10F30830181EE575F6C1">';
     $kml[] = '<Style>';
