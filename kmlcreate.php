@@ -62,8 +62,8 @@ if (isset($_REQUEST['kml'])) {
         $photos[] = $rows[$i]['image_name_photo'];
     }
 
-    $photo = file_get_contents('AuthorFormUploads/' . $photos[0]);
-    $photo  = base64_encode($photo);
+    // $photo = file_get_contents('AuthorFormUploads/' . $photos[0]);
+    // $photo  = base64_encode($photo);
 
 
 
@@ -95,6 +95,17 @@ if (isset($_REQUEST['kml'])) {
     for ($i = 0; $i < count($rows); $i++) {
         $authordescription[] = $rows[$i]['LieuDescription'];
     }
+
+    $managestylecascade = array();
+    $managestylecascade[0] = "__managed_style_173785644C1EEF0E1E9A";
+    $managestylecascade[1] = "__managed_style_10F30830181EE575F6C1";
+    $managestylecascade[2] = "__managed_style_20FC69FF5F1EEF222DC2";
+
+    $managestylemap = array ();
+    $managestylemap[0] = "__managed_style_0EE5DE14A21EE575F6C1";
+    $managestylemap[1] = "__managed_style_007D815D771EEF0E1E9A";
+    $managestylemap[2] = "__managed_style_374DA35C841EEF20DE93";
+
 
     $kml = array('<?xml version="1.0" encoding="UTF-8"?>');
     $kml[] = '<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">';
@@ -228,25 +239,25 @@ if (isset($_REQUEST['kml'])) {
     // $kml[] = '</BalloonStyle>';
     // $kml[] = '</Style>';
     // $kml[] = '</gx:CascadingStyle>';
-
-    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_10F30830181EE575F6C1">';
-    $kml[] = '<Style>';
-    $kml[] = '<IconStyle>';
-    $kml[] = '<scale>1.2</scale>';
-    $kml[] = '<Icon>';
-    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
-    $kml[] = '</Icon>';
-    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
-    $kml[] = '</IconStyle>';
-    $kml[] = '<LabelStyle>';
-    $kml[] = '</LabelStyle>';
-    $kml[] = "<LineStyle>";
-    $kml[] = '<width>7.592</width>';
-    $kml[] = '</LineStyle>';
-    $kml[] = '<PolyStyle>';
-    $kml[] = '</PolyStyle>';
-    $kml[] = '<BalloonStyle>';
-    $kml[] = '<text><![CDATA[<html lang="en">
+    for ($i = 0; $i < count($rows); $i++) {
+        $kml[] = '<gx:CascadingStyle kml:id="' . $managestylecascade[$i] .     '">';
+        $kml[] = '<Style>';
+        $kml[] = '<IconStyle>';
+        $kml[] = '<scale>1.2</scale>';
+        $kml[] = '<Icon>';
+        $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+        $kml[] = '</Icon>';
+        $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+        $kml[] = '</IconStyle>';
+        $kml[] = '<LabelStyle>';
+        $kml[] = '</LabelStyle>';
+        $kml[] = "<LineStyle>";
+        $kml[] = '<width>7.592</width>';
+        $kml[] = '</LineStyle>';
+        $kml[] = '<PolyStyle>';
+        $kml[] = '</PolyStyle>';
+        $kml[] = '<BalloonStyle>';
+        $kml[] = '<text><![CDATA[<html lang="en">
     <head>
     <meta charset="UTF-8">
     <title>Test</title>
@@ -258,7 +269,7 @@ if (isset($_REQUEST['kml'])) {
 
     <body>
     <div>
-    <img src  = "https://aaof.tech/new/AuthorFormUploads/AUT-1_Photo.jpg" width = "464px" height = "400px">
+    <img src  = "https://aaof.tech/jojo/AuthorFormUploads/' . $photos[$i] . '"'   . ' width = "464px" height = "400px">
     </div>
     <simple-template title="$[name|escapeHtml]" snippet="$[snippet|escapeHtml]" description="$[description|escapeHtml]" carousel="$[carousel|escapeHtml]">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
@@ -270,21 +281,26 @@ if (isset($_REQUEST['kml'])) {
 
     </body>
     </html>]]></text>';
-    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-    $kml[] = '</BalloonStyle>';
-    $kml[] = '</Style>';
-    $kml[] = '</gx:CascadingStyle>';
+        $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+        $kml[] = '</BalloonStyle>';
+        $kml[] = '</Style>';
+        $kml[] = '</gx:CascadingStyle>';
 
-    $kml[] = '<StyleMap id="__managed_style_0EE5DE14A21EE575F6C1">';
-    $kml[] = '<Pair>';
-    $kml[] = '<key>normal</key>';
-    $kml[] = '<styleUrl>#__managed_style_10F30830181EE575F6C1</styleUrl>';
-    $kml[] = '</Pair>';
-    $kml[] = '<Pair>';
-    $kml[] = '<key>highlight</key>';
-    $kml[] = '<styleUrl>#__managed_style_22CCE86F761EE575F6C1</styleUrl>';
-    $kml[] = '</Pair>';
-    $kml[] = '</StyleMap>';
+    }
+
+    for($i = 0; $i < count($rows); $i++){
+        $kml[] = '<StyleMap id="' . $managestylemap[$i]  . '"' . '>';
+        $kml[] = '<Pair>';
+        $kml[] = '<key>normal</key>';
+        $kml[] = '<styleUrl>' . $managestylecascade[$i] . '</styleUrl>';
+        $kml[] = '</Pair>';
+        $kml[] = '<Pair>';
+        $kml[] = '<key>highlight</key>';
+        $kml[] = '<styleUrl>' . $managestylecascade[$i] . '</styleUrl>';
+        $kml[] = '</Pair>';
+        $kml[] = '</StyleMap>';
+    }
+
 
 
 
@@ -292,7 +308,7 @@ if (isset($_REQUEST['kml'])) {
         $kml[] = ' <Placemark>';
         $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
         $kml[] = ' <description>' . $authordescription[$i] . '</description>';
-        $kml[] = ' <styleUrl>__managed_style_0EE5DE14A21EE575F6C1</styleUrl>';
+        $kml[] = ' <styleUrl>' . $managestylemap[$i] . '</styleUrl>';
 
         $kml[] = ' <Point>';
         $kml[] = ' <coordinates>' . $long[$i] . ',' . $lat[$i] . ',0</coordinates>';

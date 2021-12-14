@@ -96,7 +96,7 @@ if ($result = mysqli_query($conn, $get)) {
 
         <label id="upload">Photo itinéraire</label>
         <div class="custom-file" style="width:750px">
-            <input type="file" name="myfile" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff">
+            <input type="file" name="myfile" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" multiple>
         </div>
 
         <br>

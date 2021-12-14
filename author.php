@@ -154,7 +154,7 @@ try {
 
     <label id="upload">Photo du lieu proposé</label>
     <div class="custom-file" style="width:750px">
-      <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" name="photo">
+      <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" name="photo" multiple>
     </div>
 
     <br>
@@ -162,21 +162,21 @@ try {
 
     <label id="upload">Vidéo du lieu proposé</label>
     <div class="custom-file" style="width:750px">
-      <input type="file" class="form-control" id="inputGroupFile04" accept=".mp4, .wav, .wmv, .avi" name="video">
+      <input type="file" class="form-control" id="inputGroupFile04" accept=".mp4, .wav, .wmv, .avi" name="video" multiple>
     </div>
 
     <br>
 
     <label id="upload">Podcast du lieu proposé</label>
     <div class="custom-file" style="width:750px">
-      <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" name="podcast">
+      <input type="file" class="form-control" id="inputGroupFile04" accept=".jpg, .jpeg, .png, .tiff" name="podcast" multiple>
     </div>
 
     <br>
 
     <label id="upload">Icône liée au lieu proposé</label>
     <div class="custom-file" style="width:750px">
-      <input type="file" class="form-control" id="inputGroupFile04" accept="image/*" name="icone">
+      <input type="file" class="form-control" id="inputGroupFile04" accept="image/*" name="icone" multiple>
     </div>
 
     <br>
