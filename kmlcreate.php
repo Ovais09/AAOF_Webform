@@ -101,7 +101,7 @@ if (isset($_REQUEST['kml'])) {
     $managestylecascade[1] = "__managed_style_10F30830181EE575F6C1";
     $managestylecascade[2] = "__managed_style_20FC69FF5F1EEF222DC2";
 
-    $managestylemap = array ();
+    $managestylemap = array();
     $managestylemap[0] = "__managed_style_0EE5DE14A21EE575F6C1";
     $managestylemap[1] = "__managed_style_007D815D771EEF0E1E9A";
     $managestylemap[2] = "__managed_style_374DA35C841EEF20DE93";
@@ -285,10 +285,33 @@ if (isset($_REQUEST['kml'])) {
         $kml[] = '</BalloonStyle>';
         $kml[] = '</Style>';
         $kml[] = '</gx:CascadingStyle>';
-
     }
 
-    for($i = 0; $i < count($rows); $i++){
+    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_07B0E6B4F41EFB377AF1">';
+    $kml[] = '<Style>';
+    $kml[] = '<IconStyle>';
+    $kml[] = '<Icon>';
+    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+    $kml[] = '</Icon>';
+    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+    $kml[] = '</IconStyle>';
+    $kml[] = '<LabelStyle>';
+    $kml[] = '</LabelStyle>';
+    $kml[] = "<LineStyle>";
+    $kml[] = '<color>ff000000</color>';
+    $kml[] = '<width>8</width>';
+    $kml[] = '</LineStyle>';
+    $kml[] = '<PolyStyle>';
+    $kml[] = '<color>40ffffff</color>';
+    $kml[] = '</PolyStyle>';
+    $kml[] = '<BalloonStyle>';
+    $kml[] = '<displayMode>hide</displayMode>';
+    $kml[] = '</BalloonStyle>';
+    $kml[] = '</Style>';
+    $kml[] = '</gx:CascadingStyle>';
+
+
+    for ($i = 0; $i < count($rows); $i++) {
         $kml[] = '<StyleMap id="' . $managestylemap[$i]  . '"' . '>';
         $kml[] = '<Pair>';
         $kml[] = '<key>normal</key>';
@@ -300,6 +323,19 @@ if (isset($_REQUEST['kml'])) {
         $kml[] = '</Pair>';
         $kml[] = '</StyleMap>';
     }
+
+    $kml[] = '<StyleMap id="__managed_style_07558493E31EFB377AF0">';
+    $kml[] = '<Pair>';
+    $kml[] = '<key>normal</key>';
+    $kml[] = '<styleUrl>#__managed_style_07B0E6B4F41EFB377AF1</styleUrl>';
+    $kml[] = '</Pair>';
+    $kml[] = '<Pair>';
+    $kml[] = '<key>highlight</key>';
+    $kml[] = '<styleUrl>#__managed_style_185D1AD7B51EFB377AF1</styleUrl>';
+    $kml[] = '</Pair>';
+    $kml[] = '</StyleMap>';
+
+
 
 
 
@@ -315,6 +351,19 @@ if (isset($_REQUEST['kml'])) {
         $kml[] = ' </Point>';
         $kml[] = ' </Placemark>';
     }
+
+    $kml[] = ' <Placemark>';
+    $kml[] = ' <name>' . $routename . '</name>';
+    $kml[] = ' <styleUrl>#__managed_style_07558493E31EFB377AF0</styleUrl>';
+    $kml[] = ' <LineString>';
+    $kml[] = '<coordinates>';
+    for ($i = 0; $i < count($rows); $i++) {
+        $kml[] = $long[$i] . ',' . $lat[$i] . " "; 
+    }
+    $kml[] = '</coordinates>';
+    $kml[] = '</LineString>';
+    $kml[] = '</Placemark>';
+
 
 
     // while ($row = @mysqli_fetch_assoc($resultselect)) {
