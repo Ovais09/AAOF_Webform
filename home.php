@@ -456,7 +456,7 @@ if (isset($_POST['authorform'])) {
 <script>
     function createkmlfile() {
         console.log("iksrgjwrigiujgnhwueijghnewiujhjneth");
-        window.location.href = "kmlcreate.php";
+        window.location.href = "kmlcreates.php";
     }
 
     function authorchange() {
