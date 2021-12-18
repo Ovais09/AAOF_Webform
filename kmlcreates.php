@@ -161,7 +161,7 @@ if (isset($_REQUEST['kml'])) {
             </div>
             <ul class="ef-intro-tiles">
               <li class="ef-intro-tiles__tile" style="background-image: url($[chapter1_url]);">
-                <a href="#efeed_hhmi_scientists_1;balloonFlyto" aria-label="$[introTile_imageLink_ariaLabel]" role="link">
+                <a href="#a;balloonFlyto" aria-label="$[introTile_imageLink_ariaLabel]" role="link">
                   <span>$[chapter1]</span>
                 </a>
               </li>
@@ -337,7 +337,9 @@ if (isset($_REQUEST['kml'])) {
 
 
 
-
+  $kml[] = '<Folder id ="01DCC2194A1DD66C7EBE">';
+  $kml[] = '<name>' . $routenames . '</name>';
+  $kml[] = '<open>1</open>';
 
   for ($i = 0; $i < count($rows); $i++) {
     $kml[] = '<gx:CascadingStyle kml:id="' . $managestylecascade[$i] .     '">';
@@ -477,11 +479,14 @@ if (isset($_REQUEST['kml'])) {
 
 
 
-
+$idvaluesauthorplacemark = array();
+$idvaluesauthorplacemark[0] = 'a';
+$idvaluesauthorplacemark[1] = 'b';
+$idvaluesauthorplacemark[2] = 'c';
 
 
   for ($i = 0; $i < count($rows); $i++) {
-    $kml[] = ' <Placemark>';
+    $kml[] = ' <Placemark id = "' . $idvaluesauthorplacemark[$i] . '">';
     $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
     $kml[] = ' <description>' . $authordescription[$i] . '</description>';
     $kml[] = ' <styleUrl>' . $managestylemap[$i] . '</styleUrl>';
@@ -506,6 +511,8 @@ if (isset($_REQUEST['kml'])) {
   $kml[] = '</coordinates>';
   $kml[] = '</LineString>';
   $kml[] = '</Placemark>';
+
+  $kml[] = '</Folder>';
 
 
 
