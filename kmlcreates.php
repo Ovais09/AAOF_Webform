@@ -113,7 +113,7 @@ if (isset($_REQUEST['kml'])) {
   $kml = array('<?xml version="1.0" encoding="UTF-8"?>');
   $kml[] = '<kml xmlns="http://earth.google.com/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">';
   $kml[] = ' <Document>';
-  $kml[] = ' <name>' . $routenames . '</name>';
+  $kml[] = ' <name>Les routes du livre</name>';
 
   $kml[] = ' <Style id="s_hhmi_scientist_splashgrid_n">';
   $kml[] = ' <IconStyle>';
