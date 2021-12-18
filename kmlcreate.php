@@ -309,7 +309,7 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<value>https://images.unsplash.com/photo-1533073526757-2c8ca1df9f1c</value>';
     $kml[] = '</Data>';
     $kml[] = '<Data name="logoImageUrl">';
-    $kml[] = '<value>https://aaof.tech/zoro/KMLFiles/aaoflogo.png</value>';
+    $kml[] = '<value>https://aaof.tech/luffy/KMLFiles/aaoflogo.png</value>';
     $kml[] = '</Data>';
     $kml[] = '<Data name="targetAction">';
     $kml[] = '<value>balloonFlyto</value>';
@@ -369,7 +369,7 @@ if (isset($_REQUEST['kml'])) {
 
     <body>
     <div>
-    <img src  = "https://aaof.tech/zoro/AuthorFormUploads/' . $photos[$i] . '"'   . ' width = "464px" height = "400px">
+    <img src  = "https://aaof.tech/luffy/AuthorFormUploads/' . $photos[$i] . '"'   . ' width = "464px" height = "400px">
     </div>
     <simple-template title="$[name|escapeHtml]" snippet="$[snippet|escapeHtml]" description="$[description|escapeHtml]" carousel="$[carousel|escapeHtml]">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
@@ -429,7 +429,7 @@ if (isset($_REQUEST['kml'])) {
 
     <body>
     <div>
-    <img src  = "https://aaof.tech/zoro/RouteFormUploads/ITI-2_AAOF.jpg"  width = "464px" height = "400px">
+    <img src  = "https://aaof.tech/luffy/RouteFormUploads/ITI-2_AAOF.jpg"  width = "464px" height = "400px">
     </div>
 
     <div>' . $routedescription . '</div>
