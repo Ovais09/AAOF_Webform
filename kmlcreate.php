@@ -390,6 +390,7 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<gx:CascadingStyle kml:id="__managed_style_07B0E6B4F41EFB377AF1">';
     $kml[] = '<Style>';
     $kml[] = '<IconStyle>';
+    $kml[] = '<scale>1.2</scale>';
     $kml[] = '<Icon>';
     $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
     $kml[] = '</Icon>';
@@ -405,6 +406,17 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<color>40ffffff</color>';
     $kml[] = '</PolyStyle>';
     $kml[] = '<BalloonStyle>';
+
+
+    $routedescriptionselect = "SELECT Description_itineraire FROM RouteForm WHERE Code_itineraire = '$routeid'";
+    if ($routedescriptionresult = mysqli_query($conn, $routedescriptionselect)) {
+    } else {
+        echo "Error: " . $routedescriptionselect . "<br>" . mysqli_error($conn);
+    }
+
+    $routedescriptionrows = mysqli_fetch_all($routedescriptionresult, MYSQLI_ASSOC);
+    $routedescription = $routedescriptionrows[0]['Description_itineraire'];
+
     $kml[] = '<text><![CDATA[<html lang="en">
     <head>
     <meta charset="UTF-8">
@@ -419,6 +431,10 @@ if (isset($_REQUEST['kml'])) {
     <div>
     <img src  = "https://aaof.tech/zoro/RouteFormUploads/ITI-2_AAOF.jpg"  width = "464px" height = "400px">
     </div>
+
+    <div>' . $routedescription . '</div>
+
+
     <simple-template title="$[name|escapeHtml]" snippet="$[snippet|escapeHtml]" description="$[description|escapeHtml]" carousel="$[carousel|escapeHtml]">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
@@ -427,10 +443,12 @@ if (isset($_REQUEST['kml'])) {
     </simple-template>
     <script src="https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.js"></script>
 
+    
+
     </body>
     </html>]]></text>';
 
-    $kml[] = '<displayMode>panel</displayMode>';
+    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
     $kml[] = '</BalloonStyle>';
     $kml[] = '</Style>';
     $kml[] = '</gx:CascadingStyle>';
@@ -479,15 +497,7 @@ if (isset($_REQUEST['kml'])) {
 
     $kml[] = ' <Placemark>';
     $kml[] = ' <name>' . $routename . '</name>';
-    
-    $routedescriptionselect = "SELECT Description_itineraire FROM RouteForm WHERE Code_itineraire = '$routeid'";
-    if ($routedescriptionresult = mysqli_query($conn, $routedescriptionselect)) {
-    } else {
-        echo "Error: " . $routedescriptionselect . "<br>" . mysqli_error($conn);
-    }
 
-    $routedescriptionrows = mysqli_fetch_all($routedescriptionresult, MYSQLI_ASSOC);
-    $routedescription = $routedescriptionrows[0]['Description_itineraire'];
 
     $kml[] = ' <description>' . $routedescription . '</description>';
     $kml[] = ' <styleUrl>#__managed_style_07558493E31EFB377AF0</styleUrl>';
