@@ -46,6 +46,27 @@ if (isset($_REQUEST['kml'])) {
     die("Connection failed: " . mysqli_connect_error());
   }
 
+  $route = "SELECT * FROM RouteForm";
+  if ($result = mysqli_query($conn, $route)) {
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
+
+  $routenumbers = mysqli_num_rows($result);
+
+  $routenamestable = "SELECT Nom_itineraire FROM RouteForm";
+  if ($result = mysqli_query($conn, $routenamestable)) {
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  }
+
+  $routenamesrows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+  $routenamestablearray = array();
+  for($i =0; $i<$routenumbers; $i++){
+    $routenamestablearray[$i] =  $routenamesrows[$i]['Nom_itineraire'];
+  }
+
   $select = "SELECT * FROM AuthorForm WHERE LinkToRoute = '$idroute'";
   if ($resultselect = mysqli_query($conn, $select)) {
   } else {
@@ -353,31 +374,36 @@ if (isset($_REQUEST['kml'])) {
 
 
 
+  for ($j = 0; $j < $routenumbers; $j++) {
 
 
-  $kml[] = '<Folder id ="01DCC2194A1DD66C7EBE">';
-  $kml[] = '<name>' . $routenames . '</name>';
-  $kml[] = '<open>1</open>';
+    $kml[] = '<Folder id ="01DCC2194A1DD66C7EBE">';
+    $kml[] = '<name>' . $routenamestablearray[$j]  . '</name>';
+    $kml[] = '<open>1</open>';
 
-  for ($i = 0; $i < count($rows); $i++) {
-    $kml[] = '<gx:CascadingStyle kml:id="' . $managestylecascade[$i] .     '">';
-    $kml[] = '<Style>';
-    $kml[] = '<IconStyle>';
-    $kml[] = '<scale>1.2</scale>';
-    $kml[] = '<Icon>';
-    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
-    $kml[] = '</Icon>';
-    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
-    $kml[] = '</IconStyle>';
-    $kml[] = '<LabelStyle>';
-    $kml[] = '</LabelStyle>';
-    $kml[] = "<LineStyle>";
-    $kml[] = '<width>7.592</width>';
-    $kml[] = '</LineStyle>';
-    $kml[] = '<PolyStyle>';
-    $kml[] = '</PolyStyle>';
-    $kml[] = '<BalloonStyle>';
-    $kml[] = '<text><![CDATA[<html lang="en">
+    // $sqlquery = "SELECT * FROM AuthorForm WHERE LinkToRoute = '".  "ITI-". strval($j + 1) .  $routenamestablearray[$j] . "'";
+    // $result = mysqli_query($conn, $sqlquery);
+    // $numberofauthorrows = mysqli_num_rows($result);
+
+    for ($i = 0; $i < count($rows); $i++) {
+      $kml[] = '<gx:CascadingStyle kml:id="' . $managestylecascade[$i] .     '">';
+      $kml[] = '<Style>';
+      $kml[] = '<IconStyle>';
+      $kml[] = '<scale>1.2</scale>';
+      $kml[] = '<Icon>';
+      $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+      $kml[] = '</Icon>';
+      $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+      $kml[] = '</IconStyle>';
+      $kml[] = '<LabelStyle>';
+      $kml[] = '</LabelStyle>';
+      $kml[] = "<LineStyle>";
+      $kml[] = '<width>7.592</width>';
+      $kml[] = '</LineStyle>';
+      $kml[] = '<PolyStyle>';
+      $kml[] = '</PolyStyle>';
+      $kml[] = '<BalloonStyle>';
+      $kml[] = '<text><![CDATA[<html lang="en">
     <head>
     <meta charset="UTF-8">
     <title>Test</title>
@@ -453,43 +479,43 @@ if (isset($_REQUEST['kml'])) {
 
     </body>
     </html>]]></text>';
-    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-    $kml[] = '</BalloonStyle>';
-    $kml[] = '</Style>';
-    $kml[] = '</gx:CascadingStyle>';
-  }
+      $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+      $kml[] = '</BalloonStyle>';
+      $kml[] = '</Style>';
+      $kml[] = '</gx:CascadingStyle>';
+    }
 
-  $kml[] = '<gx:CascadingStyle kml:id="__managed_style_07B0E6B4F41EFB377AF1">';
-  $kml[] = '<Style>';
-  $kml[] = '<IconStyle>';
-  $kml[] = '<scale>1.2</scale>';
-  $kml[] = '<Icon>';
-  $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
-  $kml[] = '</Icon>';
-  $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
-  $kml[] = '</IconStyle>';
-  $kml[] = '<LabelStyle>';
-  $kml[] = '</LabelStyle>';
-  $kml[] = "<LineStyle>";
-  $kml[] = '<color>ff000000</color>';
-  $kml[] = '<width>8</width>';
-  $kml[] = '</LineStyle>';
-  $kml[] = '<PolyStyle>';
-  $kml[] = '<color>40ffffff</color>';
-  $kml[] = '</PolyStyle>';
-  $kml[] = '<BalloonStyle>';
+    $kml[] = '<gx:CascadingStyle kml:id="__managed_style_07B0E6B4F41EFB377AF1">';
+    $kml[] = '<Style>';
+    $kml[] = '<IconStyle>';
+    $kml[] = '<scale>1.2</scale>';
+    $kml[] = '<Icon>';
+    $kml[] = '<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>';
+    $kml[] = '</Icon>';
+    $kml[] = '<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>';
+    $kml[] = '</IconStyle>';
+    $kml[] = '<LabelStyle>';
+    $kml[] = '</LabelStyle>';
+    $kml[] = "<LineStyle>";
+    $kml[] = '<color>ff000000</color>';
+    $kml[] = '<width>8</width>';
+    $kml[] = '</LineStyle>';
+    $kml[] = '<PolyStyle>';
+    $kml[] = '<color>40ffffff</color>';
+    $kml[] = '</PolyStyle>';
+    $kml[] = '<BalloonStyle>';
 
 
-  $routedescriptionselect = "SELECT Description_itineraire FROM RouteForm WHERE Code_itineraire = '$routeid'";
-  if ($routedescriptionresult = mysqli_query($conn, $routedescriptionselect)) {
-  } else {
-    echo "Error: " . $routedescriptionselect . "<br>" . mysqli_error($conn);
-  }
+    $routedescriptionselect = "SELECT Description_itineraire FROM RouteForm WHERE Code_itineraire = '$routeid'";
+    if ($routedescriptionresult = mysqli_query($conn, $routedescriptionselect)) {
+    } else {
+      echo "Error: " . $routedescriptionselect . "<br>" . mysqli_error($conn);
+    }
 
-  $routedescriptionrows = mysqli_fetch_all($routedescriptionresult, MYSQLI_ASSOC);
-  $routedescription = $routedescriptionrows[0]['Description_itineraire'];
+    $routedescriptionrows = mysqli_fetch_all($routedescriptionresult, MYSQLI_ASSOC);
+    $routedescription = $routedescriptionrows[0]['Description_itineraire'];
 
-  $kml[] = '<text><![CDATA[<html lang="en">
+    $kml[] = '<text><![CDATA[<html lang="en">
     <head>
     <meta charset="UTF-8">
     <title>Test</title>
@@ -517,126 +543,129 @@ if (isset($_REQUEST['kml'])) {
     </body>
     </html>]]></text>';
 
-  $kml[] = '<gx:displayMode>panel</gx:displayMode>';
-  $kml[] = '</BalloonStyle>';
-  $kml[] = '</Style>';
-  $kml[] = '</gx:CascadingStyle>';
+    $kml[] = '<gx:displayMode>panel</gx:displayMode>';
+    $kml[] = '</BalloonStyle>';
+    $kml[] = '</Style>';
+    $kml[] = '</gx:CascadingStyle>';
 
 
-  for ($i = 0; $i < count($rows); $i++) {
-    $kml[] = '<StyleMap id="' . $managestylemap[$i]  . '"' . '>';
+    for ($i = 0; $i < count($rows); $i++) {
+      $kml[] = '<StyleMap id="' . $managestylemap[$i]  . '"' . '>';
+      $kml[] = '<Pair>';
+      $kml[] = '<key>normal</key>';
+      $kml[] = '<styleUrl>' . $managestylecascade[$i] . '</styleUrl>';
+      $kml[] = '</Pair>';
+      $kml[] = '<Pair>';
+      $kml[] = '<key>highlight</key>';
+      $kml[] = '<styleUrl>' . $managestylecascade[$i] . '</styleUrl>';
+      $kml[] = '</Pair>';
+      $kml[] = '</StyleMap>';
+    }
+
+    $kml[] = '<StyleMap id="__managed_style_07558493E31EFB377AF0">';
     $kml[] = '<Pair>';
     $kml[] = '<key>normal</key>';
-    $kml[] = '<styleUrl>' . $managestylecascade[$i] . '</styleUrl>';
+    $kml[] = '<styleUrl>#__managed_style_07B0E6B4F41EFB377AF1</styleUrl>';
     $kml[] = '</Pair>';
     $kml[] = '<Pair>';
     $kml[] = '<key>highlight</key>';
-    $kml[] = '<styleUrl>' . $managestylecascade[$i] . '</styleUrl>';
+    $kml[] = '<styleUrl>#__managed_style_185D1AD7B51EFB377AF1</styleUrl>';
     $kml[] = '</Pair>';
     $kml[] = '</StyleMap>';
+
+
+
+    $idvaluesauthorplacemark = array();
+    $idvaluesauthorplacemark[0] = 'a';
+    $idvaluesauthorplacemark[1] = 'b';
+    $idvaluesauthorplacemark[2] = 'c';
+
+
+    for ($i = 0; $i < count($rows); $i++) {
+      $kml[] = ' <Placemark id = "' . $idvaluesauthorplacemark[$i] . '">';
+      $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
+      $kml[] = ' <description>' . $authordescription[$i] . '</description>';
+      $kml[] = ' <styleUrl>' . $managestylemap[$i] . '</styleUrl>';
+
+      $kml[] = '<ExtendedData>';
+      $kml[] = '<Data name="overlayIdsToShow">';
+      $kml[] = '<value>GNPBoundary</value>';
+      $kml[] =  '</Data>';
+      $kml[] =  '<Data name="overlaySwitchIds-1">';
+      $kml[] =      '<value>GNPBoundary</value>';
+      $kml[] =    '</Data>';
+      $kml[] =  '<Data name="overlaySwitchLabelActive-1">';
+      $kml[] =      '<value>Parc national de Gorongosa</value>';
+      $kml[] =    '</Data>';
+      $kml[] =    '<Data name="overlaySwitchLabelInactive-1">';
+      $kml[] =      '<value>Parc national de Gorongosa</value>';
+      $kml[] =    '</Data>';
+      $kml[] =    '<Data name="overlaySwitchVisibleOnLoad-1">';
+      $kml[] =      '<value>true</value>';
+      $kml[] =  '</Data>';
+      $kml[] =  '<Data name="youtubeVideoId">';
+      $kml[] =      '<value>VPP_COhvzn0</value>';
+      $kml[] =  '</Data>';
+      $kml[] =    '<Data name="logoLink">';
+      $kml[] =      '<value>http://www.biointeractive.org</value>';
+      $kml[] =    '</Data>';
+      $kml[] =    '<Data name="logoImageUrl">';
+      $kml[] =      '<value>https://www.gstatic.com/earthfeed/hhmi/logos/BioInteractive_white_logo_long_RGB-resized.png</value>';
+      $kml[] =    '</Data>';
+      $kml[] =    '<Data name="fabAction">';
+      $kml[] =    '<value>flyto</value>';
+      $kml[] =  '</Data>';
+      $kml[] =  '<Data name="previousAction">';
+      $kml[] =    '<value>balloonFlyto</value>';
+      $kml[] =    '</Data>';
+      $kml[] =    '<Data name="nextAction">';
+      $kml[] =      '<value>balloonFlyto</value>';
+      $kml[] =    '</Data>';
+      $kml[] =    '<Data name="panelFab_link_ariaLabel">';
+      $kml[] =      '<value>Fly to view</value>';
+      $kml[] =  '</Data>';
+      $kml[] =  '<Data name="panel_ctaLink_ariaLabel">';
+      $kml[] =    '<value>$[ctaText]</value>';
+      $kml[] =  '</Data>';
+      $kml[] =    '<Data name="panelFooter_nextLink_ariaLabel">';
+      $kml[] =    '<value>Suivant</value>';
+      $kml[] =  '</Data>';
+      $kml[] =  '<Data name="panelFooter_previousLink_ariaLabel">';
+      $kml[] =    '<value>Précédent</value>';
+      $kml[] =  '</Data>';
+      $kml[] =  '<Data name="panelYoutube_link_ariaLabel">';
+      $kml[] =    '<value>Lecture de la vidéo</value>';
+      $kml[] =  '</Data>';
+      $kml[] =  '<Data name="panelFooter_logoLink_ariaLabel">';
+      $kml[] =    '<value>Logo</value>';
+      $kml[] =    '</Data>';
+      $kml[] =  '</ExtendedData>';
+
+      $kml[] = ' <Point>';
+      $kml[] = ' <coordinates>' . $long[$i] . ',' . $lat[$i] . ',0</coordinates>';
+      $kml[] = ' </Point>';
+      $kml[] = ' </Placemark>';
+    }
+
+    $kml[] = ' <Placemark>';
+    $kml[] = ' <name>' . $routenames . '</name>';
+
+
+    $kml[] = ' <description>' . $routedescription . '</description>';
+    $kml[] = ' <styleUrl>#__managed_style_07558493E31EFB377AF0</styleUrl>';
+    $kml[] = ' <LineString>';
+    $kml[] = '<coordinates>';
+    for ($i = 0; $i < count($rows); $i++) {
+      $kml[] = $long[$i] . ',' . $lat[$i] . " ";
+    }
+    $kml[] = '</coordinates>';
+    $kml[] = '</LineString>';
+    $kml[] = '</Placemark>';
+
+    $kml[] = '</Folder>';
   }
 
-  $kml[] = '<StyleMap id="__managed_style_07558493E31EFB377AF0">';
-  $kml[] = '<Pair>';
-  $kml[] = '<key>normal</key>';
-  $kml[] = '<styleUrl>#__managed_style_07B0E6B4F41EFB377AF1</styleUrl>';
-  $kml[] = '</Pair>';
-  $kml[] = '<Pair>';
-  $kml[] = '<key>highlight</key>';
-  $kml[] = '<styleUrl>#__managed_style_185D1AD7B51EFB377AF1</styleUrl>';
-  $kml[] = '</Pair>';
-  $kml[] = '</StyleMap>';
 
-
-
-  $idvaluesauthorplacemark = array();
-  $idvaluesauthorplacemark[0] = 'a';
-  $idvaluesauthorplacemark[1] = 'b';
-  $idvaluesauthorplacemark[2] = 'c';
-
-
-  for ($i = 0; $i < count($rows); $i++) {
-    $kml[] = ' <Placemark id = "' . $idvaluesauthorplacemark[$i] . '">';
-    $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
-    $kml[] = ' <description>' . $authordescription[$i] . '</description>';
-    $kml[] = ' <styleUrl>' . $managestylemap[$i] . '</styleUrl>';
-
-    $kml[] = '<ExtendedData>';
-    $kml[] = '<Data name="overlayIdsToShow">';
-    $kml[] = '<value>GNPBoundary</value>';
-    $kml[] =  '</Data>';
-    $kml[] =  '<Data name="overlaySwitchIds-1">';
-    $kml[] =      '<value>GNPBoundary</value>';
-    $kml[] =    '</Data>';
-    $kml[] =  '<Data name="overlaySwitchLabelActive-1">';
-    $kml[] =      '<value>Parc national de Gorongosa</value>';
-    $kml[] =    '</Data>';
-    $kml[] =    '<Data name="overlaySwitchLabelInactive-1">';
-    $kml[] =      '<value>Parc national de Gorongosa</value>';
-    $kml[] =    '</Data>';
-    $kml[] =    '<Data name="overlaySwitchVisibleOnLoad-1">';
-    $kml[] =      '<value>true</value>';
-    $kml[] =  '</Data>';
-    $kml[] =  '<Data name="youtubeVideoId">';
-    $kml[] =      '<value>VPP_COhvzn0</value>';
-    $kml[] =  '</Data>';
-    $kml[] =    '<Data name="logoLink">';
-    $kml[] =      '<value>http://www.biointeractive.org</value>';
-    $kml[] =    '</Data>';
-    $kml[] =    '<Data name="logoImageUrl">';
-    $kml[] =      '<value>https://www.gstatic.com/earthfeed/hhmi/logos/BioInteractive_white_logo_long_RGB-resized.png</value>';
-    $kml[] =    '</Data>';
-    $kml[] =    '<Data name="fabAction">';
-    $kml[] =    '<value>flyto</value>';
-    $kml[] =  '</Data>';
-    $kml[] =  '<Data name="previousAction">';
-    $kml[] =    '<value>balloonFlyto</value>';
-    $kml[] =    '</Data>';
-    $kml[] =    '<Data name="nextAction">';
-    $kml[] =      '<value>balloonFlyto</value>';
-    $kml[] =    '</Data>';
-    $kml[] =    '<Data name="panelFab_link_ariaLabel">';
-    $kml[] =      '<value>Fly to view</value>';
-    $kml[] =  '</Data>';
-    $kml[] =  '<Data name="panel_ctaLink_ariaLabel">';
-    $kml[] =    '<value>$[ctaText]</value>';
-    $kml[] =  '</Data>';
-    $kml[] =    '<Data name="panelFooter_nextLink_ariaLabel">';
-    $kml[] =    '<value>Suivant</value>';
-    $kml[] =  '</Data>';
-    $kml[] =  '<Data name="panelFooter_previousLink_ariaLabel">';
-    $kml[] =    '<value>Précédent</value>';
-    $kml[] =  '</Data>';
-    $kml[] =  '<Data name="panelYoutube_link_ariaLabel">';
-    $kml[] =    '<value>Lecture de la vidéo</value>';
-    $kml[] =  '</Data>';
-    $kml[] =  '<Data name="panelFooter_logoLink_ariaLabel">';
-    $kml[] =    '<value>Logo</value>';
-    $kml[] =    '</Data>';
-    $kml[] =  '</ExtendedData>';
-
-    $kml[] = ' <Point>';
-    $kml[] = ' <coordinates>' . $long[$i] . ',' . $lat[$i] . ',0</coordinates>';
-    $kml[] = ' </Point>';
-    $kml[] = ' </Placemark>';
-  }
-
-  $kml[] = ' <Placemark>';
-  $kml[] = ' <name>' . $routenames . '</name>';
-
-
-  $kml[] = ' <description>' . $routedescription . '</description>';
-  $kml[] = ' <styleUrl>#__managed_style_07558493E31EFB377AF0</styleUrl>';
-  $kml[] = ' <LineString>';
-  $kml[] = '<coordinates>';
-  for ($i = 0; $i < count($rows); $i++) {
-    $kml[] = $long[$i] . ',' . $lat[$i] . " ";
-  }
-  $kml[] = '</coordinates>';
-  $kml[] = '</LineString>';
-  $kml[] = '</Placemark>';
-
-  $kml[] = '</Folder>';
 
 
 
