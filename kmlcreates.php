@@ -194,8 +194,26 @@ if (isset($_REQUEST['kml'])) {
             <div data-hide-if-empty="$[captionText]" class="ef-intro__credit">
               <a href="$[captionLink]" target="_blank" aria-label="$[intro_captionLink_ariaLabel]" role="link">$[captionText]</a>
             </div>
+            <div class="ef-footer__pagination">
+            <a data-hide-if-empty="#$[previousSiblingId];$[previousAction]" href="#$[previousSiblingId];$[previousAction]" role="button" aria-label="$[panelFooter_previousLink_ariaLabel]" class="ef-footer__button ef-footer__button--prev mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">&#xE408;</i>
+            </a>
+            <span data-hide-if-empty="$[containerIndex] / $[containerLength]" class="ef-footer__page">$[containerIndex] / $[containerLength]</span>
+            <a data-hide-if-empty="#$[nextSiblingId];$[nextAction]" href="#$[nextSiblingId];$[nextAction]" role="button" aria-label="$[panelFooter_nextLink_ariaLabel]" class="ef-footer__button ef-footer__button--next mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">&#xE409;</i>
+            </a>
+          </div>
           </main>
         </div>
+        <div class="ef-footer__pagination">
+            <a data-hide-if-empty="#$[previousSiblingId];$[previousAction]" href="#$[previousSiblingId];$[previousAction]" role="button" aria-label="$[panelFooter_previousLink_ariaLabel]" class="ef-footer__button ef-footer__button--prev mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">&#xE408;</i>
+            </a>
+            <span data-hide-if-empty="$[containerIndex] / $[containerLength]" class="ef-footer__page">$[containerIndex] / $[containerLength]</span>
+            <a data-hide-if-empty="#$[nextSiblingId];$[nextAction]" href="#$[nextSiblingId];$[nextAction]" role="button" aria-label="$[panelFooter_nextLink_ariaLabel]" class="ef-footer__button ef-footer__button--next mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">&#xE409;</i>
+            </a>
+          </div>
         <script src="https://www.gstatic.com/earth/earthfeed/js/earthfeed.v23.x.min.js"></script>
         <script>componentHandler.upgradeAllRegistered()</script>
         <script type="x-component/x-template-string">
@@ -363,8 +381,14 @@ if (isset($_REQUEST['kml'])) {
     <head>
     <meta charset="UTF-8">
     <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="version" content="23.1.0" />
     <style>html,body{margin:0;padding:0;width:100%;height:100%}html::-webkit-scrollbar{width:16px}html::-webkit-scrollbar-track{box-sizing:border-box;background-color:var(--gm2-grey-900);border:1px solid transparent;transition:all .15s var(--gm2-easing-standard)}::-webkit-scrollbar-track:hover{border:1px solid var(--gm2-grey-800)}::-webkit-scrollbar-track:active{border:1px solid var(--gm2-grey-800)}html::-webkit-scrollbar-thumb{background-color:rgba(255,255,255,.24);background-clip:padding-box;border:4px solid transparent;border-radius:16px;transition:all .15s var(--gm2-easing-standard)}::-webkit-scrollbar-thumb:vertical{min-height:32px}::-webkit-scrollbar-thumb:horizontal{min-width:32px}::-webkit-scrollbar-thumb:hover{background-color:rgba(255,255,255,.36)}::-webkit-scrollbar-thumb:active{background-color:rgba(255,255,255,.48)}::-webkit-scrollbar-corner{background:transparent}div[unresolved].hidden{display:none}div[unresolved]{padding:20px}div[unresolved] h1{font-family:"Google Sans","Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:18px;font-weight:normal;letter-spacing:0;line-height:24px;margin:0;margin-bottom:4px}div[unresolved] h2{font-family:"Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;font-weight:600;line-height:20px;letter-spacing:.25px;color:#5f6368;margin-bottom:20px}div[unresolved] div{font-family:"Roboto","Noto",sans-serif;-webkit-font-smoothing:antialiased;font-size:14px;font-weight:normal;line-height:20px;letter-spacing:.2px}</style>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500|Roboto+Slab|Material+Icons" type="text/css" />
+    <link rel="stylesheet" href="https://www.gstatic.com/earth/earthfeed/mdl/1.1.3/material.blue_grey-blue.min.css" />
+    <link rel="stylesheet" href="https://www.gstatic.com/earth/earthfeed/css/earthfeed.v23.x.min.css" type="text/css" />
+    <script src="https://www.gstatic.com/earth/earthfeed/mdl/1.3.0/material.min.js"></script>
     <script src="https://earth.google.com/balloon_components/base/1.0.23.0/polyfills/webcomponents-loader.js"></script>
 
     </head>
@@ -380,6 +404,52 @@ if (isset($_REQUEST['kml'])) {
     <script src="https://earth.google.com/balloon_components/base/1.0.23.0/failsafe_bin.js"></script>
     </simple-template>
     <script src="https://earth.google.com/balloon_components/base/1.0.23.0/simple_template.js"></script>
+
+    <div data-component="EfPanel" class="ef-container ef-panel theme-dark">
+      <main class="ef-panel__main">
+       
+        <div class="ef-panel-header ">
+          <h1 class="ef-panel-header__title">$[name]</h1>
+          <h2 class="ef-panel-header__subtitle">$[snippet]</h2>
+          <a href="#$[id];$[fabAction]" aria-label="$[panelFab_link_ariaLabel]" role="button" class="ef-panel-fab ef-panel-fab--flyto mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+            <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path class="ef-panel-fab__icon ef-panel-fab__icon--flyto" d="M42.506 8.25c.106-.027.21-.04.312-.04.78 0 1.39.78 1.115 1.574L36.81 37.502c-.172.5-.638.802-1.125.802-.194 0-.39-.048-.576-.15L25.1 32.7l-6.967 7.028c-.68.7-2.11-.018-2.11-.993v-10.74L4.61 21.75c-.932-.52-.76-1.91.272-2.186L42.506 8.25zM19.05 27.08v7.084l21.3-22.33v-.146L19.05 27.08z" fill="#FFF" fill-rule="evenodd"></path>
+              <path class="ef-panel-fab__icon ef-panel-fab__icon--streetview" d="M24,17 C28.9705615,17 33,13.194421 33,9 C33,3.80557896 28.9705615,0 24,0 C19.029436,0 15,3.80557896 15,9 C15,13.194421 19.029436,17 24,17 Z M14,35 C13.6861635,35.4002019 13.725866,35.539573 13,36 C12.3828832,35.539573 11.341473,34.94568 11,35 C11.341473,34.94568 10.8591204,34.5896324 11,34 C11.6348205,32.2985717 14.3610537,21.9991987 15,20 C15.5607564,17.9236744 17.2540068,18.000351 17,18 L19,18 L24,27 L29,18 L31,18 C31.285115,18.000351 32.0562602,18.0770969 33,19 C33.215413,19.380836 33.3396705,20.4815199 33,20 L37,33 C36.8085563,33.33718 37.0542064,34.2387355 37,35 C36.8987063,34.8671104 36.6510838,34.94568 37,35 C36.6510838,34.94568 35.6874261,35.2038795 35,35 C34.1374882,35.67648 33.9394282,34.7609927 34,35 L31,27 L30,48 L26,48 L25,36 C24.6925235,35.8339873 24.5350735,35.539573 24,36 C23.6633458,35.539573 23.5105133,35.8339873 24,36 L22,48 L18,48 L17,27 C17.4544694,26.5101552 14.7393587,33.566825 14,35 Z" style="transform: translateX(3px)" fill="#FFFFFF"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="ef-panel-content">
+          <div class="ef-overlay-switches" data-component="EfOverlaySwitches">
+            <script type="x-component/x-data">
+            
+            </script>
+          </div>
+          <p>$[description]</p>
+          <a href="$[ctaLink]" data-hide-if-empty="$[ctaText]" aria-label="$[panel_ctaLink_ariaLabel]" role="button" class="ef-cta-button mdl-button mdl-js-button">$[ctaText]</a>
+        </div>
+        <div class="ef-footer " data-component="EfPanelFooter">
+          <div class="ef-footer__logo-container">
+            <a href="$[logoLink]" data-hide-if-empty="$[logoImageUrl]" aria-label="$[panelFooter_logoLink_ariaLabel]" role="link">
+              <img data-src="$[logoImageUrl]" class="ef-footer__logo" />
+            </a>
+          </div>
+          <div class="ef-footer__pagination">
+            <a data-hide-if-empty="#$[previousSiblingId];$[previousAction]" href="#$[previousSiblingId];$[previousAction]" role="button" aria-label="$[panelFooter_previousLink_ariaLabel]" class="ef-footer__button ef-footer__button--prev mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">&#xE408;</i>
+            </a>
+            <span data-hide-if-empty="$[containerIndex] / $[containerLength]" class="ef-footer__page">$[containerIndex] / $[containerLength]</span>
+            <a data-hide-if-empty="#$[nextSiblingId];$[nextAction]" href="#$[nextSiblingId];$[nextAction]" role="button" aria-label="$[panelFooter_nextLink_ariaLabel]" class="ef-footer__button ef-footer__button--next mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">&#xE409;</i>
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="https://www.gstatic.com/earth/earthfeed/js/earthfeed.v23.x.min.js"></script>
+    <script>componentHandler.upgradeAllRegistered()</script>
+    <script type="x-component/x-template-string">
+     
+    </script>
 
     </body>
     </html>]]></text>';
@@ -479,10 +549,10 @@ if (isset($_REQUEST['kml'])) {
 
 
 
-$idvaluesauthorplacemark = array();
-$idvaluesauthorplacemark[0] = 'a';
-$idvaluesauthorplacemark[1] = 'b';
-$idvaluesauthorplacemark[2] = 'c';
+  $idvaluesauthorplacemark = array();
+  $idvaluesauthorplacemark[0] = 'a';
+  $idvaluesauthorplacemark[1] = 'b';
+  $idvaluesauthorplacemark[2] = 'c';
 
 
   for ($i = 0; $i < count($rows); $i++) {
@@ -490,6 +560,60 @@ $idvaluesauthorplacemark[2] = 'c';
     $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
     $kml[] = ' <description>' . $authordescription[$i] . '</description>';
     $kml[] = ' <styleUrl>' . $managestylemap[$i] . '</styleUrl>';
+
+    $kml[] = '<ExtendedData>';
+    $kml[] = '<Data name="overlayIdsToShow">';
+    $kml[] = '<value>GNPBoundary</value>';
+    $kml[] =  '</Data>';
+    $kml[] =  '<Data name="overlaySwitchIds-1">';
+    $kml[] =      '<value>GNPBoundary</value>';
+    $kml[] =    '</Data>';
+    $kml[] =  '<Data name="overlaySwitchLabelActive-1">';
+    $kml[] =      '<value>Parc national de Gorongosa</value>';
+    $kml[] =    '</Data>';
+    $kml[] =    '<Data name="overlaySwitchLabelInactive-1">';
+    $kml[] =      '<value>Parc national de Gorongosa</value>';
+    $kml[] =    '</Data>';
+    $kml[] =    '<Data name="overlaySwitchVisibleOnLoad-1">';
+    $kml[] =      '<value>true</value>';
+    $kml[] =  '</Data>';
+    $kml[] =  '<Data name="youtubeVideoId">';
+    $kml[] =      '<value>VPP_COhvzn0</value>';
+    $kml[] =  '</Data>';
+    $kml[] =    '<Data name="logoLink">';
+    $kml[] =      '<value>http://www.biointeractive.org</value>';
+    $kml[] =    '</Data>';
+    $kml[] =    '<Data name="logoImageUrl">';
+    $kml[] =      '<value>https://www.gstatic.com/earthfeed/hhmi/logos/BioInteractive_white_logo_long_RGB-resized.png</value>';
+    $kml[] =    '</Data>';
+    $kml[] =    '<Data name="fabAction">';
+    $kml[] =    '<value>flyto</value>';
+    $kml[] =  '</Data>';
+    $kml[] =  '<Data name="previousAction">';
+    $kml[] =    '<value>balloonFlyto</value>';
+    $kml[] =    '</Data>';
+    $kml[] =    '<Data name="nextAction">';
+    $kml[] =      '<value>balloonFlyto</value>';
+    $kml[] =    '</Data>';
+    $kml[] =    '<Data name="panelFab_link_ariaLabel">';
+    $kml[] =      '<value>Fly to view</value>';
+    $kml[] =  '</Data>';
+    $kml[] =  '<Data name="panel_ctaLink_ariaLabel">';
+    $kml[] =    '<value>$[ctaText]</value>';
+    $kml[] =  '</Data>';
+    $kml[] =    '<Data name="panelFooter_nextLink_ariaLabel">';
+    $kml[] =    '<value>Suivant</value>';
+    $kml[] =  '</Data>';
+    $kml[] =  '<Data name="panelFooter_previousLink_ariaLabel">';
+    $kml[] =    '<value>Précédent</value>';
+    $kml[] =  '</Data>';
+    $kml[] =  '<Data name="panelYoutube_link_ariaLabel">';
+    $kml[] =    '<value>Lecture de la vidéo</value>';
+    $kml[] =  '</Data>';
+    $kml[] =  '<Data name="panelFooter_logoLink_ariaLabel">';
+    $kml[] =    '<value>Logo</value>';
+    $kml[] =    '</Data>';
+    $kml[] =  '</ExtendedData>';
 
     $kml[] = ' <Point>';
     $kml[] = ' <coordinates>' . $long[$i] . ',' . $lat[$i] . ',0</coordinates>';
