@@ -81,6 +81,18 @@ if (isset($_REQUEST['kml'])) {
     $routedescription[$i] =  $routedescriptionrows[$i]['Description_itineraire'];
   }
 
+  $routeimages = "SELECT image_name FROM RouteForm";
+  if ($routeimagesresult = mysqli_query($conn, $routeimages)) {
+  } else {
+    echo "Error: " . $routeimages . "<br>" . mysqli_error($conn);
+  }
+
+  $routeimagesrows = mysqli_fetch_all($routeimagesresult, MYSQLI_ASSOC);
+  $routeimagesarray = array();
+  for ($i = 0; $i < $routenumbers; $i++) {
+    $routeimagesarray[$i] =  $routeimagesrows[$i]['image_name'];
+  }
+
 
 
   $routename = explode(",", $idroute);
@@ -544,7 +556,7 @@ if (isset($_REQUEST['kml'])) {
 
     <body>
     <div>
-    <img src  = "https://aaof.tech/nami/RouteFormUploads/ITI-2_AAOF.jpg"  width = "464px" height = "400px">
+    <img src  = "https://aaof.tech/nami/RouteFormUploads/' . $routeimagesarray[$j] . '"' .   'width = "464px" height = "400px">
     </div>
 
     <simple-template title="$[name|escapeHtml]" snippet="$[snippet|escapeHtml]" description="$[description|escapeHtml]" carousel="$[carousel|escapeHtml]">
