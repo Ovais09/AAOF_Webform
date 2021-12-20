@@ -63,50 +63,10 @@ if (isset($_REQUEST['kml'])) {
   $routenamesrows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   $routenamestablearray = array();
-  for($i =0; $i<$routenumbers; $i++){
+  for ($i = 0; $i < $routenumbers; $i++) {
     $routenamestablearray[$i] =  $routenamesrows[$i]['Nom_itineraire'];
   }
 
-  $select = "SELECT * FROM AuthorForm WHERE LinkToRoute = '$idroute'";
-  if ($resultselect = mysqli_query($conn, $select)) {
-  } else {
-    echo "Error: " . $select . "<br>" . mysqli_error($conn);
-  }
-
-  //getting the file from the server and storing it in a variable;
-
-
-  $rows = mysqli_fetch_all($resultselect, MYSQLI_ASSOC);
-
-  $photos = array();
-  for ($i = 0; $i < count($rows); $i++) {
-    $photos[] = $rows[$i]['image_name_photo'];
-  }
-
-  // $photo = file_get_contents('AuthorFormUploads/' . $photos[0]);
-  // $photo  = base64_encode($photo);
-
-
-
-  $fname = array();
-  for ($i = 0; $i < count($rows); $i++) {
-    $fname[] = $rows[$i]['FirstName'];
-  }
-
-  $lname = array();
-  for ($i = 0; $i < count($rows); $i++) {
-    $lname[] = $rows[$i]['LastName'];
-  }
-
-  $lat = array();
-  for ($i = 0; $i < count($rows); $i++) {
-    $lat[] = $rows[$i]['Lat'];
-  }
-
-  $long = array();
-  for ($i = 0; $i < count($rows); $i++) {
-    $long[] = $rows[$i]['Longitude'];
-  }
 
   $routename = explode(",", $idroute);
   $routenames = $routename[1];
@@ -115,10 +75,6 @@ if (isset($_REQUEST['kml'])) {
   $routeid = $routename[0];
 
 
-  $authordescription = array();
-  for ($i = 0; $i < count($rows); $i++) {
-    $authordescription[] = $rows[$i]['LieuDescription'];
-  }
 
   $managestylecascade = array();
   $managestylecascade[0] = "__managed_style_173785644C1EEF0E1E9A";
@@ -381,11 +337,57 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<name>' . $routenamestablearray[$j]  . '</name>';
     $kml[] = '<open>1</open>';
 
-    // $sqlquery = "SELECT * FROM AuthorForm WHERE LinkToRoute = '".  "ITI-". strval($j + 1) .  $routenamestablearray[$j] . "'";
-    // $result = mysqli_query($conn, $sqlquery);
-    // $numberofauthorrows = mysqli_num_rows($result);
+    $routeidandname = "ITI-" . strval($j + 1) . "," . $routenamestablearray[$j];
 
+
+
+    $sqlquery = "SELECT * FROM AuthorForm WHERE LinkToRoute = '$routeidandname'";
+
+    if ($result = mysqli_query($conn, $sqlquery)) {
+    } else {
+      echo "Error: " . $sqlquery . "<br>" . mysqli_error($conn);
+    }
+
+    $numberofauthorrows = mysqli_num_rows($result);
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+    $photos = array();
     for ($i = 0; $i < count($rows); $i++) {
+      $photos[] = $rows[$i]['image_name_photo'];
+    }
+
+    $fname = array();
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
+      $fname[] = $rows[$i]['FirstName'];
+    }
+
+    $lname = array();
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
+      $lname[] = $rows[$i]['LastName'];
+    }
+
+    $lat = array();
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
+      $lat[] = $rows[$i]['Lat'];
+    }
+  
+    $long = array();
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
+      $long[] = $rows[$i]['Longitude'];
+    }
+
+    $authordescription = array();
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
+      $authordescription[] = $rows[$i]['LieuDescription'];
+    }
+
+
+
+
+
+
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
       $kml[] = '<gx:CascadingStyle kml:id="' . $managestylecascade[$i] .     '">';
       $kml[] = '<Style>';
       $kml[] = '<IconStyle>';
@@ -549,7 +551,10 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '</gx:CascadingStyle>';
 
 
-    for ($i = 0; $i < count($rows); $i++) {
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
+
+
+
       $kml[] = '<StyleMap id="' . $managestylemap[$i]  . '"' . '>';
       $kml[] = '<Pair>';
       $kml[] = '<key>normal</key>';
@@ -581,7 +586,12 @@ if (isset($_REQUEST['kml'])) {
     $idvaluesauthorplacemark[2] = 'c';
 
 
-    for ($i = 0; $i < count($rows); $i++) {
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
+
+
+
+
+
       $kml[] = ' <Placemark id = "' . $idvaluesauthorplacemark[$i] . '">';
       $kml[] = ' <name>' . $fname[$i] . ' ' . $lname[$i] . '</name>';
       $kml[] = ' <description>' . $authordescription[$i] . '</description>';
@@ -655,7 +665,7 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = ' <styleUrl>#__managed_style_07558493E31EFB377AF0</styleUrl>';
     $kml[] = ' <LineString>';
     $kml[] = '<coordinates>';
-    for ($i = 0; $i < count($rows); $i++) {
+    for ($i = 0; $i < $numberofauthorrows; $i++) {
       $kml[] = $long[$i] . ',' . $lat[$i] . " ";
     }
     $kml[] = '</coordinates>';
