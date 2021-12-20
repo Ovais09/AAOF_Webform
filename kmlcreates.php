@@ -68,6 +68,21 @@ if (isset($_REQUEST['kml'])) {
   }
 
 
+
+  $routedescriptionselect = "SELECT Description_itineraire FROM RouteForm";
+  if ($routedescriptionresult = mysqli_query($conn, $routedescriptionselect)) {
+  } else {
+    echo "Error: " . $routedescriptionselect . "<br>" . mysqli_error($conn);
+  }
+
+  $routedescriptionrows = mysqli_fetch_all($routedescriptionresult, MYSQLI_ASSOC);
+  $routedescription = array();
+  for ($i = 0; $i < $routenumbers; $i++) {
+    $routedescription[$i] =  $routedescriptionrows[$i]['Description_itineraire'];
+  }
+
+
+
   $routename = explode(",", $idroute);
   $routenames = $routename[1];
   $_SESSION['routename'] = $routenames;
@@ -371,7 +386,7 @@ if (isset($_REQUEST['kml'])) {
     for ($i = 0; $i < $numberofauthorrows; $i++) {
       $lat[] = $rows[$i]['Lat'];
     }
-  
+
     $long = array();
     for ($i = 0; $i < $numberofauthorrows; $i++) {
       $long[] = $rows[$i]['Longitude'];
@@ -508,14 +523,14 @@ if (isset($_REQUEST['kml'])) {
     $kml[] = '<BalloonStyle>';
 
 
-    $routedescriptionselect = "SELECT Description_itineraire FROM RouteForm WHERE Code_itineraire = '$routeid'";
-    if ($routedescriptionresult = mysqli_query($conn, $routedescriptionselect)) {
-    } else {
-      echo "Error: " . $routedescriptionselect . "<br>" . mysqli_error($conn);
-    }
+    // $routedescriptionselect = "SELECT Description_itineraire FROM RouteForm WHERE Code_itineraire = '$routeid'";
+    // if ($routedescriptionresult = mysqli_query($conn, $routedescriptionselect)) {
+    // } else {
+    //   echo "Error: " . $routedescriptionselect . "<br>" . mysqli_error($conn);
+    // }
 
-    $routedescriptionrows = mysqli_fetch_all($routedescriptionresult, MYSQLI_ASSOC);
-    $routedescription = $routedescriptionrows[0]['Description_itineraire'];
+    // $routedescriptionrows = mysqli_fetch_all($routedescriptionresult, MYSQLI_ASSOC);
+    // $routedescription = $routedescriptionrows[0]['Description_itineraire'];
 
     $kml[] = '<text><![CDATA[<html lang="en">
     <head>
@@ -658,10 +673,10 @@ if (isset($_REQUEST['kml'])) {
     }
 
     $kml[] = ' <Placemark>';
-    $kml[] = ' <name>' . $routenames . '</name>';
+    $kml[] = ' <name>' .  $routenamestablearray[$j] . '</name>';
 
 
-    $kml[] = ' <description>' . $routedescription . '</description>';
+    $kml[] = ' <description>' . $routedescription[$j] . '</description>';
     $kml[] = ' <styleUrl>#__managed_style_07558493E31EFB377AF0</styleUrl>';
     $kml[] = ' <LineString>';
     $kml[] = '<coordinates>';
