@@ -1,1 +1,1 @@
-﻿# [https://aaof.tech/nami/)
+﻿# https://aaof.tech/nami/
